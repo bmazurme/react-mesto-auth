@@ -1,0 +1,23 @@
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-self: center;
+  padding: 0;
+  margin: 0;
+}
+
+/* @media screen and (min-width: 320px) and (max-width: 899px) {
+  .navbar {
+    display: block;
+    position: absolute;
+    visibility: hidden;
+    top: 0;
+    left: -100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+    width: 100%;
+  }
+} */

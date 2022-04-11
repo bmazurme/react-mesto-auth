@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
 
 function Login(props) {
   const [email, setEmail] = React.useState("");
@@ -47,7 +46,7 @@ function Login(props) {
                     autoComplete="off"
             />
           </div>
-          <button className="form__submit" 
+          <button className="button button_identity" 
                   type="submit">
             Войти
           </button>
@@ -56,4 +55,4 @@ function Login(props) {
   );
 }
 
-export default withRouter(Login) ;
+export default Login ;

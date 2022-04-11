@@ -1,38 +1,52 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
 
-function Register() {
+function Register(props) {
+  const [email, setEmail] = React.useState("");
+  const [password, setpassword] = React.useState("");
+
+  function handleEmailChange(e) {
+    setEmail(e.target.value);
+  }
+  function handlePasswordChange(e) {
+    setpassword(e.target.value);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    props.onRegister(email, password);
+  }
+
   return(
       <div className="identity">
         <h2 className="identity__title">Регистрация</h2>
         <form className="form form_identity" 
-              //onSubmit={handleSubmit}
+              onSubmit={handleSubmit}
               >
           <div className="form__box form__box_identity">
             <input placeholder="Email"
-                    //onChange={handleNameChange} 
-                    className="form__input form__input_identity form__input_type_name" 
+                    onChange={handleEmailChange} 
+                    className="form__input form__input_identity form__input_type_email" 
                     name="email" 
                     type="email"
                     required
                     id="email-input"
                     autoComplete="off"
-                    //value={name || ''}
+                    value={email || ''}
             />
           </div>
 
           <div className="form__box form__box_identity">
-            <input  //onChange={handlePasswordChange}
-                    className="form__input form__input_identity form__input_type_email"
+            <input  onChange={handlePasswordChange}
+                    className="form__input form__input_identity form__input_type_password"
                     placeholder="Пароль"
                     name="password"
                     type="password"
                     required
-                    //value={password || ''}
+                    value={password || ''}
                     autoComplete="off"
             />
           </div>
-          <button className="form__submit" 
+          <button className="button button_identity" 
                   type="submit">
             Зарегистрироваться
           </button>
@@ -47,4 +61,4 @@ function Register() {
   );
 }
 
-export default withRouter(Register) ;
+export default Register ;

@@ -5,9 +5,10 @@
   margin-right: 0;
   padding: 0;
   text-decoration: none;
+  color: white;
 }
 
-.form__link:visited {
+.form__link:visited  {
   color: white;
 }
 

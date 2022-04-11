@@ -1,9 +1,14 @@
 import logo from '../images/logo.svg';
+import NavBar from './NavBar';
 
-function Header() {
+function Header(props) {
   return (
     <header className="header">
-      <img className="logo" src={logo} alt="Логотип Место"></img>
+        <a href='/' 
+           className="logo" 
+           src={logo} alt="Логотип Место">
+        </a>
+        <NavBar {...props}/>
     </header>
   );
 }
