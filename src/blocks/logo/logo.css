@@ -14,5 +14,7 @@
   .logo {
     width: 103px;
     height: 24px;
+    grid-area: logo;
+    /* margin-left: 30px; */
   }
 }

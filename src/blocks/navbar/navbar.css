@@ -7,17 +7,25 @@
   margin: 0;
 }
 
-/* @media screen and (min-width: 320px) and (max-width: 899px) {
+@media screen and (min-width: 320px) and (max-width: 479px) {
   .navbar {
-    display: block;
-    position: absolute;
-    visibility: hidden;
-    top: 0;
-    left: -100%;
+    /* height: 142px; */
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    align-self: center;
+    justify-content: center;
+    /* position: absolute; */
+    border-bottom: 1px solid rgba(84, 84, 84, 0.7);
     margin: 0;
     padding: 0;
     list-style: none;
     text-align: center;
-    width: 100%;
+    /* top:0;
+    left: 0; */
+    grid-area: menu;
   }
-} */
+  .navbar_opened {
+    display: flex;
+  }
+}
