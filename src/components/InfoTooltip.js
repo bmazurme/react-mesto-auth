@@ -11,10 +11,7 @@ function InfoTooltip(props) {
               <div className="tooltip">
                 <div className={`tooltip__image ${props.isSuccess ? 'tooltip__image_success': ''}`}></div>
                 <p className="tooltip__text">
-                  {props.isSuccess 
-                    ? 'Вы успешно зарегистрировались!' 
-                    : 'Что-то пошло не так! Попробуйте ещё раз.'
-                  }
+                  {props.text}
                 </p>
               </div>
  

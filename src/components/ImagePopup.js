@@ -1,8 +1,12 @@
 import React from "react";
 
 function ImagePopup(props) {
+  function handleCloseClick(e)
+  {
+    e.currentTarget === e.target && props.onClose();
+  }
   return(
-    <div onClick={ e => (e.currentTarget === e.target) && props.onClose()}
+    <div onClick={handleCloseClick}
          className={`popup popup_type_slide popup_image ${props.card && 'popup_active'}`}>
 
       <div className="popup__container popup__container_image">

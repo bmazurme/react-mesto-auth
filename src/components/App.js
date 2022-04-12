@@ -169,6 +169,9 @@ function App() {
         history.push("/");
       })
       .catch((err) => {
+        setIsInfoToolTipPopupOpen(true); 
+        setIsSuccess(false); 
+
         if (err.status === 400) {
           console.log("400 - не передано одно из полей.");
         } else if (err.status === 401) {
@@ -215,7 +218,7 @@ function App() {
                           onAddPlace={handleAddPlaceClick}
                           onCardClick={handleCardClick}
                           onCardLike={handleCardLike}
-                          onCardDelete={handleCardDelete}
+                          handleCardDelete={handleCardDeleteConfirm}
                           cards={cards}
                           component={Main}
                           isLoading={isLoading}
@@ -230,7 +233,7 @@ function App() {
           </Route>
 
           <Route>
-            {isLoggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" /> }
+            {isLoggedIn ? (<Redirect to="/" />) : (<Redirect to="/sign-in" />) }
           </Route>
 
         </Switch>
@@ -265,7 +268,11 @@ function App() {
         />
         <InfoTooltip isOpen={isInfoToolTipPopupOpen}
                      onClose={closeAllPopups}
-                     isSuccess={isSuccess}/>
+                     isSuccess={isSuccess}
+                     text={isSuccess 
+                      ? 'Вы успешно зарегистрировались!' 
+                      : 'Что-то пошло не так! Попробуйте ещё раз.'}
+                     />
       </div>
     </CurrentUserContext.Provider>
   );

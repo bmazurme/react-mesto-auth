@@ -1,6 +1,11 @@
 function PopupWithForm(props) {
+  function handleCloseClick(e)
+  {
+    e.currentTarget === e.target && props.onClose();
+  }
+
   return (
-    <div onClick={ e => (e.currentTarget === e.target) && props.onClose()} 
+    <div onClick={handleCloseClick}
          className={`popup popup_type_${props.name} ${props.isOpen && 'popup_active'}`}>
     <div className="popup__container">
       <button aria-label="Close" 
