@@ -12,9 +12,12 @@ function Header(props) {
     <header className={`header ${isOpen ? 'header_opened' : ''}`}>
         <a href='/' 
            className="logo" 
-           src={logo} alt="Логотип Место">
+           src={logo} 
+           alt="Логотип Место">
         </a>
-        <NavBar {...props} handlerClick={handlerClick} isOpen={isOpen}/>
+        <NavBar {...props} 
+                handlerClick={handlerClick} 
+                isOpen={isOpen}/>
     </header>
   );
 }

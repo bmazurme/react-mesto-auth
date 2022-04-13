@@ -17,9 +17,13 @@
 
 @media screen and (max-width: 599px) {
   .header {
-    margin: 28px auto 0;
-    width: auto;
+    margin-left: 0;
+    margin-right: 0;
     padding-left: 30px;
     padding-right: 30px;
+
+    width: auto;
+    /* padding-left: 30px; */
   }
 }
+

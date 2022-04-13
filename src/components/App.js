@@ -28,7 +28,6 @@ function App() {
   const [isConfirmPopupOpen, setIsConfirmPopupOpen] = React.useState(false);
   const [isInfoToolTipPopupOpen, setIsInfoToolTipPopupOpen] = React.useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
-
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [email, setEmail] = React.useState(null);
   const history = useHistory();
@@ -217,7 +216,7 @@ function App() {
                           onEditProfile={handleEditProfileClick}
                           onAddPlace={handleAddPlaceClick}
                           onCardClick={handleCardClick}
-                          onCardLike={handleCardLike}
+                          handleCardLike={handleCardLike}
                           handleCardDelete={handleCardDeleteConfirm}
                           cards={cards}
                           component={Main}
@@ -270,8 +269,8 @@ function App() {
                      onClose={closeAllPopups}
                      isSuccess={isSuccess}
                      text={isSuccess 
-                      ? 'Вы успешно зарегистрировались!' 
-                      : 'Что-то пошло не так! Попробуйте ещё раз.'}
+                            ? 'Вы успешно зарегистрировались!' 
+                            : 'Что-то пошло не так! Попробуйте ещё раз.'}
                      />
       </div>
     </CurrentUserContext.Provider>

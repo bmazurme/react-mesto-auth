@@ -26,7 +26,7 @@ function Main(props) {
                 onClick={props.onAddPlace}/>
       </section>
 
-      <section className="elements">
+      <section className="cards">
         {props.cards.map(card => 
           <Card key={card._id} 
                 card={card} 

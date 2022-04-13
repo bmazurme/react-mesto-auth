@@ -3,10 +3,12 @@
   .header_opened {
     display: grid;
     grid-template-areas:
-        "menu menu"
-        "logo button";
-    grid-template-columns: 1fr;
+        "menu menu menu menu"
+        "leftgap logo button rightgap";
+    grid-template-columns: 30px 1fr 20px 30px;
     grid-template-rows: 1fr 84px;
+    padding-left: 0;
+    padding-right: 0;
   
     gap: 0;
   }
