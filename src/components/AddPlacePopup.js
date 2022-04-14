@@ -30,7 +30,9 @@ function AddPlacePopup(props) {
   return(
     <PopupWithForm title="Новое место" 
                    name="place" 
-                   buttonText={props.isLoading? 'Загрузка...' : 'Создать'}  
+                   buttonText={props.isLoading 
+                               ? 'Загрузка...' 
+                               : 'Создать'}  
                    isOpen={props.isOpen} 
                    onClose={props.onClose}
                    onSubmit={handleSubmit}
@@ -44,8 +46,8 @@ function AddPlacePopup(props) {
                minLength="2" 
                maxLength="30" 
                name="name" 
-               id="nameCard-input"/>
-          <span className="nameCard-input-error form__input-error"></span>
+               id="name-input"/>
+          <span className="name-input-error form__input-error"></span>
       </div>
       <div className="form__box">
         <input placeholder="Ссылка на картинку"

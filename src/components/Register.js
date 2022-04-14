@@ -25,7 +25,8 @@ function Register(props) {
           <div className="form__box form__box_identity">
             <input placeholder="Email"
                     onChange={handleEmailChange} 
-                    className="form__input form__input_identity form__input_type_email" 
+                    className="form__input form__input_identity 
+                               form__input_type_email" 
                     name="email" 
                     type="email"
                     required
@@ -37,7 +38,8 @@ function Register(props) {
 
           <div className="form__box form__box_identity">
             <input  onChange={handlePasswordChange}
-                    className="form__input form__input_identity form__input_type_password"
+                    className="form__input form__input_identity 
+                               form__input_type_password"
                     placeholder="Пароль"
                     name="password"
                     type="password"
@@ -53,7 +55,7 @@ function Register(props) {
 
           <div className="form__help">
             Уже зарегистрированы? 
-            <a href="/login" className="form__link">Войти</a> 
+            <a href="/sign-in" className="form__link">Войти</a> 
           </div>
         </form>
 

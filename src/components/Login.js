@@ -25,7 +25,9 @@ function Login(props) {
           <div className="form__box form__box_identity">
             <input placeholder="Email"
                     onChange={handleEmailChange} 
-                    className="form__input form__input_identity form__input_type_name" 
+                    className="form__input 
+                               form__input_identity 
+                               form__input_type_name" 
                     name="email" 
                     type="email"
                     required
@@ -37,7 +39,9 @@ function Login(props) {
 
           <div className="form__box form__box_identity">
             <input  onChange={handlePasswordChange}
-                    className="form__input form__input_identity form__input_type_email"
+                    className="form__input 
+                               form__input_identity 
+                               form__input_type_email"
                     placeholder="Пароль"
                     name="password"
                     type="password"

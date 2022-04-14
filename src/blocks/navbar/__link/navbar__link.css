@@ -9,8 +9,15 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
-  
 }
+
+@media screen and (min-width: 479px) and (max-width: 639px) {
+  .navbar__link {
+    font-size: 14px;
+    line-height: 16px;
+  }
+}
+
 .navbar__link:visited {
   color: #A9A9A9;
 }
@@ -18,9 +25,11 @@
 .navbar__link_active:active {
   color: #fff;
 }
+
 .navbar__link_active:visited {
   color: #fff;
 }
+
 .navbar__link_active:hover {
   color: #fff;
 }

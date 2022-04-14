@@ -21,7 +21,7 @@ function PopupWithForm(props) {
       {props.children}
 
       <button aria-label="Save" 
-              className="button button_save form__submit" 
+              className="button button_submit" 
               type="submit">{props.buttonText}</button>
     </form>
     </div>

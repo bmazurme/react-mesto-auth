@@ -14,5 +14,6 @@
   .logo {
     width: 103px;
     height: 24px;
+    grid-area: logo;
   }
 }

@@ -1,4 +1,4 @@
-.elements {
+.cards {
   min-height: 40vh;
   max-width: 880px;
   margin-top: 50px;
@@ -11,7 +11,7 @@
 }
 
 @media screen and (min-width: 320px) and (max-width: 599px) {
-  .elements {
+  .cards {
     margin-top: 36px;
     max-width: 282px;
     flex-direction: column;
@@ -19,7 +19,7 @@
 }
 
 @media screen and (min-width: 580px) and (max-width: 879px) {
-  .elements {
+  .cards {
     max-width: 581px;
   }
 }
