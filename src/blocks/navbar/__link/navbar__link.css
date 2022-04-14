@@ -11,6 +11,13 @@
   line-height: 22px;
 }
 
+@media screen and (min-width: 479px) and (max-width: 639px) {
+  .navbar__link {
+    font-size: 14px;
+    line-height: 16px;
+  }
+}
+
 .navbar__link:visited {
   color: #A9A9A9;
 }

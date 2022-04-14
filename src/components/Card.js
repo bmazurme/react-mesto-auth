@@ -20,9 +20,9 @@ function Card(props) {
               type="button"
       />
       <img className="card__image" 
-          alt={props.card.name} 
-          onClick={() => props.onCardClick(props.card)} 
-          src={props.card.link}
+           alt={props.card.name} 
+           onClick={() => props.onCardClick(props.card)} 
+           src={props.card.link}
       />
       <div className="card__group">
         <h2 className="card__name">{props.card.name}</h2>

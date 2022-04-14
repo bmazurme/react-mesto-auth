@@ -32,7 +32,6 @@ function App() {
   const [email, setEmail] = React.useState(null);
   const history = useHistory();
   
-
   function escFunction(event){
     if (event.key === "Escape") {
       closeAllPopups();
