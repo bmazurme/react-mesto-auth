@@ -16,6 +16,9 @@ import Register from "./Register.js";
 import ProtectedRoute from './ProtectedRoute';
 import InfoTooltip from './InfoTooltip';
 
+import { config } from '../utils/config';
+import { FormValidator } from '../utils/FormValidator';
+
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
@@ -31,6 +34,24 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [email, setEmail] = React.useState(null);
   const history = useHistory();
+
+
+  const formValidators = {}
+  const enableValidation = (config) => {
+    const formList = Array.from(document.querySelectorAll(config.formSelector))
+    formList.forEach((formElement) => {
+      const validator = new FormValidator(config, formElement);
+      const formName = formElement.getAttribute('name');
+      formValidators[formName] = validator;
+    validator.enableValidation();
+    });
+  };
+  enableValidation(config);
+  const editForm = document.querySelector('.form_type_edit');
+  const addForm = document.querySelector('.form_type_place');
+  const avaForm = document.querySelector('.form_type_avatar');
+
+
   
   function escFunction(event){
     if (event.key === "Escape") {
@@ -106,6 +127,9 @@ function App() {
     setIsInfoToolTipPopupOpen(false);
     setSelectedCard(null);
     setIsSuccess(false);
+    formValidators[ editForm.getAttribute('name') ].resetValidation();
+    formValidators[ addForm.getAttribute('name') ].resetValidation();
+    formValidators[ avaForm.getAttribute('name') ].resetValidation();
   }
 
   function handleUpdateUser({name, about}) {

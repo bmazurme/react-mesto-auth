@@ -2,8 +2,8 @@
 
 ## О проекте
 
-#### Проектная работа №10, сделана в Яндекс.Практикуме.
-Версия проекта 0.1.2
+#### Проектная работа №11,12 сделана в Яндекс.Практикуме.
+Версия проекта 0.1.3
 * Сервис для размещения фотографий.
 
 Реализована логика:
@@ -16,7 +16,7 @@
 - [X] Регистрация пользователя
 - [X] Авторизация пользователя
 - [X] Закрытие окон по esc и клику вне
-- [ ] Валидация форм
+- [X] Валидация форм
 
 ## Демо
 
@@ -28,11 +28,27 @@
 * Figma
 * Картинки
 
+### Установка
+Клонируйте репозиторий на компьютер:
+
+`git clone git@github.com:bmazurme/react-mesto-auth.git`
+
+Установите зависисмости:
+
+`npm install`
+
+Запуск:
+
+`npm start`
+
 ### Стек технологий
 HTML, CSS, JS, JSX, React.js
 
 **Figma**
 * [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
+* [Figma - signup, signin](https://www.figma.com/file/5H3gsn5lIGPwzBPby9jAOo/JavaScript.-Sprint-12?node-id=0%3A1)
 * [Unicorn - Совмещенный валидатор W3C](https://validator.w3.org/)
 * [Бесплатный шрифт ”Inter"](https://rsms.me/inter/)
 * [Оптимизировать картинки](https://tinypng.com/)
+* [Картинки](https://unsplash.com/)
+* [Mesto VanillaJS](https://github.com/bmazurme/mesto)

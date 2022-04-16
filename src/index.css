@@ -54,7 +54,7 @@
 
 @import url(./blocks/button/_submit/button_save.css);
 
-@import url(./blocks/button/_submit/_inactive/button_save_inactive.css);
+@import url(./blocks/button/_submit/_inactive/button_submit_inactive.css);
 
 @import url(./blocks/button/_identity/button_identity.css);
 
