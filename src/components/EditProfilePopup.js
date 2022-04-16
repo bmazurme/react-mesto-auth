@@ -25,7 +25,7 @@ function EditProfilePopup(props) {
   }
 
   function handleDescriptionChange(e) {
-      setDescription(e.target.value);
+    setDescription(e.target.value);
   } 
 
   return(
