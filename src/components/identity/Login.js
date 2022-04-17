@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Register(props) {
+function Login(props) {
   const [email, setEmail] = React.useState("");
   const [password, setpassword] = React.useState("");
 
@@ -13,20 +13,21 @@ function Register(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.onRegister(email, password);
+    props.onLogin(email, password);
   }
 
   return(
       <div className="identity">
-        <h2 className="identity__title">Регистрация</h2>
+        <h2 className="identity__title">Вход</h2>
         <form className="form form_identity" 
               onSubmit={handleSubmit}
               >
           <div className="form__box form__box_identity">
             <input placeholder="Email"
                     onChange={handleEmailChange} 
-                    className="form__input form__input_identity 
-                               form__input_type_email" 
+                    className="form__input 
+                               form__input_identity 
+                               form__input_type_name" 
                     name="email" 
                     type="email"
                     required
@@ -34,12 +35,15 @@ function Register(props) {
                     autoComplete="off"
                     value={email || ''}
             />
+            <span className="email-input-error 
+                             form__input-error"></span>
           </div>
 
           <div className="form__box form__box_identity">
             <input  onChange={handlePasswordChange}
-                    className="form__input form__input_identity 
-                               form__input_type_password"
+                    className="form__input 
+                               form__input_identity 
+                               form__input_type_email"
                     placeholder="Пароль"
                     name="password"
                     type="password"
@@ -47,20 +51,16 @@ function Register(props) {
                     value={password || ''}
                     autoComplete="off"
             />
+            <span className="password-input-error 
+                            form__input-error"></span>
           </div>
           <button className="button button_identity" 
                   type="submit">
-            Зарегистрироваться
+            Войти
           </button>
-
-          <div className="form__help">
-            Уже зарегистрированы? 
-            <a href="/sign-in" className="form__link">Войти</a> 
-          </div>
         </form>
-
       </div>
   );
 }
 
-export default Register ;
+export default Login ;

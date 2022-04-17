@@ -1,3 +1,25 @@
+// connect
+//
+// function enableValidation(config) {
+//   const formList = Array.from(document.querySelectorAll(config.formSelector))
+//   formList.forEach((formElement) => {
+//     const validator = new FormValidator(config, formElement);
+//     const formName = formElement.getAttribute('name');
+//     formValidators[formName] = validator;
+//     validator.enableValidation();
+//   });
+// };
+// enableValidation(config);
+
+
+export default function resetForms(forms, formValidators) {
+  forms.forEach(form => 
+    formValidators[ document
+                    .querySelector(form)
+                    .getAttribute('name') ]
+                    .resetValidation())
+}
+
 export class FormValidator {
   constructor(config, formElement) {
     this._config = config;
@@ -68,8 +90,10 @@ export class FormValidator {
   _hideInputError (inputElement) {
     const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.remove(this._config.inputErrorClass);
-    errorElement.classList.remove(this._config.errorClass);
-    errorElement.textContent = '';
+    if (errorElement) {
+      errorElement.classList.remove(this._config.errorClass);
+      errorElement.textContent = '';
+    }
   };
   
   _checkInputValidity (inputElement) {
