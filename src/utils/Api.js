@@ -4,7 +4,6 @@ export class Api {
   }
 
   _checkResponse(res) {
-  //  (res.ok) ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
     if (res.ok) {
       return res.json();
     }

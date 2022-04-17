@@ -21,7 +21,7 @@
     text-align: center;
     grid-area: menu;
   }
-  .navbar_opened {
+  /* .navbar_opened {
     display: flex;
-  }
+  } */
 }

@@ -1,19 +1,22 @@
 import React from 'react';
 
 function Register(props) {
-  const [email, setEmail] = React.useState("");
-  const [password, setpassword] = React.useState("");
+  const [data, setData] = React.useState({
+    email: '',
+    password: ''
+  });
 
-  function handleEmailChange(e) {
-    setEmail(e.target.value);
-  }
-  function handlePasswordChange(e) {
-    setpassword(e.target.value);
+  function handleChange(e) {
+    const {name, value} = e.target;
+    setData({
+      ...data,
+      [name]: value,
+    });
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.onRegister(email, password);
+    props.onRegister(data.email, data.password);
   }
 
   return(
@@ -24,7 +27,7 @@ function Register(props) {
               >
           <div className="form__box form__box_identity">
             <input placeholder="Email"
-                    onChange={handleEmailChange} 
+                    onChange={handleChange} 
                     className="form__input form__input_identity 
                                form__input_type_email" 
                     name="email" 
@@ -32,21 +35,26 @@ function Register(props) {
                     required
                     id="email-input"
                     autoComplete="off"
-                    value={email || ''}
+                    value={data.email || ''}
             />
+            <span className="email-input-error 
+                             form__input-error"></span>
           </div>
 
           <div className="form__box form__box_identity">
-            <input  onChange={handlePasswordChange}
+            <input  onChange={handleChange}
                     className="form__input form__input_identity 
                                form__input_type_password"
                     placeholder="Пароль"
                     name="password"
                     type="password"
+                    id="password-input"
                     required
-                    value={password || ''}
+                    value={data.password || ''}
                     autoComplete="off"
             />
+            <span className="password-input-error 
+                             form__input-error"></span>
           </div>
           <button className="button button_identity" 
                   type="submit">

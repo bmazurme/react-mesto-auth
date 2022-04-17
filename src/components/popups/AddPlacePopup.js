@@ -2,29 +2,34 @@ import PopupWithForm from "./PopupWithForm";
 import React from "react";
 
 function AddPlacePopup(props) {
-  const [name, setName] = React.useState('');
-  const [link, setLink] = React.useState('');
+  const [data, setData] = React.useState({
+    name: '',
+    link: ''
+  });
 
-  function handleNameChange(e) {
-    setName(e.target.value);
+  function handleChange(e) {
+    const {name, value} = e.target;
+    console.log(e.target);
+    setData({
+      ...data,
+      [name]: value,
+    });
   }
-
-  function handleLinkChange(e) {
-    setLink(e.target.value);
-  } 
 
   function handleSubmit(evt) {
     evt.preventDefault();
     props.onAddPlace(
       {
-        name: name,
-        link: link
+        name: data.name,
+        link: data.link
       });
   }
 
   React.useEffect(() => { 
-    setName(''); 
-    setLink(''); 
+    setData({
+      name: '',
+      link: ''
+    }); 
   }, [props.isOpen]); 
 
   return(
@@ -39,20 +44,20 @@ function AddPlacePopup(props) {
     >
       <div className="form__box">
         <input placeholder="Название"
-               onChange={handleNameChange} 
-               value={name || ''}
+               onChange={handleChange} 
+               value={data.name || ''}
                className="form__input form__input_type_name"
                required 
                minLength="2" 
                maxLength="30" 
                name="name" 
-               id="name-input"/>
-          <span className="name-input-error form__input-error"></span>
+               id="placename-input"/>
+          <span className="placename-input-error form__input-error"></span>
       </div>
       <div className="form__box">
         <input placeholder="Ссылка на картинку"
-               onChange={handleLinkChange}
-               value={link || ''}
+               onChange={handleChange}
+               value={data.link || ''}
                name="link" 
                className="form__input form__input_type_link" 
                id="link-input" 

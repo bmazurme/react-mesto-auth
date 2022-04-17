@@ -18,8 +18,7 @@ export class Auth {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: email,
-        password: password,
+        email, password,
       }),
     })
     .then(this._checkResponse)
@@ -32,17 +31,10 @@ export class Auth {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: email,
-        password: password,
+        email, password,
       }),
     })
     .then(this._checkResponse)
-      .then((data) => {
-        if (data.token) {
-          localStorage.setItem("jwt", data.token);
-          return data;
-        }
-      })  
   };
   
   checkToken(jwt) {

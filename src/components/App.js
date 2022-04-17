@@ -2,22 +2,21 @@ import React from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
-import ImagePopup from './ImagePopup';
+import ImagePopup from './popups/ImagePopup';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import api from '../utils/Api';
 import auth from '../utils/Auth';
-import EditProfilePopup from './EditProfilePopup';
-import EditAvatarPopup from './EditAvatarPopup';
-import AddPlacePopup from './AddPlacePopup';
-import PopupWithConfirm from './PopupWithConfirm';
+import EditProfilePopup from './popups/EditProfilePopup';
+import EditAvatarPopup from './popups/EditAvatarPopup';
+import AddPlacePopup from './popups/AddPlacePopup';
+import PopupWithConfirm from './popups/PopupWithConfirm';
+import InfoTooltip from './popups/InfoTooltip';
 import { Route, Switch, Redirect, useHistory } from "react-router-dom";
-import Login from "./Login.js";
-import Register from "./Register.js";
+import Login from "./identity/Login.js";
+import Register from "./identity/Register.js";
 import ProtectedRoute from './ProtectedRoute';
-import InfoTooltip from './InfoTooltip';
-
 import { config } from '../utils/config';
-import { FormValidator } from '../utils/FormValidator';
+import resetForms, { FormValidator } from '../utils/FormValidator';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -32,26 +31,20 @@ function App() {
   const [isInfoToolTipPopupOpen, setIsInfoToolTipPopupOpen] = React.useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-  const [email, setEmail] = React.useState(null);
+  const [email, setEmail] = React.useState('');
   const history = useHistory();
+  const formValidators = {};
 
-
-  const formValidators = {}
-  const enableValidation = (config) => {
+  function enableValidation(config) {
     const formList = Array.from(document.querySelectorAll(config.formSelector))
     formList.forEach((formElement) => {
       const validator = new FormValidator(config, formElement);
       const formName = formElement.getAttribute('name');
       formValidators[formName] = validator;
-    validator.enableValidation();
+      validator.enableValidation();
     });
   };
   enableValidation(config);
-  const editForm = document.querySelector('.form_type_edit');
-  const addForm = document.querySelector('.form_type_place');
-  const avaForm = document.querySelector('.form_type_avatar');
-
-
   
   function escFunction(event){
     if (event.key === "Escape") {
@@ -97,10 +90,10 @@ function App() {
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
     api.changeLike(card._id, !isLiked)
-    .then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-    })
-    .catch((err) => console.log(err));;
+       .then((newCard) => {
+         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+       })
+       .catch((err) => console.log(err));;
   }
 
   function handleEditAvatarClick() {
@@ -127,9 +120,7 @@ function App() {
     setIsInfoToolTipPopupOpen(false);
     setSelectedCard(null);
     setIsSuccess(false);
-    formValidators[ editForm.getAttribute('name') ].resetValidation();
-    formValidators[ addForm.getAttribute('name') ].resetValidation();
-    formValidators[ avaForm.getAttribute('name') ].resetValidation();
+    resetForms(config.forms, formValidators);
   }
 
   function handleUpdateUser({name, about}) {
@@ -174,7 +165,7 @@ function App() {
     setIsLoading(true);
     api.deleteCard(card._id)
        .then(() => {
-         const newCards = cards.filter((_card) => _card!== card);
+         const newCards = cards.filter((_card) => _card !== card);
          setCards(newCards);
          setIsLoading(false);
          closeAllPopups();
@@ -208,7 +199,7 @@ function App() {
         .then((res) => {
           setIsInfoToolTipPopupOpen(true);
           setIsSuccess(true);
-          history.push("/sign-in");
+          history.replace({pathname: "/sign-in"});
         })
         .catch((err) => {
           if (err.status === 400) {
@@ -224,6 +215,7 @@ function App() {
   function handleSignOut() {
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
+    setEmail('');
     history.push("/sign-in");
   }
 
