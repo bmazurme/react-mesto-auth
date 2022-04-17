@@ -10,11 +10,11 @@ import EditProfilePopup from './popups/EditProfilePopup';
 import EditAvatarPopup from './popups/EditAvatarPopup';
 import AddPlacePopup from './popups/AddPlacePopup';
 import PopupWithConfirm from './popups/PopupWithConfirm';
+import InfoTooltip from './popups/InfoTooltip';
 import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 import Login from "./identity/Login.js";
 import Register from "./identity/Register.js";
 import ProtectedRoute from './ProtectedRoute';
-import InfoTooltip from './popups/InfoTooltip';
 import { config } from '../utils/config';
 import resetForms, { FormValidator } from '../utils/FormValidator';
 
@@ -31,7 +31,7 @@ function App() {
   const [isInfoToolTipPopupOpen, setIsInfoToolTipPopupOpen] = React.useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-  const [email, setEmail] = React.useState(null);
+  const [email, setEmail] = React.useState('');
   const history = useHistory();
   const formValidators = {};
 
@@ -90,10 +90,10 @@ function App() {
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
     api.changeLike(card._id, !isLiked)
-    .then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-    })
-    .catch((err) => console.log(err));;
+       .then((newCard) => {
+         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+       })
+       .catch((err) => console.log(err));;
   }
 
   function handleEditAvatarClick() {
@@ -199,7 +199,7 @@ function App() {
         .then((res) => {
           setIsInfoToolTipPopupOpen(true);
           setIsSuccess(true);
-          history.push("/sign-in");
+          history.replace({pathname: "/sign-in"});
         })
         .catch((err) => {
           if (err.status === 400) {
@@ -215,6 +215,7 @@ function App() {
   function handleSignOut() {
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
+    setEmail('');
     history.push("/sign-in");
   }
 
