@@ -10,29 +10,25 @@ export class Auth {
     return Promise.reject(`Ошибка ${res.status}`);
   }
 
-  signUp(email, password) {
+  signUp(data) {
     return fetch(`${this._options.baseUrl}/signup`, {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        email, password,
-      }),
+      body: JSON.stringify(data),
     })
     .then(this._checkResponse)
   };
   
-  signIn(email, password) {
+  signIn(data) {
     return fetch(`${this._options.baseUrl}/signin`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        email, password,
-      }),
+      body: JSON.stringify(data),
     })
     .then(this._checkResponse)
   };

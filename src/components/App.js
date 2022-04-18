@@ -123,9 +123,9 @@ function App() {
     resetForms(config.forms, formValidators);
   }
 
-  function handleUpdateUser({name, about}) {
+  function handleUpdateUser(data) {
     setIsLoading(true);
-    api.patchUser({name, about})
+    api.patchUser(data)
        .then((userInfo) => {
           setCurrentUser(userInfo);
           setIsLoading(false);
@@ -134,9 +134,9 @@ function App() {
         .catch((err) => console.log(err));
   }
 
-  function handleUpdateAvatar({avatar}) {
+  function handleUpdateAvatar(data) {
     setIsLoading(true);
-    api.patchAvatar({avatar})
+    api.patchAvatar(data)
        .then((userInfo) => {
          setCurrentUser(userInfo);
          setIsLoading(false);
@@ -173,12 +173,12 @@ function App() {
        .catch((err) => console.log(err));
   }
 
-  function handleLoginSubmit(email, password) {
-    auth.signIn(email, password)
+  function handleLoginSubmit(data) {
+    auth.signIn(data)
       .then((res) => {
         localStorage.setItem("jwt", res.token);
         setIsLoggedIn(true);
-        setEmail(email);
+        setEmail(data.email);
         history.push("/");
       })
       .catch((err) => {
@@ -194,8 +194,8 @@ function App() {
       });
   }
 
-  function handleRegisterSubmit(email, password) {
-    auth.signUp(email, password)
+  function handleRegisterSubmit(data) {
+    auth.signUp(data)
         .then((res) => {
           setIsInfoToolTipPopupOpen(true);
           setIsSuccess(true);
