@@ -4,22 +4,24 @@
   margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+  display: grid;
+  row-gap: 20px;
+  column-gap: 17px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
 }
 
 @media screen and (min-width: 320px) and (max-width: 599px) {
   .cards {
     margin-top: 36px;
-    max-width: 282px;
-    flex-direction: column;
+    width: calc(100% - 54px);
+    grid-template-columns: 1fr;
   }
 }
 
 @media screen and (min-width: 580px) and (max-width: 879px) {
   .cards {
-    max-width: 581px;
+    width: calc(282px + 282px + 20px);
+    grid-template-columns: 1fr 1fr;
   }
 }

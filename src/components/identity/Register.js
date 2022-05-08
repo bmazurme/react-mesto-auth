@@ -46,7 +46,7 @@ function Register(props) {
           value={data.password}
         />
         <button 
-          className="button button_identity" 
+          className="button button_identity button_submit" 
           type="submit">
           Зарегистрироваться
         </button>

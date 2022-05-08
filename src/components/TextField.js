@@ -20,8 +20,7 @@ function TextField(props) {
         minLength={props.minLength ? props.minLength : ''}
         maxLength={props.maxLength ? props.maxLength : ''}
       />
-      <span 
-        className={`${props.label}-input-error text-field__input-error`}>
+      <span className={`${props.label}-input-error text-field__input-error`}>
       </span>
   </div>
   );

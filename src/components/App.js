@@ -11,12 +11,17 @@ import EditAvatarPopup from './popups/EditAvatarPopup';
 import AddPlacePopup from './popups/AddPlacePopup';
 import PopupWithConfirm from './popups/PopupWithConfirm';
 import InfoTooltip from './popups/InfoTooltip';
-import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 import Login from "./identity/Login.js";
 import Register from "./identity/Register.js";
 import ProtectedRoute from './ProtectedRoute';
 import { config } from '../utils/config';
 import resetForms, { FormValidator } from '../utils/FormValidator';
+import {
+  Route,
+  Switch,
+  Redirect,
+  useHistory 
+} from "react-router-dom";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -36,7 +41,7 @@ function App() {
   const formValidators = {};
 
   function enableValidation(config) {
-    const formList = Array.from(document.querySelectorAll(config.formSelector))
+    const formList = Array.from(document.querySelectorAll(config.formSelector));
     formList.forEach((formElement) => {
       const validator = new FormValidator(config, formElement);
       const formName = formElement.getAttribute('name');
@@ -299,9 +304,11 @@ function App() {
           isOpen={isInfoToolTipPopupOpen}
           onClose={closeAllPopups}
           isSuccess={isSuccess}
-          text={isSuccess 
-            ? 'Вы успешно зарегистрировались!' 
-            : 'Что-то пошло не так! Попробуйте ещё раз.'}
+          text={
+            isSuccess 
+              ? 'Вы успешно зарегистрировались!' 
+              : 'Что-то пошло не так! Попробуйте ещё раз.'
+          }
         />
       </div>
     </CurrentUserContext.Provider>

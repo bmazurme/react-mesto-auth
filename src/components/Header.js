@@ -12,8 +12,8 @@ function Header(props) {
     <header 
       className={`header 
         ${isOpen 
-        ? 'header_opened' 
-        : ''}`}
+          ? 'header_opened' 
+          : ''}`}
     >
       <a href='/' 
         className="logo" 
