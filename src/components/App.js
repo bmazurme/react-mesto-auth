@@ -83,7 +83,7 @@ function App() {
         .then((res) => {
           setIsLoggedIn(true);
           setEmail(res.data.email);
-          history.push("/");
+          history.push(`/${config.ROOT_URL}`);
         })
         .catch((err) => {
           if (err.status === 401) {
@@ -186,7 +186,7 @@ function App() {
         localStorage.setItem("jwt", res.token);
         setIsLoggedIn(true);
         setEmail(data.email);
-        history.push("/");
+        history.push(`/${config.ROOT_URL}`);
       })
       .catch((err) => {
         setIsInfoToolTipPopupOpen(true); 
@@ -206,7 +206,7 @@ function App() {
       .then((res) => {
         setIsInfoToolTipPopupOpen(true);
         setIsSuccess(true);
-        history.replace({pathname: "/sign-in"});
+        history.replace({pathname: `/${config.ROOT_URL}/sign-in`});
       })
       .catch((err) => {
         if (err.status === 400) {
@@ -223,7 +223,7 @@ function App() {
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
     setEmail('');
-    history.push("/sign-in");
+    history.push(`/${config.ROOT_URL}/sign-in`);
   }
 
   return (
@@ -236,7 +236,7 @@ function App() {
 
         <Switch>
           <ProtectedRoute 
-            exact path="/"
+            exact path={`/${config.ROOT_URL}`}
             isLoggedIn={isLoggedIn}
             onEditAvatar={handleEditAvatarClick}
             onEditProfile={handleEditProfileClick}
@@ -249,19 +249,19 @@ function App() {
             isLoading={isLoading}
           />
 
-          <Route path="/sign-in">
+          <Route path={`/${config.ROOT_URL}/sign-in`}>
             <Login onLogin={handleLoginSubmit} />
           </Route>
 
-          <Route path="/sign-up">
+          <Route path={`/${config.ROOT_URL}/sign-UP`}>
             <Register onRegister={handleRegisterSubmit}/>
           </Route>
 
-          <Route>
+          <Route path="*">
             {
               isLoggedIn 
-                ? (<Redirect to="/" />) 
-                : (<Redirect to="/sign-in" />) 
+                ? (<Redirect to={`/${config.ROOT_URL}`} />) 
+                : (<Redirect to={`/${config.ROOT_URL}/sign-in`} />) 
             }
           </Route>
 
