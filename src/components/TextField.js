@@ -1,4 +1,5 @@
 function TextField(props) {
+  // console.log(props.errors);
   return(
     <div 
       className={`text-field ${props.style 
@@ -21,6 +22,7 @@ function TextField(props) {
         maxLength={props.maxLength ? props.maxLength : ''}
       />
       <span className={`${props.label}-input-error text-field__input-error`}>
+        {props.errors ? props.errors[props.name] : ''}
       </span>
   </div>
   );

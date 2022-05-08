@@ -41,7 +41,8 @@ function App() {
   const formValidators = {};
 
   function enableValidation(config) {
-    const formList = Array.from(document.querySelectorAll(config.formSelector));
+    const formList = Array.from(document.querySelectorAll('.form_type'));//config.formSelector));
+
     formList.forEach((formElement) => {
       const validator = new FormValidator(config, formElement);
       const formName = formElement.getAttribute('name');
@@ -253,7 +254,7 @@ function App() {
             <Login onLogin={handleLoginSubmit} />
           </Route>
 
-          <Route path={`/${config.ROOT_URL}/sign-UP`}>
+          <Route path={`/${config.ROOT_URL}/sign-up`}>
             <Register onRegister={handleRegisterSubmit}/>
           </Route>
 

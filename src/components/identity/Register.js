@@ -1,23 +1,23 @@
 import React from 'react';
 import TextField from '../TextField';
+import { useFormWithValidation } from '../../utils/FormValidator';
 
 function Register(props) {
-  const [data, setData] = React.useState({
-    email: '',
-    password: ''
-  });
-
-  function handleChange(e) {
-    const {name, value} = e.target;
-    setData({
-      ...data,
-      [name]: value,
-    });
-  }
+  const {
+    values,
+    handleChange,
+    resetFrom,
+    errors,
+    isValid,
+    isValidInputs
+  } = useFormWithValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.onRegister(data);
+    props.onRegister(values).then(resetFrom())
+    .catch(err => {
+      console.log(err.message || 'Что то пошло не так.');
+    });
   }
 
   return(
@@ -34,7 +34,9 @@ function Register(props) {
           handleChange={handleChange}
           name="email" 
           type="email"
-          value={data.email}
+          value={values.email}
+          errors={errors}
+          isValidInputs={isValidInputs}
         />
         <TextField
           styles="identity"
@@ -43,10 +45,15 @@ function Register(props) {
           handleChange={handleChange}
           name="password" 
           type="password"
-          value={data.password}
+          value={values.password}
+          errors={errors}
+          isValidInputs={isValidInputs}
         />
         <button 
-          className="button button_identity button_submit" 
+          className={`button button_identity button_submit 
+          ${!isValid 
+            ? 'button_submit_inactive' 
+            :''}`} 
           type="submit">
           Зарегистрироваться
         </button>

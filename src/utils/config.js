@@ -10,6 +10,5 @@ export const config = {
     '.form_type_edit', 
     '.form_type_place', 
     '.form_type_avatar',
-    '.form_identity',
   ]
 };
