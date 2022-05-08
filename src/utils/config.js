@@ -5,5 +5,11 @@ export const config = {
   inactiveButtonClass: 'button_submit_inactive',
   inputErrorClass: 'text-field__input_type_error',
   errorClass: 'text-field__input-error_active',
-  ROOT_URL: 'react-mesto-auth'
+  ROOT_URL: 'react-mesto-auth',
+  forms: [
+    '.form_type_edit', 
+    '.form_type_place', 
+    '.form_type_avatar',
+    '.form_identity',
+  ]
 };

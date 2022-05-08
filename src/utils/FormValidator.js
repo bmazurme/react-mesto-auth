@@ -1,9 +1,11 @@
 export default function resetForms(forms, formValidators) {
   forms.forEach(form => {
-    const item = formValidators[document
-      .querySelector(form)
-      .getAttribute('name')];
-    if (item) item.resetValidation()})
+    const el = document.querySelector(form);
+    if (el) {
+      const item = formValidators[el.getAttribute('name')];
+      if (item) item.resetValidation()}
+    }
+  )
 }
 
 export class FormValidator {
