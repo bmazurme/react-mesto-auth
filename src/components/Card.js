@@ -18,25 +18,30 @@ function Card(props) {
 
   return(
     <div className="card">
-      <button onClick={() => props.onCardDelete(props.card)} 
-              aria-label="Remove" 
-              className={cardDeleteButtonClassName} 
-              type="button"
+      <button 
+        onClick={() => props.onCardDelete(props.card)} 
+        aria-label="Remove" 
+        className={cardDeleteButtonClassName} 
+        type="button"
       />
-      <img className="card__image" 
-           alt={props.card.name} 
-           onClick={() => props.onCardClick(props.card)} 
-           src={props.card.link}
+      <img
+        className="card__image" 
+        alt={props.card.name} 
+        onClick={() => props.onCardClick(props.card)} 
+        src={props.card.link}
       />
       <div className="card__group">
         <h2 className="card__name">{props.card.name}</h2>
         <div className="card__column">
-          <button onClick={() => props.onCardLike(props.card)} 
-                  aria-label="Like" 
-                  className={cardLikeButtonClassName}
-                  name="button-like"
+          <button 
+            onClick={() => props.onCardLike(props.card)} 
+            aria-label="Like" 
+            className={cardLikeButtonClassName}
+            name="button-like"
           />
-        <p className="card__counter">{props.card.likes.length}</p>
+        <p className="card__counter">
+          {props.card.likes.length}
+        </p>
       </div>
     </div>
   </div>   

@@ -54,36 +54,38 @@ function App() {
 
   React.useEffect(() => {
     api.getUser()
-       .then((userData) => {
-         setCurrentUser(userData);
-       })
-       .catch((err) => console.log(err));
+      .then((userData) => {
+        setCurrentUser(userData);
+      })
+      .catch((err) => console.log(err));
     api.getCards()
-       .then((cardData) => {
-         setCards(cardData);
-       })
-       .catch((err) => console.log(err));
+      .then((cardData) => {
+        setCards(cardData);
+      })
+      .catch((err) => console.log(err));
     document.addEventListener("keydown", escFunction, false);
     return () => {
       document.removeEventListener("keydown", escFunction, false);
     }
-  }, []);
+  },
+  // eslint-disable-next-line 
+  []);
 
   React.useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
       auth.checkToken(jwt)
-          .then((res) => {
-            setIsLoggedIn(true);
-            setEmail(res.data.email);
-            history.push("/");
-          })
-          .catch((err) => {
-            if (err.status === 401) {
-              console.log("401 — Токен не передан или передан не в том формате.");
-            }
-            console.log(err);
-          });
+        .then((res) => {
+          setIsLoggedIn(true);
+          setEmail(res.data.email);
+          history.push("/");
+        })
+        .catch((err) => {
+          if (err.status === 401) {
+            console.log("401 — Токен не передан или передан не в том формате.");
+          }
+          console.log(err);
+        });
     }
   }, [history]);
 
@@ -126,34 +128,34 @@ function App() {
   function handleUpdateUser(data) {
     setIsLoading(true);
     api.patchUser(data)
-       .then((userInfo) => {
-          setCurrentUser(userInfo);
-          setIsLoading(false);
-          closeAllPopups();
-        })
-        .catch((err) => console.log(err));
+      .then((userInfo) => {
+        setCurrentUser(userInfo);
+        setIsLoading(false);
+        closeAllPopups();
+      })
+      .catch((err) => console.log(err));
   }
 
   function handleUpdateAvatar(data) {
     setIsLoading(true);
     api.patchAvatar(data)
-       .then((userInfo) => {
-         setCurrentUser(userInfo);
-         setIsLoading(false);
-         closeAllPopups();
-       })
-       .catch((err) => console.log(err));
+      .then((userInfo) => {
+        setCurrentUser(userInfo);
+        setIsLoading(false);
+        closeAllPopups();
+      })
+      .catch((err) => console.log(err));
   }
 
   function handleAddPlaceSubmit(card) {
     setIsLoading(true);
     api.postCard(card)
-       .then((newCard) => {
-         setCards([newCard, ...cards]);
-         setIsLoading(false);
-         closeAllPopups();
-       })
-       .catch((err) => console.log(err));
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        setIsLoading(false);
+        closeAllPopups();
+      })
+      .catch((err) => console.log(err));
   }
 
   function handleCardDeleteConfirm(card) {
@@ -196,20 +198,20 @@ function App() {
 
   function handleRegisterSubmit(data) {
     auth.signUp(data)
-        .then((res) => {
-          setIsInfoToolTipPopupOpen(true);
-          setIsSuccess(true);
-          history.replace({pathname: "/sign-in"});
-        })
-        .catch((err) => {
-          if (err.status === 400) {
-            console.log("400 - некорректно заполнено одно из полей.");
-          }
-          console.log('400 - некорректно заполнено одно из полей');
-          console.log(err);
-          setIsInfoToolTipPopupOpen(true);
-          setIsSuccess(false);
-        });
+      .then((res) => {
+        setIsInfoToolTipPopupOpen(true);
+        setIsSuccess(true);
+        history.replace({pathname: "/sign-in"});
+      })
+      .catch((err) => {
+        if (err.status === 400) {
+          console.log("400 - некорректно заполнено одно из полей.");
+        }
+        console.log('400 - некорректно заполнено одно из полей');
+        console.log(err);
+        setIsInfoToolTipPopupOpen(true);
+        setIsSuccess(false);
+      });
   }
 
   function handleSignOut() {
@@ -222,20 +224,24 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header email={email} onSignOut={handleSignOut}/>
+        <Header
+          email={email}
+          onSignOut={handleSignOut}
+        />
 
         <Switch>
-          <ProtectedRoute exact path="/"
-                          isLoggedIn={isLoggedIn}
-                          onEditAvatar={handleEditAvatarClick}
-                          onEditProfile={handleEditProfileClick}
-                          onAddPlace={handleAddPlaceClick}
-                          onCardClick={handleCardClick}
-                          handleCardLike={handleCardLike}
-                          handleCardDelete={handleCardDeleteConfirm}
-                          cards={cards}
-                          component={Main}
-                          isLoading={isLoading}
+          <ProtectedRoute 
+            exact path="/"
+            isLoggedIn={isLoggedIn}
+            onEditAvatar={handleEditAvatarClick}
+            onEditProfile={handleEditProfileClick}
+            onAddPlace={handleAddPlaceClick}
+            onCardClick={handleCardClick}
+            handleCardLike={handleCardLike}
+            handleCardDelete={handleCardDeleteConfirm}
+            cards={cards}
+            component={Main}
+            isLoading={isLoading}
           />
 
           <Route path="/sign-in">
@@ -247,46 +253,56 @@ function App() {
           </Route>
 
           <Route>
-            {isLoggedIn ? (<Redirect to="/" />) : (<Redirect to="/sign-in" />) }
+            {
+              isLoggedIn 
+                ? (<Redirect to="/" />) 
+                : (<Redirect to="/sign-in" />) 
+            }
           </Route>
 
         </Switch>
 
         <Footer/>
            
-        <EditProfilePopup isOpen={isEditProfilePopupOpen} 
-                          onClose={closeAllPopups} 
-                          onUpdateUser={handleUpdateUser}
-                          isLoading={isLoading}
+        <EditProfilePopup
+          isOpen={isEditProfilePopupOpen} 
+          onClose={closeAllPopups} 
+          onUpdateUser={handleUpdateUser}
+          isLoading={isLoading}
         /> 
-        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} 
-                         onClose={closeAllPopups}
-                         onUpdateAvatar={handleUpdateAvatar}
-                         isLoading={isLoading}
+        <EditAvatarPopup 
+          isOpen={isEditAvatarPopupOpen} 
+          onClose={closeAllPopups}
+          onUpdateAvatar={handleUpdateAvatar}
+          isLoading={isLoading}
         />
-        <AddPlacePopup isOpen={isAddPlacePopupOpen}
-                       onClose={closeAllPopups}
-                       onAddPlace={handleAddPlaceSubmit}
-                       isLoading={isLoading}
+        <AddPlacePopup
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+          onAddPlace={handleAddPlaceSubmit}
+          isLoading={isLoading}
         />
-        <ImagePopup card={selectedCard}
-                    onClose={closeAllPopups}
+        <ImagePopup
+          card={selectedCard}
+          onClose={closeAllPopups}
         />
-        <PopupWithConfirm isOpen={isConfirmPopupOpen}
-                          isLoading={isLoading}
-                          card={deletedCard}
-                          onClose={closeAllPopups}
-                          onSubmit={handleCardDelete}
-                          title="Вы уверены?"
-                          buttonText="Да"
+        <PopupWithConfirm
+          isOpen={isConfirmPopupOpen}
+          isLoading={isLoading}
+          card={deletedCard}
+          onClose={closeAllPopups}
+          onSubmit={handleCardDelete}
+          title="Вы уверены?"
+          buttonText="Да"
         />
-        <InfoTooltip isOpen={isInfoToolTipPopupOpen}
-                     onClose={closeAllPopups}
-                     isSuccess={isSuccess}
-                     text={isSuccess 
-                            ? 'Вы успешно зарегистрировались!' 
-                            : 'Что-то пошло не так! Попробуйте ещё раз.'}
-                     />
+        <InfoTooltip
+          isOpen={isInfoToolTipPopupOpen}
+          onClose={closeAllPopups}
+          isSuccess={isSuccess}
+          text={isSuccess 
+            ? 'Вы успешно зарегистрировались!' 
+            : 'Что-то пошло не так! Попробуйте ещё раз.'}
+        />
       </div>
     </CurrentUserContext.Provider>
   );
