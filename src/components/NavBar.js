@@ -1,5 +1,6 @@
 import { Route, Switch } from "react-router-dom";
 import NavItem from './NavItem';
+import { config } from "../utils/config";
 
 function NavBar(props) {
   return(
@@ -11,29 +12,29 @@ function NavBar(props) {
           : ''}`}
       >
         <Switch>
-          <Route path="/sign-in">
+          <Route path={`/${config.ROOT_URL}/sign-in`}>
             <NavItem
-              to="/sign-up"
+              to={`/${config.ROOT_URL}/sign-up`}
               value="Регистрация"
               active="active"
             />
           </Route>
-          <Route path="/sign-up">
+          <Route path={`/${config.ROOT_URL}/sign-up`}>
             <NavItem
-              to="/sign-in"
+              to={`/${config.ROOT_URL}/sign-in`}
               value="Войти"
               active="active"
             />
           </Route>
-          <Route exact path="/">
+          <Route exact path={`/${config.ROOT_URL}`}>
             <NavItem
-              to="/"
+              to={`/${config.ROOT_URL}`}
               value={props.email}
               onClick={()=>console.log('go to profile')}
               active="active"
             />
             <NavItem
-              to="/sign-in"
+              to={`/${config.ROOT_URL}/sign-in`}
               value="Выйти"
               onClick={props.onSignOut}
             />
