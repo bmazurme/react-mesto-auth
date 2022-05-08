@@ -1,60 +1,51 @@
-import { Link } from 'react-router-dom';
 import { Route, Switch } from "react-router-dom";
+import NavItem from './NavItem';
 
 function NavBar(props) {
   return(
     <>
-      <ul onClick={props.handlerClick} 
-         className={`navbar ${props.isOpen 
-                              ? 'navbar_opened' 
-                              : ''}`}>
+      <ul
+        onClick={props.handlerClick} 
+        className={`navbar ${props.isOpen 
+          ? 'navbar_opened' 
+          : ''}`}
+      >
         <Switch>
-          <Route exact path="/sign-in">
-            <li className='navbar__item'>
-              <Link to="/sign-up" 
-                    className="navbar__link 
-                               navbar__link_active">
-                Регистрация
-              </Link>
-            </li>
+          <Route path="/sign-in">
+            <NavItem
+              to="/sign-up"
+              value="Регистрация"
+              active="active"
+            />
           </Route>
-
-          <Route exact path="/sign-up">
-            <li className='navbar__item'>
-              <Link to="/sign-in" 
-                    className="navbar__link 
-                               navbar__link_active">
-                Войти
-              </Link>
-            </li>
+          <Route path="/sign-up">
+            <NavItem
+              to="/sign-in"
+              value="Войти"
+              active="active"
+            />
           </Route>
-
           <Route exact path="/">
-            <li className='navbar__item'>
-              <Link to='/' 
-                    className="navbar__link 
-                               navbar__link_active" 
-                    onClick={()=>console.log('go to profile')}>
-                {props.email}
-              </Link>
-            </li>
-
-            <li className='navbar__item'>
-              <Link to='/sign-in' 
-                    className="navbar__link" 
-                    onClick={props.onSignOut}>
-                Выйти
-              </Link>
-            </li>
+            <NavItem
+              to="/"
+              value={props.email}
+              onClick={()=>console.log('go to profile')}
+              active="active"
+            />
+            <NavItem
+              to="/sign-in"
+              value="Выйти"
+              onClick={props.onSignOut}
+            />
           </Route>
-
         </Switch>
       </ul>
-
-      <button onClick={props.handlerClick} 
-              className={`navbar__btn ${props.isOpen 
-                                        ? 'navbar__btn_opened'
-                                        : ''}`} />
+      <button
+        onClick={props.handlerClick} 
+        className={`navbar__btn ${props.isOpen 
+          ? 'navbar__btn_opened'
+          : ''}`} 
+      />
     </>
   );
 }

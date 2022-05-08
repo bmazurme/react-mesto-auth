@@ -1,10 +1,10 @@
 export const config = {
   formSelector: '.form',
-  inputSelector: '.form__input',
+  inputSelector: '.text-field__input',
   submitButtonSelector: '.button_submit',
   inactiveButtonClass: 'button_submit_inactive',
-  inputErrorClass: 'form__input_type_error',
-  errorClass: 'form__input-error_active',
+  inputErrorClass: 'text-field__input_type_error',
+  errorClass: 'text-field__input-error_active',
   forms: [
     '.form_type_edit', 
     '.form_type_place', 

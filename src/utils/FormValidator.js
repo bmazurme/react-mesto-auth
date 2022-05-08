@@ -1,23 +1,9 @@
-// connect
-//
-// function enableValidation(config) {
-//   const formList = Array.from(document.querySelectorAll(config.formSelector))
-//   formList.forEach((formElement) => {
-//     const validator = new FormValidator(config, formElement);
-//     const formName = formElement.getAttribute('name');
-//     formValidators[formName] = validator;
-//     validator.enableValidation();
-//   });
-// };
-// enableValidation(config);
-
-
 export default function resetForms(forms, formValidators) {
-  forms.forEach(form => 
-    formValidators[ document
-                    .querySelector(form)
-                    .getAttribute('name') ]
-                    .resetValidation())
+  forms.forEach(form => {
+    const item = formValidators[document
+      .querySelector(form)
+      .getAttribute('name')];
+    if (item) item.resetValidation()})
 }
 
 export class FormValidator {

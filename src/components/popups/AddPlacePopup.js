@@ -1,5 +1,6 @@
 import PopupWithForm from "./PopupWithForm";
 import React from "react";
+import TextField from "../TextField";
 
 function AddPlacePopup(props) {
   const [data, setData] = React.useState({
@@ -9,7 +10,6 @@ function AddPlacePopup(props) {
 
   function handleChange(e) {
     const {name, value} = e.target;
-    console.log(e.target);
     setData({
       ...data,
       [name]: value,
@@ -33,38 +33,34 @@ function AddPlacePopup(props) {
   }, [props.isOpen]); 
 
   return(
-    <PopupWithForm title="Новое место" 
-                   name="place" 
-                   buttonText={props.isLoading 
-                               ? 'Загрузка...' 
-                               : 'Создать'}  
-                   isOpen={props.isOpen} 
-                   onClose={props.onClose}
-                   onSubmit={handleSubmit}
+    <PopupWithForm 
+      title="Новое место" 
+      name="place" 
+      buttonText={props.isLoading 
+        ? 'Загрузка...' 
+        : 'Создать'}  
+      isOpen={props.isOpen} 
+      onClose={props.onClose}
+      onSubmit={handleSubmit}
     >
-      <div className="form__box">
-        <input placeholder="Название"
-               onChange={handleChange} 
-               value={data.name || ''}
-               className="form__input form__input_type_name"
-               required 
-               minLength="2" 
-               maxLength="30" 
-               name="name" 
-               id="placename-input"/>
-          <span className="placename-input-error form__input-error"></span>
-      </div>
-      <div className="form__box">
-        <input placeholder="Ссылка на картинку"
-               onChange={handleChange}
-               value={data.link || ''}
-               name="link" 
-               className="form__input form__input_type_link" 
-               id="link-input" 
-               required 
-               type="url"/>
-        <span className="link-input-error form__input-error"></span>
-      </div>
+      <TextField 
+        placeholder="Название"
+        label="name"
+        handleChange={handleChange}
+        value={data.name}
+        name="name" 
+        type="text"
+        minLength="2" 
+        maxLength="30" 
+      />
+      <TextField 
+        placeholder="Ссылка на картинку"
+        label="link"
+        handleChange={handleChange}
+        value={data.link}
+        name="link" 
+        type="text"
+      />
     </PopupWithForm >
   );
 }

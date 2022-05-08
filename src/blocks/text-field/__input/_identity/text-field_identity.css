@@ -1,6 +1,5 @@
-.form__input_identity {
+.text-field__input_identity {
   outline: none;
-  /* font-family: Inter; */
   margin-top: 0;
   margin-bottom: 0;
   margin-left: 0;
@@ -19,11 +18,11 @@
   background-color: black;
   
 }
-.form__input_identity:focus {
+.text-field__input_identity:focus {
   outline: none;
 }
 
-.form__input_identity{
+.text-field__input_identity{
   -webkit-box-shadow: inset 0 0 0 50px #000;
   -webkit-text-fill-color: #fff;
 }
