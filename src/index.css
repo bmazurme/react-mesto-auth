@@ -52,7 +52,7 @@
 @import url(./blocks/text-field/__input-error/text-field__input-error.css);
 /* button */
 @import url(./blocks/button/button.css);
-@import url(./blocks/button/_submit/button_save.css);
+@import url(./blocks/button/_submit/button_submit.css);
 @import url(./blocks/button/_submit/_inactive/button_submit_inactive.css);
 @import url(./blocks/button/_identity/button_identity.css);
 /* slide */
@@ -73,3 +73,5 @@
 @import url(./blocks/tooltip/__image/tooltip__image.css);
 @import url(./blocks/tooltip/__image/_success/tooltip__image_success.css);
 @import url(./blocks/tooltip/__text/tooltip__text.css);
+
+@import url(./blocks/main/main.css);
