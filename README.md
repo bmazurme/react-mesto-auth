@@ -25,7 +25,7 @@
 
 ## Демо
 
-[Проект на GitHub Pages](https://bmazurme.github.io/react-mesto-auth/)
+[Проект на GitHub Pages](https://bmazurme.github.io/react-mesto-auth/mesto)
 
 ![Alt-текст](https://github.com/bmazurme/mesto-react/blob/main/src/images/mesto.png "demo")
 
