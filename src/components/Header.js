@@ -1,6 +1,7 @@
 import logo from '../images/logo.svg';
 import NavBar from './NavBar';
 import React from 'react';
+import { config } from '../utils/config';
 
 function Header(props) {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -15,7 +16,7 @@ function Header(props) {
           ? 'header_opened' 
           : ''}`}
     >
-      <a href='/' 
+      <a href={`/${config.ROOT_URL}`} 
         className="logo" 
         src={logo} 
         alt="Логотип Место">
