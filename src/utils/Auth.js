@@ -1,48 +1,48 @@
 export class Auth {
   constructor(options) {
-    this._options = options;
+    this.options = options;
   }
 
-  _checkResponse(res) {
+  checkResponse(res) {
     if (res.ok) {
       return res.json();
     }
     return Promise.reject(`Ошибка ${res.status}`);
   }
 
-  signUp(data) {
-    return fetch(`${this._options.baseUrl}/signup`, {
-      method: "POST",
+  async signUp(data) {
+    const res = await fetch(`${this.options.baseUrl}/signup`, {
+      method: 'POST',
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
-    })
-    .then(this._checkResponse)
-  };
-  
-  signIn(data) {
-    return fetch(`${this._options.baseUrl}/signin`, {
-      method: "POST",
+    });
+    return this.checkResponse(res);
+  }
+
+  async signIn(data) {
+    const res = await fetch(`${this.options.baseUrl}/signin`, {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
-    })
-    .then(this._checkResponse)
-  };
-  
-  checkToken(jwt) {
-    return fetch(`${this._options.baseUrl}/users/me`, {
-      method: "GET",
+    });
+    return this.checkResponse(res);
+  }
+
+  async checkToken(jwt) {
+    const res = await fetch(`${this.options.baseUrl}/users/me`, {
+      method: 'GET',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${jwt}`,
       },
-    })
-    .then(this._checkResponse)
-  };
+    });
+    return this.checkResponse(res);
+  }
 }
 
 const auth = new Auth({

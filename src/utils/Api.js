@@ -1,78 +1,78 @@
 export class Api {
   constructor(options) {
-    this._options = options;
+    this.options = options;
   }
 
-  _checkResponse(res) {
+  checkResponse(res) {
     if (res.ok) {
       return res.json();
     }
     return Promise.reject(`Ошибка ${res.status}`);
   }
 
-  getUser() {
-    return fetch(`${this._options.baseUrl}/users/me`, {
-        headers: this._options.headers
-      })
-      .then(this._checkResponse);
+  async getUser() {
+    const res = await fetch(`${this.options.baseUrl}/users/me`, {
+      headers: this.options.headers,
+    });
+    return this.checkResponse(res);
   }
 
-  patchUser({name, about}) {
-    return fetch(`${this._options.baseUrl}/users/me`, {
+  async patchUser({ name, about }) {
+    const res = await fetch(`${this.options.baseUrl}/users/me`, {
       method: 'PATCH',
-      headers: this._options.headers,
+      headers: this.options.headers,
       body: JSON.stringify({
-        name: name,
-        about: about
-      })
-    })
-    .then(this._checkResponse);
+        name,
+        about,
+      }),
+    });
+    return this.checkResponse(res);
   }
 
-  patchAvatar({avatar}) {
-    return fetch(`${this._options.baseUrl}/users/me/avatar`, {
+  async patchAvatar({ avatar }) {
+    const res = await fetch(`${this.options.baseUrl}/users/me/avatar`, {
       method: 'PATCH',
-      headers: this._options.headers,
+      headers: this.options.headers,
       body: JSON.stringify({
-        avatar: avatar,
-      })
-    })
-    .then(this._checkResponse);
+        avatar,
+      }),
+    });
+    return this.checkResponse(res);
   }
 
-  getCards() {
-    return fetch(`${this._options.baseUrl}/cards`, {
-      headers: this._options.headers
-    })
-    .then(this._checkResponse);
+  async getCards() {
+    const res = await fetch(`${this.options.baseUrl}/cards`, {
+      headers: this.options.headers,
+    });
+    return this.checkResponse(res);
   }
 
-  deleteCard(cardId) {
-    return fetch(`${this._options.baseUrl}/cards/${cardId}`, {
-      method: 'DELETE',  
-      headers: this._options.headers,
-    })
-    .then(this._checkResponse);
+  async deleteCard(cardId) {
+    const res = await fetch(`${this.options.baseUrl}/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: this.options.headers,
+    });
+    return this.checkResponse(res);
   }
 
-  postCard({name, link}) {
-    return fetch(`${this._options.baseUrl}/cards`, {
-      method: 'POST',  
-      headers: this._options.headers,
+  async postCard({ name, link }) {
+    const res = await fetch(`${this.options.baseUrl}/cards`, {
+      method: 'POST',
+      headers: this.options.headers,
       body: JSON.stringify({
-        name: name,
-        link: link
-      })
-    })
-    .then(this._checkResponse);
+        name,
+        link,
+      }),
+    });
+    return this.checkResponse(res);
   }
 
-  changeLike(cardId, value) {
-    return fetch(`${this._options.baseUrl}/cards/${cardId}/likes`, {
-      method: value ? 'PUT' : 'DELETE',  
-      headers: this._options.headers,
-    })
-    .then(this._checkResponse);
+  async changeLike(cardId, value) {
+    const res = await fetch(`${this.options.baseUrl}/cards/${cardId}/likes`, {
+      method: value ? 'PUT' : 'DELETE',
+      headers: this.options.headers,
+    });
+    return this.checkResponse(res);
   }
 }
 
@@ -80,8 +80,8 @@ const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort36',
   headers: {
     authorization: 'fcfa5c3a-c07d-49f3-a47d-0099ff285712',
-    'Content-Type': 'application/json'
-  }
+    'Content-Type': 'application/json',
+  },
 });
 
 export default api;
