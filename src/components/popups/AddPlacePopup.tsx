@@ -3,7 +3,21 @@ import PopupWithForm from './PopupWithForm';
 import TextField from '../TextField/TextField';
 import { useFormWithValidation } from '../../utils/Validator';
 
-function AddPlacePopup(props) {
+interface IProps {
+  isOpen: boolean,
+  onClose: any,
+  isLoading: boolean,
+  onAddPlace: any, // (data: {name: string, link: string}) => void,
+}
+
+interface IValid {
+  values: any,
+  errors: any,
+  isValid: boolean,
+  handleChange: any,
+}
+
+function AddPlacePopup(props: IProps) {
   const {
     isOpen,
     onClose,
@@ -16,9 +30,9 @@ function AddPlacePopup(props) {
     errors,
     isValid,
     handleChange,
-  } = useFormWithValidation();
+  } = useFormWithValidation() as IValid;
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = (evt: SubmitEvent) => {
     evt.preventDefault();
     onAddPlace(
       {
@@ -53,10 +67,11 @@ function AddPlacePopup(props) {
         className=""
         onChange={handleChange}
         type="text"
-        minLength="2"
-        maxLength="30"
+        minLength={2}
+        maxLength={30}
         errors={errors}
         required
+        pattern={''}
       />
 
       <TextField
@@ -71,6 +86,9 @@ function AddPlacePopup(props) {
         type="text"
         errors={errors}
         required
+        pattern={''}
+        minLength={0}
+        maxLength={200}
       />
     </PopupWithForm>
   );

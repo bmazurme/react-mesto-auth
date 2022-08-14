@@ -3,7 +3,21 @@ import PopupWithForm from './PopupWithForm';
 import TextField from '../TextField/TextField';
 import { useFormWithValidation } from '../../utils/Validator';
 
-function EditAvatarPopup(props) {
+interface IProps {
+  isOpen: boolean,
+  onClose: any,
+  isLoading: boolean,
+  onUpdateAvatar: (data: {avatar: string}) => void,
+}
+
+interface IValid {
+  values: any,
+  errors: any,
+  isValid: boolean,
+  handleChange: any,
+}
+
+function EditAvatarPopup(props: IProps) {
   const {
     isOpen,
     onClose,
@@ -16,9 +30,9 @@ function EditAvatarPopup(props) {
     errors,
     isValid,
     handleChange,
-  } = useFormWithValidation();
+  } = useFormWithValidation() as IValid;
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = (evt: SubmitEvent) => {
     evt.preventDefault();
     onUpdateAvatar({
       avatar: values.avatar,
@@ -49,9 +63,11 @@ function EditAvatarPopup(props) {
         className=""
         onChange={handleChange}
         type="text"
-        minLength="2"
+        minLength={2}
+        maxLength={300}
         errors={errors}
         required
+        pattern={''}
       />
     </PopupWithForm>
   );

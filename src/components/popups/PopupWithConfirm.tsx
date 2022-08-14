@@ -1,7 +1,17 @@
 import React from 'react';
 import PopupWithForm from './PopupWithForm';
 
-function PopupWithConfirm(props) {
+interface IProps {
+  title: string,
+  isLoading: boolean,
+  buttonText: string,
+  card: Record<string, string>,
+  onSubmit: any,
+  onClose: any,
+  isOpen: boolean
+}
+
+function PopupWithConfirm(props: IProps) {
   const {
     card,
     title,
@@ -12,7 +22,7 @@ function PopupWithConfirm(props) {
     onClose,
   } = props;
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = (evt: Event) => {
     evt.preventDefault();
     onSubmit(card);
   };
@@ -26,6 +36,7 @@ function PopupWithConfirm(props) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      children={undefined}
     />
   );
 }

@@ -4,8 +4,29 @@ import { useFormWithValidation } from '../../utils/Validator';
 import PopupWithForm from './PopupWithForm';
 import TextField from '../TextField/TextField';
 
-function EditProfilePopup(props) {
-  const currentUser = React.useContext(CurrentUserContext);
+interface IProps {
+  isOpen: boolean,
+  onClose: any,
+  isLoading: boolean,
+  onUpdateUser: (data: {name: string, about: string}) => void,
+}
+
+interface IValid {
+  values: any,
+  errors: any,
+  isValid: boolean,
+  handleChange: any,
+}
+
+interface IUser {
+  _id: number,
+  avatar: string,
+  name: string,
+  about: string,
+}
+
+function EditProfilePopup(props: IProps) {
+  const currentUser = React.useContext(CurrentUserContext) as IUser;
   const {
     isLoading,
     isOpen,
@@ -18,9 +39,9 @@ function EditProfilePopup(props) {
     errors,
     isValid,
     handleChange,
-  } = useFormWithValidation();
+  } = useFormWithValidation() as IValid;
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = (evt: SubmitEvent) => {
     evt.preventDefault();
     onUpdateUser({
       name: values.name,
@@ -53,10 +74,11 @@ function EditProfilePopup(props) {
         className=""
         onChange={handleChange}
         type="text"
-        minLength="2"
-        maxLength="40"
+        minLength={2}
+        maxLength={40}
         errors={errors}
         required
+        pattern={''}
       />
       <TextField
         placeholder="Профессия"
@@ -68,10 +90,11 @@ function EditProfilePopup(props) {
         className=""
         onChange={handleChange}
         type="text"
-        minLength="2"
-        maxLength="200"
+        minLength={2}
+        maxLength={200}
         errors={errors}
         required
+        pattern={''}
       />
     </PopupWithForm>
   );

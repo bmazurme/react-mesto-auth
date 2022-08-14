@@ -1,6 +1,23 @@
 import React from 'react';
 
-function TextField(props) {
+interface IProps {
+  label: string,
+  pattern: string,
+  name: string,
+  placeholder: string,
+  onChange: () => void,
+  minLength: number,
+  maxLength: number,
+  required: boolean,
+  errors: any,
+  type: string,
+  id: string,
+  autoComplete: string,
+  value: string,
+  className: string,
+}
+
+function TextField(props: IProps) {
   const {
     label,
     pattern,
@@ -28,8 +45,8 @@ function TextField(props) {
             name={name}
             placeholder={placeholder}
             onChange={onChange}
-            minLength={minLength || ''}
-            maxLength={maxLength || ''}
+            minLength={minLength || undefined}
+            maxLength={maxLength || undefined}
             required={required}
             className={`text-field__input ${className} ${errors[name] ? 'text-field__input-error' : ''}`}
             type={type}
@@ -41,8 +58,8 @@ function TextField(props) {
           name={name}
           placeholder={placeholder}
           onChange={onChange}
-          minLength={minLength || ''}
-          maxLength={maxLength || ''}
+          minLength={minLength || undefined}
+          maxLength={maxLength || undefined}
           required={required}
           className={`text-field__input ${className} ${errors[name] ? 'text-field__input-error' : ''}`}
           type={type}

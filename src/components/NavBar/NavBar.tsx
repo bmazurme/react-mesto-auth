@@ -3,7 +3,14 @@ import { Route, Switch } from 'react-router-dom';
 import NavItem from '../NavItem/NavItem';
 import { SIGNIN_URL, SIGNUP_URL, BASE_URL } from '../../utils/config';
 
-function NavBar(props) {
+interface IProps {
+  email: string,
+  isOpen: boolean,
+  handlerClick: () => void,
+  onSignOut: () => void,
+}
+
+function NavBar(props: IProps) {
   const {
     email,
     isOpen,
@@ -22,6 +29,7 @@ function NavBar(props) {
             <NavItem
               to={SIGNUP_URL}
               value="Регистрация"
+              onClick={() => console.log('go to up')}
               active="active"
             />
           </Route>
@@ -29,6 +37,7 @@ function NavBar(props) {
             <NavItem
               to={SIGNIN_URL}
               value="Войти"
+              onClick={() => console.log('go to in')}
               active="active"
             />
           </Route>
@@ -36,13 +45,14 @@ function NavBar(props) {
             <NavItem
               to={BASE_URL}
               value={email}
-              // onClick={() => console.log('go to profile')}
+              onClick={() => console.log('go to profile')}
               active="active"
             />
             <NavItem
               to={SIGNIN_URL}
               value="Выйти"
               onClick={onSignOut}
+              active={''}
             />
           </Route>
         </Switch>

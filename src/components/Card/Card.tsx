@@ -1,7 +1,31 @@
 import React from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-function Card(props) {
+interface IUser {
+  _id: number
+}
+
+interface ILike {
+  _id: number
+}
+
+interface ICard {
+  _id: number,
+  name: string,
+  link: string,
+  likes: Array<ILike>,
+  owner: IUser,
+  createdAt: Date
+}
+
+interface IProps {
+  card: ICard,
+  onCardDelete: (card: ICard) => void,
+  onCardLike: (card: ICard) => void,
+  onCardClick: (card: ICard) => void,
+}
+
+function Card(props: IProps) {
   const {
     card,
     onCardDelete,
@@ -9,7 +33,7 @@ function Card(props) {
     onCardClick,
   } = props;
 
-  const { _id } = React.useContext(CurrentUserContext);
+  const { _id } = React.useContext(CurrentUserContext) as IUser;
   const isOwn = card.owner._id === _id;
   const isLiked = card.likes.some((like) => like._id === _id);
   const cardDeleteButtonClassName = (

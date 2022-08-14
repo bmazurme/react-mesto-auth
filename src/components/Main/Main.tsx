@@ -2,8 +2,24 @@ import React from 'react';
 import Card from '../Card/Card';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-function Main(props) {
-  const { avatar, name, about } = React.useContext(CurrentUserContext);
+interface IProps {
+  onEditProfile:  () => void,
+  onAddPlace:  () => void,
+  cards: Array<typeof Card>,
+  onCardClick: (card: any) => void,
+  onEditAvatar: (card: any) => void,
+  handleCardLike: (card: any) => void,
+  handleCardDelete: (card: any) => void,
+}
+
+interface IUser {
+  avatar: string,
+  name: string,
+  about: string,
+}
+
+function Main(props: IProps) {
+  const { avatar, name, about } = React.useContext(CurrentUserContext) as IUser;
   const {
     onEditProfile,
     onAddPlace,
@@ -41,7 +57,7 @@ function Main(props) {
         />
       </section>
       <section className="cards">
-        {cards.map((card) =>
+        {cards.map((card: any) =>
 
           <Card
             key={card._id}

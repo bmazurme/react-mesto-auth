@@ -3,15 +3,26 @@ import TextField from '../TextField/TextField';
 import { SIGNIN_URL, EMAIL_REGEXP } from '../../utils/config';
 import { useFormWithValidation } from '../../utils/Validator';
 
-function SignUp({ onRegister }) {
+interface IProps {
+  onRegister: ({email, password}: Record<string, string>) => void,
+}
+
+interface IValid {
+  values: Record<string, string>,
+  errors: Record<string, string>,
+  isValid: boolean,
+  handleChange: any,
+}
+
+function SignUp({ onRegister }: IProps) {
   const {
     values,
     errors,
     isValid,
     handleChange,
-  } = useFormWithValidation();
+  }: IValid = useFormWithValidation();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     onRegister({
       email: values.email,
@@ -39,6 +50,8 @@ function SignUp({ onRegister }) {
           errors={errors}
           value={values.email || ''}
           required
+          minLength={0}
+          maxLength={100}        
         />
         <TextField
           placeholder="Пароль"
@@ -49,7 +62,12 @@ function SignUp({ onRegister }) {
           type="password"
           value={values.password || ''}
           errors={errors}
-          minLength="6"
+          minLength={6}
+          maxLength={100}
+          pattern={''}
+          required
+          id="password-input"
+          autoComplete="off"
         />
         <button
           className={`button button_identity button_submit ${!isValid ? 'button_submit_inactive' : ''}`}

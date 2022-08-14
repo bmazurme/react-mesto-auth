@@ -1,6 +1,13 @@
 import React from 'react';
 
-function InfoTooltip(props) {
+interface IProps {
+  isOpen: boolean,
+  onClose: () => void,
+  isSuccess: boolean,
+  text: string,
+}
+
+function InfoTooltip(props: IProps) {
   const {
     text,
     isOpen,

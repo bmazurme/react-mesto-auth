@@ -1,8 +1,13 @@
 import React from 'react';
 
-function ImagePopup(props) {
+interface IProps {
+  onClose: () => void,
+  card: any,
+}
+
+function ImagePopup(props: IProps) {
   const { card, onClose } = props;
-  const handleCloseClick = (e) => {
+  const handleCloseClick = (e: any) => {
     e.currentTarget === e.target && onClose();
   };
 

@@ -1,16 +1,17 @@
 export class Auth {
-  constructor(options) {
+  options: any;
+  constructor(options: any) {
     this.options = options;
   }
 
-  checkResponse(res) {
+  checkResponse(res: any) {
     if (res.ok) {
       return res.json();
     }
     return Promise.reject(`Ошибка ${res.status}`);
   }
 
-  async signUp(data) {
+  async signUp(data: any) {
     const res = await fetch(`${this.options.baseUrl}/signup`, {
       method: 'POST',
       headers: {
@@ -22,7 +23,7 @@ export class Auth {
     return this.checkResponse(res);
   }
 
-  async signIn(data) {
+  async signIn(data: any) {
     const res = await fetch(`${this.options.baseUrl}/signin`, {
       method: 'POST',
       headers: {
@@ -33,7 +34,7 @@ export class Auth {
     return this.checkResponse(res);
   }
 
-  async checkToken(jwt) {
+  async checkToken(jwt: string) {
     const res = await fetch(`${this.options.baseUrl}/users/me`, {
       method: 'GET',
       headers: {

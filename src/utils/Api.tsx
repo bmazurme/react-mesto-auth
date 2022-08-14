@@ -1,9 +1,10 @@
 export class Api {
-  constructor(options) {
+  options: any;
+  constructor(options: any) {
     this.options = options;
   }
 
-  checkResponse(res) {
+  checkResponse(res: any) {
     if (res.ok) {
       return res.json();
     }
@@ -17,7 +18,7 @@ export class Api {
     return this.checkResponse(res);
   }
 
-  async patchUser({ name, about }) {
+  async patchUser({ name, about }: any) {
     const res = await fetch(`${this.options.baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this.options.headers,
@@ -29,7 +30,7 @@ export class Api {
     return this.checkResponse(res);
   }
 
-  async patchAvatar({ avatar }) {
+  async patchAvatar({ avatar }: any) {
     const res = await fetch(`${this.options.baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this.options.headers,
@@ -47,7 +48,7 @@ export class Api {
     return this.checkResponse(res);
   }
 
-  async deleteCard(cardId) {
+  async deleteCard(cardId: number) {
     const res = await fetch(`${this.options.baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
       headers: this.options.headers,
@@ -55,7 +56,7 @@ export class Api {
     return this.checkResponse(res);
   }
 
-  async postCard({ name, link }) {
+  async postCard({ name, link }: any) {
     const res = await fetch(`${this.options.baseUrl}/cards`, {
       method: 'POST',
       headers: this.options.headers,
@@ -67,7 +68,7 @@ export class Api {
     return this.checkResponse(res);
   }
 
-  async changeLike(cardId, value) {
+  async changeLike(cardId: number, value: any) {
     const res = await fetch(`${this.options.baseUrl}/cards/${cardId}/likes`, {
       method: value ? 'PUT' : 'DELETE',
       headers: this.options.headers,

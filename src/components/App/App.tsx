@@ -24,15 +24,22 @@ import SignUp from '../Sign/SignUp';
 import api from '../../utils/Api';
 import auth from '../../utils/Auth';
 
+interface IUser {
+  _id: number,
+  avatar: string,
+  name: string,
+  about: string,
+}
+
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(null);
-  const [deletedCard, setDeletedCard] = React.useState(null);
+  const [deletedCard, setDeletedCard] = React.useState({id: ''});
   const [isLoading, setIsLoading] = React.useState(false);
-  const [currentUser, setCurrentUser] = React.useState({});
-  const [cards, setCards] = React.useState([]);
+  const [currentUser, setCurrentUser] = React.useState({_id: 0, avatar: '', name: '', about: ''});
+  const [cards, setCards] = React.useState<any[]>([]); // React.useState([]);
   const [isConfirmPopupOpen, setIsConfirmPopupOpen] = React.useState(false);
   const [isInfoToolTipPopupOpen, setIsInfoToolTipPopupOpen] = React.useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
@@ -48,7 +55,7 @@ function App() {
     setSelectedCard(null);
     setIsSuccess(false);
   };
-  const escFunction = (event) => {
+  const escFunction = (event: any) => {
     if (event.key === 'Escape') {
       closeAllPopups();
     }
@@ -62,19 +69,20 @@ function App() {
   const handleAddPlaceClick = () => {
     setIsAddPlacePopupOpen(true);
   };
-  const handleCardClick = (card) => {
+  const handleCardClick = (card: any) => {
     setSelectedCard(card);
   };
-  const handleCardDeleteConfirm = (card) => {
+  const handleCardDeleteConfirm = (card: any) => {
     setIsConfirmPopupOpen(true);
     setDeletedCard(card);
   };
-  const handleCardLike = (card) => {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+
+  const handleCardLike = (card: any) => {
+    const isLiked = card.likes.some((user: IUser) => user._id === currentUser._id);
     api
       .changeLike(card._id, !isLiked)
       .then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+        setCards((state: any) => state.map((c: any) => c._id === card._id ? newCard : c));
       })
       .catch((err) => console.log(err));
   };
@@ -116,7 +124,7 @@ function App() {
     }
   }, [history]);
 
-  const handleUpdateUser = (data) => {
+  const handleUpdateUser = (data: any) => {
     setIsLoading(true);
     api
       .patchUser(data)
@@ -128,7 +136,7 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-  const handleUpdateAvatar = (data) => {
+  const handleUpdateAvatar = (data: any) => {
     setIsLoading(true);
     api
       .patchAvatar(data)
@@ -140,19 +148,20 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-  const handleAddPlaceSubmit = (card) => {
+  const handleAddPlaceSubmit = (card: any) => {
     setIsLoading(true);
     api
       .postCard(card)
-      .then((newCard) => {
-        setCards([newCard, ...cards]);
+      .then((newCard: string[]) => {
+        const arr: Array<any> = [newCard, ...cards];
+        setCards(arr);
         setIsLoading(false);
         closeAllPopups();
       })
       .catch((err) => console.log(err));
   };
 
-  const handleCardDelete = (card) => {
+  const handleCardDelete = (card: any) => {
     setIsLoading(true);
     api
       .deleteCard(card._id)
@@ -165,7 +174,7 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-  const handleLoginSubmit = (data) => {
+  const handleLoginSubmit = (data: any) => {
     auth
       .signIn(data)
       .then((res) => {
@@ -186,7 +195,7 @@ function App() {
       });
   };
 
-  const handleRegisterSubmit = (data) => {
+  const handleRegisterSubmit = (data: any) => {
     auth
       .signUp(data)
       .then(() => {

@@ -1,7 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function NavItem(props) {
+interface IProps {
+  to: string,
+  onClick: () => void,
+  active: string,
+  value: string,
+}
+
+function NavItem(props: IProps) {
   const {
     to,
     onClick,
