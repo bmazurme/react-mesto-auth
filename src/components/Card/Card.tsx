@@ -1,22 +1,9 @@
 import React from 'react';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { useSelector } from 'react-redux';
+import { selectData } from '../user/userSlice';
 
-interface IUser {
-  _id: number
-}
-
-interface ILike {
-  _id: number
-}
-
-interface ICard {
-  _id: number,
-  name: string,
-  link: string,
-  likes: Array<ILike>,
-  owner: IUser,
-  createdAt: Date
-}
+import { IUser } from '../../interfaces/IUser';
+import { ICard } from '../../interfaces/ICard';
 
 interface IProps {
   card: ICard,
@@ -32,8 +19,8 @@ function Card(props: IProps) {
     onCardLike,
     onCardClick,
   } = props;
-
-  const { _id } = React.useContext(CurrentUserContext) as IUser;
+  const { user } = useSelector(selectData);
+  const { _id } = user as IUser;
   const isOwn = card.owner._id === _id;
   const isLiked = card.likes.some((like) => like._id === _id);
   const cardDeleteButtonClassName = (

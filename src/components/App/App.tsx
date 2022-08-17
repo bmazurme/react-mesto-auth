@@ -5,7 +5,7 @@ import {
   Redirect,
   useHistory,
 } from 'react-router-dom';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { useDispatch } from 'react-redux';
 import { SIGNIN_URL, SIGNUP_URL, BASE_URL } from '../../utils/config';
 
 import Header from '../Header/Header';
@@ -24,26 +24,25 @@ import SignUp from '../Sign/SignUp';
 import api from '../../utils/Api';
 import auth from '../../utils/Auth';
 
-interface IUser {
-  _id: number,
-  avatar: string,
-  name: string,
-  about: string,
-}
+import { useSelector } from 'react-redux';
+import { getUserAsync, selectData, setUserData } from '../user/userSlice';
+
+import { ICard } from '../../interfaces/ICard';
 
 function App() {
+  const dispatch = useDispatch();
+  const currentUser = useSelector(selectData);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState(null);
-  const [deletedCard, setDeletedCard] = React.useState({id: ''});
+  const [selectedCard, setSelectedCard] = React.useState<ICard|null>(null);
+  const [deletedCard, setDeletedCard] = React.useState<ICard|null>(null);
   const [isLoading, setIsLoading] = React.useState(false);
-  const [currentUser, setCurrentUser] = React.useState({_id: 0, avatar: '', name: '', about: ''});
-  const [cards, setCards] = React.useState<any[]>([]); // React.useState([]);
+  const [cards, setCards] = React.useState<ICard[]>([]);
   const [isConfirmPopupOpen, setIsConfirmPopupOpen] = React.useState(false);
   const [isInfoToolTipPopupOpen, setIsInfoToolTipPopupOpen] = React.useState(false);
-  const [isSuccess, setIsSuccess] = React.useState(false);
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isSuccess, setIsSuccess] = React.useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState<boolean>(false);
   const [email, setEmail] = React.useState('');
   const history = useHistory();
   const closeAllPopups = () => {
@@ -55,7 +54,7 @@ function App() {
     setSelectedCard(null);
     setIsSuccess(false);
   };
-  const escFunction = (event: any) => {
+  const escFunction = (event: KeyboardEventInit) => {
     if (event.key === 'Escape') {
       closeAllPopups();
     }
@@ -69,31 +68,26 @@ function App() {
   const handleAddPlaceClick = () => {
     setIsAddPlacePopupOpen(true);
   };
-  const handleCardClick = (card: any) => {
+  const handleCardClick = (card: ICard) => {
     setSelectedCard(card);
   };
-  const handleCardDeleteConfirm = (card: any) => {
+  const handleCardDeleteConfirm = (card: ICard) => {
     setIsConfirmPopupOpen(true);
     setDeletedCard(card);
   };
 
-  const handleCardLike = (card: any) => {
-    const isLiked = card.likes.some((user: IUser) => user._id === currentUser._id);
+  const handleCardLike = (card: ICard) => {
+    const isLiked = card.likes.some((user) => user._id === currentUser.user._id);
     api
       .changeLike(card._id, !isLiked)
       .then((newCard) => {
-        setCards((state: any) => state.map((c: any) => c._id === card._id ? newCard : c));
+        setCards((state: Array<ICard>) => state.map((c: ICard) => c._id === card._id ? newCard : c));
       })
       .catch((err) => console.log(err));
   };
 
   React.useEffect(() => {
-    api
-      .getUser()
-      .then((userData) => {
-        setCurrentUser(userData);
-      })
-      .catch((err) => console.log(err));
+    dispatch<any>(getUserAsync());
     api
       .getCards()
       .then((cardData) => {
@@ -124,36 +118,36 @@ function App() {
     }
   }, [history]);
 
-  const handleUpdateUser = (data: any) => {
+  const handleUpdateUser = (data: Record<string, string>) => {
     setIsLoading(true);
     api
       .patchUser(data)
       .then((userInfo) => {
-        setCurrentUser(userInfo);
+        dispatch(setUserData(userInfo));
         setIsLoading(false);
         closeAllPopups();
       })
       .catch((err) => console.log(err));
   };
 
-  const handleUpdateAvatar = (data: any) => {
+  const handleUpdateAvatar = (data: Record<string, string>) => {
     setIsLoading(true);
     api
       .patchAvatar(data)
       .then((userInfo) => {
-        setCurrentUser(userInfo);
+        dispatch(setUserData(userInfo));
         setIsLoading(false);
         closeAllPopups();
       })
       .catch((err) => console.log(err));
   };
 
-  const handleAddPlaceSubmit = (card: any) => {
+  const handleAddPlaceSubmit = (card: ICard) => {
     setIsLoading(true);
     api
       .postCard(card)
-      .then((newCard: string[]) => {
-        const arr: Array<any> = [newCard, ...cards];
+      .then((newCard: ICard) => {
+        const arr: Array<ICard> = [newCard, ...cards];
         setCards(arr);
         setIsLoading(false);
         closeAllPopups();
@@ -161,7 +155,7 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-  const handleCardDelete = (card: any) => {
+  const handleCardDelete = (card: ICard) => {
     setIsLoading(true);
     api
       .deleteCard(card._id)
@@ -174,7 +168,7 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-  const handleLoginSubmit = (data: any) => {
+  const handleLoginSubmit = (data: Record<string, string>) => {
     auth
       .signIn(data)
       .then((res) => {
@@ -195,7 +189,7 @@ function App() {
       });
   };
 
-  const handleRegisterSubmit = (data: any) => {
+  const handleRegisterSubmit = (data: Record<string, string>) => {
     auth
       .signUp(data)
       .then(() => {
@@ -222,83 +216,81 @@ function App() {
   };
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
-      <div className="page">
-        <Header
-          email={email}
-          onSignOut={handleSignOut}
-        />
-        <Switch>
-          <ProtectedRoute
-            exact
-            path={BASE_URL}
-            isLoggedIn={isLoggedIn}
-            onEditAvatar={handleEditAvatarClick}
-            onEditProfile={handleEditProfileClick}
-            onAddPlace={handleAddPlaceClick}
-            onCardClick={handleCardClick}
-            handleCardLike={handleCardLike}
-            handleCardDelete={handleCardDeleteConfirm}
-            cards={cards}
-            component={Main}
-            isLoading={isLoading}
-          />
-          <Route path={SIGNIN_URL}>
-            <SignIn onLogin={handleLoginSubmit} />
-          </Route>
-          <Route path={SIGNUP_URL}>
-            <SignUp onRegister={handleRegisterSubmit} />
-          </Route>
-          <Route path="*">
-            {
-              isLoggedIn
-                ? (<Redirect to={BASE_URL} />)
-                : (<Redirect to={SIGNIN_URL} />)
-            }
-          </Route>
-        </Switch>
-        <Footer />
-        <EditProfilePopup
-          isOpen={isEditProfilePopupOpen}
-          onClose={closeAllPopups}
-          onUpdateUser={handleUpdateUser}
+    <div className="page">
+      <Header
+        email={email}
+        onSignOut={handleSignOut}
+      />
+      <Switch>
+        <ProtectedRoute
+          exact
+          path={BASE_URL}
+          isLoggedIn={isLoggedIn}
+          onEditAvatar={handleEditAvatarClick}
+          onEditProfile={handleEditProfileClick}
+          onAddPlace={handleAddPlaceClick}
+          onCardClick={handleCardClick}
+          handleCardLike={handleCardLike}
+          handleCardDelete={handleCardDeleteConfirm}
+          cards={cards}
+          component={Main}
           isLoading={isLoading}
         />
-        <EditAvatarPopup
-          isOpen={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}
-          onUpdateAvatar={handleUpdateAvatar}
-          isLoading={isLoading}
-        />
-        <AddPlacePopup
-          isOpen={isAddPlacePopupOpen}
-          onClose={closeAllPopups}
-          onAddPlace={handleAddPlaceSubmit}
-          isLoading={isLoading}
-        />
-        <ImagePopup
-          card={selectedCard}
-          onClose={closeAllPopups}
-        />
-        <PopupWithConfirm
-          isOpen={isConfirmPopupOpen}
-          isLoading={isLoading}
-          card={deletedCard}
-          onClose={closeAllPopups}
-          onSubmit={handleCardDelete}
-          title="Вы уверены?"
-          buttonText="Да"
-        />
-        <InfoTooltip
-          isOpen={isInfoToolTipPopupOpen}
-          onClose={closeAllPopups}
-          isSuccess={isSuccess}
-          text={
-            isSuccess ? 'Вы успешно зарегистрировались!' : 'Что-то пошло не так! Попробуйте ещё раз.'
+        <Route path={SIGNIN_URL}>
+          <SignIn onLogin={handleLoginSubmit} />
+        </Route>
+        <Route path={SIGNUP_URL}>
+          <SignUp onRegister={handleRegisterSubmit} />
+        </Route>
+        <Route path="*">
+          {
+            isLoggedIn
+              ? (<Redirect to={BASE_URL} />)
+              : (<Redirect to={SIGNIN_URL} />)
           }
-        />
-      </div>
-    </CurrentUserContext.Provider>
+        </Route>
+      </Switch>
+      <Footer />
+      <EditProfilePopup
+        isOpen={isEditProfilePopupOpen}
+        onClose={closeAllPopups}
+        onUpdateUser={handleUpdateUser}
+        isLoading={isLoading}
+      />
+      <EditAvatarPopup
+        isOpen={isEditAvatarPopupOpen}
+        onClose={closeAllPopups}
+        onUpdateAvatar={handleUpdateAvatar}
+        isLoading={isLoading}
+      />
+      <AddPlacePopup
+        isOpen={isAddPlacePopupOpen}
+        onClose={closeAllPopups}
+        onAddPlace={handleAddPlaceSubmit}
+        isLoading={isLoading}
+      />
+      <ImagePopup
+        card={selectedCard}
+        onClose={closeAllPopups}
+      />
+      <PopupWithConfirm
+        isOpen={isConfirmPopupOpen}
+        isLoading={isLoading}
+        card={deletedCard}
+        onClose={closeAllPopups}
+        onSubmit={handleCardDelete}
+        title="Вы уверены?"
+        buttonText="Да"
+      />
+      <InfoTooltip
+        isOpen={isInfoToolTipPopupOpen}
+        onClose={closeAllPopups}
+        isSuccess={isSuccess}
+        text={
+          isSuccess ? 'Вы успешно зарегистрировались!' : 'Что-то пошло не так! Попробуйте ещё раз.'
+        }
+      />
+    </div>
   );
 }
 

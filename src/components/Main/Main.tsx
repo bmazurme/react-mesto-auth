@@ -1,25 +1,24 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Card from '../Card/Card';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { selectData } from '../user/userSlice';
+
+import { ICard } from '../../interfaces/ICard';
 
 interface IProps {
-  onEditProfile:  () => void,
-  onAddPlace:  () => void,
+  onEditProfile: () => void,
+  onAddPlace: () => void,
   cards: Array<typeof Card>,
-  onCardClick: (card: any) => void,
-  onEditAvatar: (card: any) => void,
-  handleCardLike: (card: any) => void,
-  handleCardDelete: (card: any) => void,
-}
-
-interface IUser {
-  avatar: string,
-  name: string,
-  about: string,
+  onCardClick: (card: ICard) => void,
+  onEditAvatar: () => void,
+  handleCardLike: (card: ICard) => void,
+  handleCardDelete: (card: ICard) => void,
 }
 
 function Main(props: IProps) {
-  const { avatar, name, about } = React.useContext(CurrentUserContext) as IUser;
+  const { user } = useSelector(selectData);
+  const { avatar, about, name } = user;
+
   const {
     onEditProfile,
     onAddPlace,
@@ -58,7 +57,6 @@ function Main(props: IProps) {
       </section>
       <section className="cards">
         {cards.map((card: any) =>
-
           <Card
             key={card._id}
             card={card}

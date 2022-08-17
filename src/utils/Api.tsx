@@ -1,6 +1,9 @@
+import { ICard } from '../interfaces/ICard';
+import { IOptions } from 'interfaces/IOptions';
+
 export class Api {
-  options: any;
-  constructor(options: any) {
+  options: IOptions;
+  constructor(options: IOptions) {
     this.options = options;
   }
 
@@ -18,7 +21,7 @@ export class Api {
     return this.checkResponse(res);
   }
 
-  async patchUser({ name, about }: any) {
+  async patchUser({ name, about }: Record<string, string>) {
     const res = await fetch(`${this.options.baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this.options.headers,
@@ -30,7 +33,7 @@ export class Api {
     return this.checkResponse(res);
   }
 
-  async patchAvatar({ avatar }: any) {
+  async patchAvatar({ avatar }: Record<string, string>) {
     const res = await fetch(`${this.options.baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this.options.headers,
@@ -56,7 +59,7 @@ export class Api {
     return this.checkResponse(res);
   }
 
-  async postCard({ name, link }: any) {
+  async postCard({ name, link }: ICard) {
     const res = await fetch(`${this.options.baseUrl}/cards`, {
       method: 'POST',
       headers: this.options.headers,
@@ -68,7 +71,7 @@ export class Api {
     return this.checkResponse(res);
   }
 
-  async changeLike(cardId: number, value: any) {
+  async changeLike(cardId: number, value: boolean) {
     const res = await fetch(`${this.options.baseUrl}/cards/${cardId}/likes`, {
       method: value ? 'PUT' : 'DELETE',
       headers: this.options.headers,

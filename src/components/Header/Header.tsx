@@ -3,8 +3,13 @@ import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg';
 import NavBar from '../NavBar/NavBar';
 
-function Header(props: any) {
-  const [isOpen, setIsOpen] = React.useState(false);
+interface IProps {
+  email: string,
+  onSignOut: () => void,
+}
+
+function Header(props: IProps) {
+  const [isOpen, setIsOpen] = React.useState<boolean>(false);
   const handlerClick = () => {
     setIsOpen(!isOpen);
   };
@@ -15,7 +20,7 @@ function Header(props: any) {
       ${isOpen ? 'header_opened' : ''}`}
     >
       <Link className="logo" to="/">
-        <img className="logo" src={logo} alt="Логотип Место"></img>
+        <img className="logo" src={logo} alt="Logo Mesto"></img>
       </Link>
       <NavBar
         /* eslint-disable react/jsx-props-no-spreading */

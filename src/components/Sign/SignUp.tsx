@@ -3,15 +3,9 @@ import TextField from '../TextField/TextField';
 import { SIGNIN_URL, EMAIL_REGEXP } from '../../utils/config';
 import { useFormWithValidation } from '../../utils/Validator';
 
+import { IValid } from '../../interfaces/IValid';
 interface IProps {
-  onRegister: ({email, password}: Record<string, string>) => void,
-}
-
-interface IValid {
-  values: Record<string, string>,
-  errors: Record<string, string>,
-  isValid: boolean,
-  handleChange: any,
+  onRegister: ({ email, password }: Record<string, string>) => void,
 }
 
 function SignUp({ onRegister }: IProps) {
@@ -22,12 +16,9 @@ function SignUp({ onRegister }: IProps) {
     handleChange,
   }: IValid = useFormWithValidation();
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onRegister({
-      email: values.email,
-      password: values.password,
-    });
+    onRegister(values);
   };
 
   return (

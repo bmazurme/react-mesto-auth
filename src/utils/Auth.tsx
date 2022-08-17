@@ -1,6 +1,8 @@
+import { IOptions } from 'interfaces/IOptions';
+
 export class Auth {
-  options: any;
-  constructor(options: any) {
+  options: IOptions;
+  constructor(options: IOptions) {
     this.options = options;
   }
 
@@ -11,7 +13,7 @@ export class Auth {
     return Promise.reject(`Ошибка ${res.status}`);
   }
 
-  async signUp(data: any) {
+  async signUp(data: Record<string, string>) {
     const res = await fetch(`${this.options.baseUrl}/signup`, {
       method: 'POST',
       headers: {
@@ -23,7 +25,7 @@ export class Auth {
     return this.checkResponse(res);
   }
 
-  async signIn(data: any) {
+  async signIn(data: Record<string, string>) {
     const res = await fetch(`${this.options.baseUrl}/signin`, {
       method: 'POST',
       headers: {
@@ -48,6 +50,9 @@ export class Auth {
 
 const auth = new Auth({
   baseUrl: 'https://auth.nomoreparties.co',
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
 export default auth;

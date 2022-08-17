@@ -3,18 +3,13 @@ import PopupWithForm from './PopupWithForm';
 import TextField from '../TextField/TextField';
 import { useFormWithValidation } from '../../utils/Validator';
 
+import { IValid } from '../../interfaces/IValid';
+
 interface IProps {
   isOpen: boolean,
   onClose: any,
   isLoading: boolean,
-  onAddPlace: any, // (data: {name: string, link: string}) => void,
-}
-
-interface IValid {
-  values: any,
-  errors: any,
-  isValid: boolean,
-  handleChange: any,
+  onAddPlace: any,
 }
 
 function AddPlacePopup(props: IProps) {

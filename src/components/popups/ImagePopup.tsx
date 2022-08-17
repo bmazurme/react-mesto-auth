@@ -1,8 +1,10 @@
 import React from 'react';
 
+import { ICard } from '../../interfaces/ICard';
+
 interface IProps {
   onClose: () => void,
-  card: any,
+  card: ICard|null,
 }
 
 function ImagePopup(props: IProps) {

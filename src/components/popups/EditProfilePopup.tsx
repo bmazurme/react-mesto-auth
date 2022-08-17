@@ -1,32 +1,21 @@
 import React from 'react';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { useSelector } from 'react-redux';
 import { useFormWithValidation } from '../../utils/Validator';
 import PopupWithForm from './PopupWithForm';
 import TextField from '../TextField/TextField';
+import { selectData } from '../user/userSlice';
+
+import { IValid } from '../../interfaces/IValid';
 
 interface IProps {
   isOpen: boolean,
   onClose: any,
   isLoading: boolean,
-  onUpdateUser: (data: {name: string, about: string}) => void,
-}
-
-interface IValid {
-  values: any,
-  errors: any,
-  isValid: boolean,
-  handleChange: any,
-}
-
-interface IUser {
-  _id: number,
-  avatar: string,
-  name: string,
-  about: string,
+  onUpdateUser: (data: Record<string, string>) => void,
 }
 
 function EditProfilePopup(props: IProps) {
-  const currentUser = React.useContext(CurrentUserContext) as IUser;
+  const { user } = useSelector(selectData);
   const {
     isLoading,
     isOpen,
@@ -43,16 +32,13 @@ function EditProfilePopup(props: IProps) {
 
   const handleSubmit = (evt: SubmitEvent) => {
     evt.preventDefault();
-    onUpdateUser({
-      name: values.name,
-      about: values.profession,
-    });
+    onUpdateUser(values);
   };
 
   React.useEffect(() => {
-    values.name = currentUser.name;
-    values.profession = currentUser.about;
-  }, [currentUser, isOpen]);
+    values.name = user.name;
+    values.about = user.about;
+  }, [isOpen, user]);
 
   return (
     <PopupWithForm
@@ -82,10 +68,10 @@ function EditProfilePopup(props: IProps) {
       />
       <TextField
         placeholder="Профессия"
-        label="profession"
-        value={values.profession || ''}
-        name="profession"
-        id="profession-input"
+        label="about"
+        value={values.about || ''}
+        name="about"
+        id="about-input"
         autoComplete="off"
         className=""
         onChange={handleChange}

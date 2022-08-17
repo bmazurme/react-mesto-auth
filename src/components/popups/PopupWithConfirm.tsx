@@ -1,11 +1,13 @@
 import React from 'react';
 import PopupWithForm from './PopupWithForm';
 
+import { ICard } from '../../interfaces/ICard';
+
 interface IProps {
   title: string,
   isLoading: boolean,
   buttonText: string,
-  card: Record<string, string>,
+  card: ICard|null,
   onSubmit: any,
   onClose: any,
   isOpen: boolean

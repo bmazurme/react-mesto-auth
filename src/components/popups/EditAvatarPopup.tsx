@@ -3,18 +3,13 @@ import PopupWithForm from './PopupWithForm';
 import TextField from '../TextField/TextField';
 import { useFormWithValidation } from '../../utils/Validator';
 
+import { IValid } from '../../interfaces/IValid';
+
 interface IProps {
   isOpen: boolean,
   onClose: any,
   isLoading: boolean,
-  onUpdateAvatar: (data: {avatar: string}) => void,
-}
-
-interface IValid {
-  values: any,
-  errors: any,
-  isValid: boolean,
-  handleChange: any,
+  onUpdateAvatar: (data: Record<string, string>) => void,
 }
 
 function EditAvatarPopup(props: IProps) {
@@ -34,9 +29,7 @@ function EditAvatarPopup(props: IProps) {
 
   const handleSubmit = (evt: SubmitEvent) => {
     evt.preventDefault();
-    onUpdateAvatar({
-      avatar: values.avatar,
-    });
+    onUpdateAvatar(values);
   };
 
   React.useEffect(() => {
