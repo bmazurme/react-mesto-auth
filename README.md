@@ -51,8 +51,8 @@ Implemented features:
 `npm start`
 
 **Figma**
-* [Liink to Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
-* [Liink to Figma - signup, signin](https://www.figma.com/file/5H3gsn5lIGPwzBPby9jAOo/JavaScript.-Sprint-12?node-id=0%3A1)
+* [Link to Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
+* [Link to Figma - signup, signin](https://www.figma.com/file/5H3gsn5lIGPwzBPby9jAOo/JavaScript.-Sprint-12?node-id=0%3A1)
 * [Unicorn - Совмещенный валидатор W3C](https://validator.w3.org/)
 * [Font ”Inter"](https://rsms.me/inter/)
 * [Оптимизировать картинки](https://tinypng.com/)
