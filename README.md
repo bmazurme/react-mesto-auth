@@ -12,6 +12,7 @@
 ![Stylelint](https://img.shields.io/badge/-Stylelint-black?style=flat-square&logo=stylelint)
 ![BEM](https://img.shields.io/badge/-BEM-black?style=flat-square&logo=bem)
 ![Webpack](https://img.shields.io/badge/-Webpack-black?style=flat-square&logo=webpack)
+![Netlify](https://img.shields.io/badge/-Netlify-black?style=flat-square&logo=netlify)
 
 ### About
 * Photo posting service.
@@ -34,6 +35,7 @@ Implemented features:
 
 ## Demo
 [GitHub Pages](https://bmazurme.github.io/react-mesto-auth)
+[Netlify](https://whimsical-sprite-5d5e95.netlify.app/)
 
 ![Alt-text](https://github.com/bmazurme/mesto-react/blob/main/src/images/mesto.png "demo")
 
