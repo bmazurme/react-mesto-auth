@@ -1,9 +1,6 @@
 .profile__profession {
   grid-area: profession;
-  padding-top: 8px;
-  padding-bottom: 0;
-  padding-left: 0;
-  padding-right: 0;
+  padding: 8px 0 0;
   margin: 0;
   max-width: 326px;
   text-overflow: ellipsis;

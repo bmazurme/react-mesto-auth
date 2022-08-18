@@ -4,9 +4,7 @@
   width: 142px;
   height: 33px;
   align-self: center;
-  background: url(../../images/logo.svg);
-  background-repeat: no-repeat;
-  background-position: center;
+  background: url("../../images/logo.svg") no-repeat center;
   background-size: cover;
 }
 
