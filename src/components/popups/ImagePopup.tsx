@@ -1,14 +1,10 @@
 import React from 'react';
 
-import { ICard } from '../../interfaces/ICard';
+import { IImageProps } from '../../interfaces/interfaces';
 
-interface IProps {
-  onClose: () => void,
-  card: ICard|null,
-}
-
-function ImagePopup(props: IProps) {
+function ImagePopup(props: IImageProps) {
   const { card, onClose } = props;
+
   const handleCloseClick = (e: any) => {
     e.currentTarget === e.target && onClose();
   };

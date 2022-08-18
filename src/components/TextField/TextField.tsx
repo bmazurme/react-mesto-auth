@@ -1,23 +1,8 @@
 import React from 'react';
 
-interface IProps {
-  label: string,
-  pattern: string,
-  name: string,
-  placeholder: string,
-  onChange: () => void,
-  minLength: number,
-  maxLength: number,
-  required: boolean,
-  errors: any,
-  type: string,
-  id: string,
-  autoComplete: string,
-  value: string,
-  className: string,
-}
+import { ITextFieldProps } from '../../interfaces/interfaces';
 
-function TextField(props: IProps) {
+function TextField(props: ITextFieldProps) {
   const {
     label,
     pattern,
@@ -34,7 +19,7 @@ function TextField(props: IProps) {
     value,
     className,
   } = props;
-  
+
   return (
     <div
       className="text-field"
@@ -68,7 +53,9 @@ function TextField(props: IProps) {
           value={value}
         />
       }
-      <span className={`${label}-input-error text-field__input-error`}></span>
+      <span className={`${label}-input-error text-field__input-error text-field__input-error_help`}>
+        {errors[name]}
+      </span>
     </div>
   );
 }

@@ -3,16 +3,9 @@ import PopupWithForm from './PopupWithForm';
 import TextField from '../TextField/TextField';
 import { useFormWithValidation } from '../../utils/Validator';
 
-import { IValid } from '../../interfaces/IValid';
+import { IValid, IAddPlaceProps } from '../../interfaces/interfaces';
 
-interface IProps {
-  isOpen: boolean,
-  onClose: any,
-  isLoading: boolean,
-  onAddPlace: any,
-}
-
-function AddPlacePopup(props: IProps) {
+function AddPlacePopup(props: IAddPlaceProps) {
   const {
     isOpen,
     onClose,
@@ -29,12 +22,7 @@ function AddPlacePopup(props: IProps) {
 
   const handleSubmit = (evt: SubmitEvent) => {
     evt.preventDefault();
-    onAddPlace(
-      {
-        name: values.name,
-        link: values.link,
-      },
-    );
+    onAddPlace(values);
   };
 
   React.useEffect(() => {
@@ -68,7 +56,6 @@ function AddPlacePopup(props: IProps) {
         required
         pattern={''}
       />
-
       <TextField
         placeholder="Ссылка на картинку"
         label="link"

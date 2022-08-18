@@ -1,14 +1,12 @@
 import React from 'react';
 import TextField from '../TextField/TextField';
-import { SIGNIN_URL, EMAIL_REGEXP } from '../../utils/config';
+import { Regexp } from '../../utils/constants';
+import { Urls } from '../../utils/constants';
 import { useFormWithValidation } from '../../utils/Validator';
 
-import { IValid } from '../../interfaces/IValid';
-interface IProps {
-  onRegister: ({ email, password }: Record<string, string>) => void,
-}
+import { IValid, ISignUpProps } from '../../interfaces/interfaces';
 
-function SignUp({ onRegister }: IProps) {
+function SignUp({ onRegister }: ISignUpProps) {
   const {
     values,
     errors,
@@ -16,8 +14,8 @@ function SignUp({ onRegister }: IProps) {
     handleChange,
   }: IValid = useFormWithValidation();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
     onRegister(values);
   };
 
@@ -29,7 +27,7 @@ function SignUp({ onRegister }: IProps) {
         onSubmit={handleSubmit}
       >
         <TextField
-          pattern={EMAIL_REGEXP}
+          pattern={Regexp.EMAIL}
           placeholder="E-mail"
           className="text-field__input_identity"
           label="E-mail"
@@ -42,7 +40,7 @@ function SignUp({ onRegister }: IProps) {
           value={values.email || ''}
           required
           minLength={0}
-          maxLength={100}        
+          maxLength={100}
         />
         <TextField
           placeholder="Пароль"
@@ -69,7 +67,7 @@ function SignUp({ onRegister }: IProps) {
         </button>
         <div className="form__help">
           Уже зарегистрированы?
-          <a href={SIGNIN_URL} className="form__link">Войти</a>
+          <a href={Urls.SIGNIN} className="form__link">Войти</a>
         </div>
       </form>
     </div>

@@ -1,61 +1,53 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import NavItem from '../NavItem/NavItem';
-import { SIGNIN_URL, SIGNUP_URL, BASE_URL } from '../../utils/config';
+import { Urls } from '../../utils/constants';
 
-interface IProps {
-  email: string,
-  isOpen: boolean,
-  handlerClick: () => void,
-  onSignOut: () => void,
-}
+import { INavBarProps } from "interfaces/interfaces";
 
-function NavBar(props: IProps) {
+function NavBar(props: INavBarProps) {
   const {
     email,
     isOpen,
     handlerClick,
     onSignOut,
   } = props;
-
   return (
     <>
       <ul
         onClick={handlerClick}
         className={`navbar ${isOpen ? 'navbar_opened' : ''}`}
       >
-        <Switch>
-          <Route path={SIGNIN_URL}>
-            <NavItem
-              to={SIGNUP_URL}
-              value="Регистрация"
-              onClick={() => console.log('go to up')}
-              active="active"
-            />
-          </Route>
-          <Route path={SIGNUP_URL}>
-            <NavItem
-              to={SIGNIN_URL}
-              value="Войти"
-              onClick={() => console.log('go to in')}
-              active="active"
-            />
-          </Route>
-          <Route exact path={BASE_URL}>
-            <NavItem
-              to={BASE_URL}
-              value={email}
-              onClick={() => console.log('go to profile')}
-              active="active"
-            />
-            <NavItem
-              to={SIGNIN_URL}
-              value="Выйти"
-              onClick={onSignOut}
-              active={''}
-            />
-          </Route>
-        </Switch>
+        <Route path={Urls.SIGNIN}>
+          <NavItem
+            to={Urls.SIGNUP}
+            value="Регистрация"
+            onClick={() => console.log('go to up')}
+            active="active"
+          />
+        </Route>
+        <Route path={Urls.SIGNUP}>
+          <NavItem
+            to={Urls.SIGNIN}
+            value="Войти"
+            onClick={() => console.log('go to in')}
+            active="active"
+          />
+        </Route>
+        <Route exact path={Urls.BASE}>
+          <NavItem
+            to={Urls.BASE}
+            value={email}
+            onClick={() => console.log('go to profile')}
+            active="active"
+          />
+          <NavItem
+            to={Urls.SIGNIN}
+            value="Выйти"
+            onClick={onSignOut}
+            active={''}
+          />
+        </Route>
       </ul>
       <button
         onClick={handlerClick}

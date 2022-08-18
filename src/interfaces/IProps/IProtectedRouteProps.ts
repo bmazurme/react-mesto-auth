@@ -1,6 +1,6 @@
-import { ICard } from '../../interfaces/ICard';
+import { ICard } from '../interfaces';
 
-export interface IProps {
+export interface IProtectedRouteProps {
   exact: boolean,
   path: string,
   isLoggedIn: boolean,

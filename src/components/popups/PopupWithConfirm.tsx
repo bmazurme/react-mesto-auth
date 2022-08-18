@@ -1,19 +1,9 @@
 import React from 'react';
 import PopupWithForm from './PopupWithForm';
 
-import { ICard } from '../../interfaces/ICard';
+import { IPopupWithConfirmProps } from '../../interfaces/interfaces';
 
-interface IProps {
-  title: string,
-  isLoading: boolean,
-  buttonText: string,
-  card: ICard|null,
-  onSubmit: any,
-  onClose: any,
-  isOpen: boolean
-}
-
-function PopupWithConfirm(props: IProps) {
+function PopupWithConfirm(props: IPopupWithConfirmProps) {
   const {
     card,
     title,

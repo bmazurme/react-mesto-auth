@@ -3,16 +3,9 @@ import PopupWithForm from './PopupWithForm';
 import TextField from '../TextField/TextField';
 import { useFormWithValidation } from '../../utils/Validator';
 
-import { IValid } from '../../interfaces/IValid';
+import { IValid, IEditAvatarProps } from '../../interfaces/interfaces';
 
-interface IProps {
-  isOpen: boolean,
-  onClose: any,
-  isLoading: boolean,
-  onUpdateAvatar: (data: Record<string, string>) => void,
-}
-
-function EditAvatarPopup(props: IProps) {
+function EditAvatarPopup(props: IEditAvatarProps) {
   const {
     isOpen,
     onClose,

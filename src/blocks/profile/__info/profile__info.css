@@ -2,10 +2,7 @@
   align-self: center;
   color: white;
   width: 326px;
-  margin-top: 0;
-  margin-bottom: 0;
-  margin-left: 30px;
-  margin-right: auto;
+  margin: 0 auto 0 30px;
   display: grid;
   gap: 0;
   grid-template-columns: 1fr 24px;
@@ -20,8 +17,8 @@
     grid-template-columns: 24px 1fr 24px;
     grid-template-rows: 33px 16px;
     grid-template-areas:
-    "space name button"
-    "space profession gap";
+      "space name button"
+      "space profession gap";
     margin-top: 26px;
     margin-left: auto;
     max-width: 238px;

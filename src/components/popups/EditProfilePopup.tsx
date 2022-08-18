@@ -1,21 +1,15 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useFormWithValidation } from '../../utils/Validator';
+import { selectData } from '../user/userSlice';
 import PopupWithForm from './PopupWithForm';
 import TextField from '../TextField/TextField';
-import { selectData } from '../user/userSlice';
 
-import { IValid } from '../../interfaces/IValid';
+import { IValid, IEditProfileProps } from '../../interfaces/interfaces';
 
-interface IProps {
-  isOpen: boolean,
-  onClose: any,
-  isLoading: boolean,
-  onUpdateUser: (data: Record<string, string>) => void,
-}
-
-function EditProfilePopup(props: IProps) {
+function EditProfilePopup(props: IEditProfileProps) {
   const { user } = useSelector(selectData);
+
   const {
     isLoading,
     isOpen,

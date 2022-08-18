@@ -1,17 +1,8 @@
 import React from 'react';
 
-interface IProps {
-  name: string,
-  isOpen: boolean,
-  onClose: () => {},
-  onSubmit: any,
-  title: string,
-  children: any,
-  buttonText: string,
-  isValid: boolean,
-}
+import { IPopupWithFormProps } from '../../interfaces/interfaces';
 
-function PopupWithForm(props: IProps) {
+function PopupWithForm(props: IPopupWithFormProps) {
   const {
     name,
     isOpen,
@@ -23,8 +14,8 @@ function PopupWithForm(props: IProps) {
     isValid,
   } = props;
 
-  const handleCloseClick = (e: any) => {
-    e.currentTarget === e.target && onClose();
+  const handleCloseClick = (evt: any) => {
+    evt.currentTarget === evt.target && onClose();
   };
 
   return (

@@ -1,20 +1,10 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import api from '../../utils/Api';
+import { createSlice } from '@reduxjs/toolkit';
 
-import { IUser } from '../../interfaces/IUser';
+import { IUser } from '../../interfaces/interfaces';
 
-const initialState: { user: IUser|{}, status: string } = {
+const initialState: { user: IUser|{} } = {
   user: {},
-  status: 'idle',
 };
-
-export const getUserAsync = createAsyncThunk(
-  'async',
-  async () => {
-    const response = await api.getUser();
-    return response;
-  }
-);
 
 const userSlice = createSlice({
   name: 'currentUser',
@@ -23,16 +13,6 @@ const userSlice = createSlice({
     setUserData: (state, action) => {
       state.user = action.payload;
     },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(getUserAsync.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(getUserAsync.fulfilled, (state, action) => {
-        state.status = 'idle';
-        state.user = action.payload;
-      });
   },
 })
 

@@ -1,20 +1,15 @@
 import React from 'react';
 
-interface IProps {
-  isOpen: boolean,
-  onClose: () => void,
-  isSuccess: boolean,
-  text: string,
-}
+import { IInfoTooltipProps } from '../../interfaces/interfaces';
 
-function InfoTooltip(props: IProps) {
+function InfoTooltip(props: IInfoTooltipProps) {
   const {
     text,
     isOpen,
     onClose,
     isSuccess,
   } = props;
-  
+
   return (
     <div
       onClick={(e) => (e.currentTarget === e.target) && onClose()}

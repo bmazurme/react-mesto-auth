@@ -1,14 +1,13 @@
 import React from 'react';
 import TextField from '../TextField/TextField';
-import { SIGNUP_URL, EMAIL_REGEXP } from '../../utils/config';
 import { useFormWithValidation } from '../../utils/Validator';
 
-import { IValid } from '../../interfaces/IValid';
-interface IProps {
-  onLogin: ({ email, password }: Record<string, string>) => void,
-}
+import { Regexp } from '../../utils/constants';
+import { Urls } from '../../utils/constants';
 
-function SignIn({ onLogin }: IProps) {
+import { IValid, ISignInProps } from '../../interfaces/interfaces';
+
+function SignIn({ onLogin }: ISignInProps) {
   const {
     values,
     errors,
@@ -29,7 +28,7 @@ function SignIn({ onLogin }: IProps) {
         onSubmit={handleSubmit}
       >
         <TextField
-          pattern={EMAIL_REGEXP}
+          pattern={Regexp.EMAIL}
           placeholder="E-mail"
           label="E-mail"
           name="email"
@@ -41,8 +40,8 @@ function SignIn({ onLogin }: IProps) {
           errors={errors}
           value={values.email || ''}
           required
-          minLength={0} 
-          maxLength={100}        
+          minLength={0}
+          maxLength={100}
         />
         <TextField
           placeholder="Пароль"
@@ -68,7 +67,7 @@ function SignIn({ onLogin }: IProps) {
           Войти
         </button>
         <div className="form__help">
-          <a href={SIGNUP_URL} className="form__link">Зарегистрироваться</a>
+          <a href={Urls.SIGNUP} className="form__link">Зарегистрироваться</a>
         </div>
       </form>
     </div>

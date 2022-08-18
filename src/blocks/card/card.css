@@ -9,16 +9,3 @@
   margin-left: auto;
   margin-right: auto;
 }
-
-
-@media screen and (min-width: 320px) and (max-width: 599px) {
-  .card {
-
-  }
-} 
-
-@media screen and (min-width: 600px) and (max-width: 879px) {
-  .card {
-
-  }
-}

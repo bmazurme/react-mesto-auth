@@ -13,7 +13,11 @@ export const config = {
   ],
 };
 
-export const BASE_URL = '/';
-export const SIGNIN_URL = '/sign-in';
-export const SIGNUP_URL = '/sign-up';
-export const EMAIL_REGEXP = '[a-z0-9._%+-]+@[a-z0-9.-]+[\.{0}][a-z]{2,3}$';
+export const API = {
+  PTH: 'https://mesto.nomoreparties.co/v1/cohort36',
+  TOKEN: 'fcfa5c3a-c07d-49f3-a47d-0099ff285712'
+};
+
+export const AUTH_API = {
+  PTH: 'https://auth.nomoreparties.co',
+};

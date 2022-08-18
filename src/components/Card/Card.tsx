@@ -2,17 +2,9 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectData } from '../user/userSlice';
 
-import { IUser } from '../../interfaces/IUser';
-import { ICard } from '../../interfaces/ICard';
+import { IUser, ICardProps } from '../../interfaces/interfaces';
 
-interface IProps {
-  card: ICard,
-  onCardDelete: (card: ICard) => void,
-  onCardLike: (card: ICard) => void,
-  onCardClick: (card: ICard) => void,
-}
-
-function Card(props: IProps) {
+function Card(props: ICardProps) {
   const {
     card,
     onCardDelete,
@@ -29,7 +21,7 @@ function Card(props: IProps) {
   const cardLikeButtonClassName = (
     `card__like ${isLiked ? 'card__like_checked' : ''}`
   );
-  
+
   return (
     <div className="card">
       <button

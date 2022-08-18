@@ -1,5 +1,6 @@
-import { ICard } from '../interfaces/ICard';
-import { IOptions } from 'interfaces/IOptions';
+import { ICard, IOptions } from '../interfaces/interfaces';
+import { METHODS } from './methods';
+import { API } from './config';
 
 export class Api {
   options: IOptions;
@@ -7,7 +8,7 @@ export class Api {
     this.options = options;
   }
 
-  checkResponse(res: any) {
+  checkResponse(res: Response) {
     if (res.ok) {
       return res.json();
     }
@@ -23,7 +24,7 @@ export class Api {
 
   async patchUser({ name, about }: Record<string, string>) {
     const res = await fetch(`${this.options.baseUrl}/users/me`, {
-      method: 'PATCH',
+      method: METHODS.PATCH,
       headers: this.options.headers,
       body: JSON.stringify({
         name,
@@ -35,7 +36,7 @@ export class Api {
 
   async patchAvatar({ avatar }: Record<string, string>) {
     const res = await fetch(`${this.options.baseUrl}/users/me/avatar`, {
-      method: 'PATCH',
+      method: METHODS.PATCH,
       headers: this.options.headers,
       body: JSON.stringify({
         avatar,
@@ -51,9 +52,9 @@ export class Api {
     return this.checkResponse(res);
   }
 
-  async deleteCard(cardId: number) {
+  async deleteCard(cardId: number | string) {
     const res = await fetch(`${this.options.baseUrl}/cards/${cardId}`, {
-      method: 'DELETE',
+      method: METHODS.DELETE,
       headers: this.options.headers,
     });
     return this.checkResponse(res);
@@ -61,7 +62,7 @@ export class Api {
 
   async postCard({ name, link }: ICard) {
     const res = await fetch(`${this.options.baseUrl}/cards`, {
-      method: 'POST',
+      method: METHODS.POST,
       headers: this.options.headers,
       body: JSON.stringify({
         name,
@@ -73,7 +74,7 @@ export class Api {
 
   async changeLike(cardId: number, value: boolean) {
     const res = await fetch(`${this.options.baseUrl}/cards/${cardId}/likes`, {
-      method: value ? 'PUT' : 'DELETE',
+      method: value ? METHODS.PUT : METHODS.DELETE,
       headers: this.options.headers,
     });
     return this.checkResponse(res);
@@ -81,9 +82,9 @@ export class Api {
 }
 
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort36',
+  baseUrl: API.PTH,
   headers: {
-    authorization: 'fcfa5c3a-c07d-49f3-a47d-0099ff285712',
+    authorization: API.TOKEN,
     'Content-Type': 'application/json',
   },
 });

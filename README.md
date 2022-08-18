@@ -8,53 +8,52 @@
 ![CSS3](https://img.shields.io/badge/-CSS3-black?style=flat-square&logo=css3)
 ![NPM](https://img.shields.io/badge/-NPM-black?style=flat-square&logo=npm)
 ![Git](https://img.shields.io/badge/-Git-black?style=flat-square&logo=git)
+![Eslint](https://img.shields.io/badge/-Eslint-black?style=flat-square&logo=eslint)
+![Stylelint](https://img.shields.io/badge/-Stylelint-black?style=flat-square&logo=stylelint)
+![BEM](https://img.shields.io/badge/-BEM-black?style=flat-square&logo=bem)
 
-## About
-
-#### Cделана в Яндекс.Практикуме.
-Version 0.2.0
-* Сервис для размещения фотографий.
+### About
+* Photo posting service.
+* JS CRA Version 0.2.0
+* TS CRA Version 1.1.1
+* TS Webpack Version 2.1.1
 
 Implemented features:
-- [X] Загрузка информации о пользователе
-- [X] Загрузка первоначальных карточек с сервера
-- [X] Редактирование профиля и аватара пользователя
-- [X] Добавление и удаление карточки
-- [X] Отображение количества лайков карточки
-- [X] Постановка и снятие лайка
-- [X] Регистрация пользователя
-- [X] Авторизация пользователя
-- [X] Закрытие окон по esc и клику вне
-- [X] Валидация форм
+- [X] User registration
+- [X] User authorization
+- [X] Adding user information
+- [X] Edit user profile
+- [X] Uploading initial cards to servers
+- [X] Delete card
+- [X] Display the number of likes of the card
+- [X] Like and dislike
+- [X] Form Validation
+
+##### Created by Yandex.Practicum
 
 ## Demo
-
 [GitHub Pages](https://bmazurme.github.io/react-mesto-auth)
 
 ![Alt-text](https://github.com/bmazurme/mesto-react/blob/main/src/images/mesto.png "demo")
 
-### Обзор
-* Figma
-* Images
-
-### Установка
-Клонируйте репозиторий на компьютер:
+### Installation
+Clone the repository on your computer:
 
 `git clone git@github.com:bmazurme/react-mesto-auth.git`
 
-Установите зависисмости:
+Install dependencies:
 
 `npm install`
 
-Запуск:
+Launch:
 
 `npm start`
 
 **Figma**
 * [Link to Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
 * [Link to Figma - signup, signin](https://www.figma.com/file/5H3gsn5lIGPwzBPby9jAOo/JavaScript.-Sprint-12?node-id=0%3A1)
-* [Unicorn - Совмещенный валидатор W3C](https://validator.w3.org/)
+* [Unicorn - Validator W3C](https://validator.w3.org/)
 * [Font ”Inter"](https://rsms.me/inter/)
-* [Оптимизировать картинки](https://tinypng.com/)
+* [Optimize pictures](https://tinypng.com/)
 * [Images](https://unsplash.com/)
 * [Mesto VanillaJS](https://github.com/bmazurme/mesto)

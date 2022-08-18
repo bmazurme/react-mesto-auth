@@ -1,14 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-interface IProps {
-  to: string,
-  onClick: () => void,
-  active: string,
-  value: string,
-}
+import { INavItemProps } from 'interfaces/interfaces';
 
-function NavItem(props: IProps) {
+function NavItem(props: INavItemProps) {
   const {
     to,
     onClick,

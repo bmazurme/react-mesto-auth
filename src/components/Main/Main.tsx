@@ -3,22 +3,11 @@ import { useSelector } from 'react-redux';
 import Card from '../Card/Card';
 import { selectData } from '../user/userSlice';
 
-import { ICard } from '../../interfaces/ICard';
+import { IMainProps } from '../../interfaces/interfaces';
 
-interface IProps {
-  onEditProfile: () => void,
-  onAddPlace: () => void,
-  cards: Array<typeof Card>,
-  onCardClick: (card: ICard) => void,
-  onEditAvatar: () => void,
-  handleCardLike: (card: ICard) => void,
-  handleCardDelete: (card: ICard) => void,
-}
-
-function Main(props: IProps) {
+function Main(props: IMainProps) {
   const { user } = useSelector(selectData);
   const { avatar, about, name } = user;
-
   const {
     onEditProfile,
     onAddPlace,
@@ -28,7 +17,6 @@ function Main(props: IProps) {
     handleCardLike,
     handleCardDelete,
   } = props;
-
   return (
     <main className="main">
       <section className="profile">

@@ -1,4 +1,6 @@
-import { IOptions } from 'interfaces/IOptions';
+import { ICard, IOptions } from 'interfaces/interfaces';
+import { METHODS } from './methods';
+import { AUTH_API } from './config';
 
 export class Auth {
   options: IOptions;
@@ -6,7 +8,7 @@ export class Auth {
     this.options = options;
   }
 
-  checkResponse(res: any) {
+  checkResponse(res: Response) {
     if (res.ok) {
       return res.json();
     }
@@ -15,7 +17,7 @@ export class Auth {
 
   async signUp(data: Record<string, string>) {
     const res = await fetch(`${this.options.baseUrl}/signup`, {
-      method: 'POST',
+      method: METHODS.POST,
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -25,10 +27,11 @@ export class Auth {
     return this.checkResponse(res);
   }
 
-  async signIn(data: Record<string, string>) {
+  async signIn(data: Record<string, string>|ICard) {
     const res = await fetch(`${this.options.baseUrl}/signin`, {
-      method: 'POST',
+      method: METHODS.POST,
       headers: {
+        Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
@@ -38,7 +41,7 @@ export class Auth {
 
   async checkToken(jwt: string) {
     const res = await fetch(`${this.options.baseUrl}/users/me`, {
-      method: 'GET',
+      method: METHODS.GET,
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${jwt}`,
@@ -49,7 +52,7 @@ export class Auth {
 }
 
 const auth = new Auth({
-  baseUrl: 'https://auth.nomoreparties.co',
+  baseUrl: AUTH_API.PTH,
   headers: {
     'Content-Type': 'application/json',
   },
