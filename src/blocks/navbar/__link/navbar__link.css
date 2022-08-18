@@ -1,10 +1,7 @@
 .navbar__link {
   padding: 0;
-  margin-top: 0;
-  margin-bottom: 0;
-  margin-left: 10px;
-  margin-right: 0;
-  color: #A9A9A9;
+  margin: 0 0 0 10px;
+  color: #a9a9a9;
   text-decoration: none;
   font-weight: 400;
   font-size: 18px;
@@ -19,7 +16,7 @@
 }
 
 .navbar__link:visited {
-  color: #A9A9A9;
+  color: #a9a9a9;
 }
 
 .navbar__link_active:active {
