@@ -17,5 +17,5 @@
 
 export interface IProtectedRouteProps {
   loggedIn: boolean,
-  // children: any,
+  children: any,
 }
