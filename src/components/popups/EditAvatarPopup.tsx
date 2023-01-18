@@ -3,6 +3,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { useErrorHandler } from 'react-error-boundary';
 
 import { IEditAvatarProps } from '../../interfaces/interfaces';
 import { Button, Input } from '../form-components';
@@ -32,8 +33,8 @@ function EditAvatarPopup(props: IEditAvatarProps) {
     onClose,
     onUpdateUser,
   } = props;
-  const isValid = true;
-  const name = 'edit';
+
+  const errorHandler = useErrorHandler();
   const buttonText = isLoading ? 'Загрузка...' : 'Сохранить';
 
   const { control, handleSubmit } = useForm<FormPayload>({
@@ -50,12 +51,12 @@ function EditAvatarPopup(props: IEditAvatarProps) {
     try {
       await onUpdateUser(data);
     } catch ({ status, data: { reason } }) {
-      // errorHandler(new Error(`${status}: ${reason}`));
+      errorHandler(new Error(`${status}: ${reason}`));
     }
   });
 
   return (
-    <div onClick={handleCloseClick} className={`popup popup_type_${name} ${isOpen && 'popup_active'}`}>
+    <div onClick={handleCloseClick} className={`popup popup_type_edit ${isOpen && 'popup_active'}`}>
       <div className="popup__container">
         <button
           aria-label="Close"
@@ -64,7 +65,7 @@ function EditAvatarPopup(props: IEditAvatarProps) {
           onClick={onClose}
         />
 
-        <form className={`form form_type_${name}`} onSubmit={onSubmit}>
+        <form className="form form_type_edit" onSubmit={onSubmit}>
           <h2 className="form__title">Обновить аватар</h2>
           {inputs.map((input) => (
             <Controller
@@ -85,7 +86,7 @@ function EditAvatarPopup(props: IEditAvatarProps) {
               )}
             />
           ))}
-          <Button className={`button button_submit ${!isValid ? 'button_submit_inactive' : ''}`} variant="filled">
+          <Button className="button button_submit" variant="filled">
             <span>{buttonText}</span>
           </Button>
         </form>

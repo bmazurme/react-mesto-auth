@@ -5,12 +5,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import useUser from '../../hook/useUser';
 
+import useUser from '../../hook/useUser';
 import NavItem from '../NavItem';
 import { Urls } from '../../utils/constants';
 import { setCredentials } from '../../store';
-
 import { INavBarProps } from '../../interfaces/interfaces';
 
 export default function NavBar(props: INavBarProps) {
@@ -33,7 +32,7 @@ export default function NavBar(props: INavBarProps) {
 
   return (
     <>
-      <ul onClick={handlerClick} className={`navbar ${isOpen ? 'navbar_opened' : ''}`}>
+      <ul onClick={handlerClick} className={`navbar${isOpen ? ' navbar_opened' : ''}`}>
         {location.pathname === Urls.SIGNIN ? <NavItem to={Urls.SIGNUP} value="Регистрация" active="active" /> : null}
         {location.pathname === Urls.SIGNUP ? <NavItem to={Urls.SIGNIN} value="Войти" active="active" /> : null}
         {user?.email ? <NavItem to={Urls.BASE} value={email} active="active" /> : null}

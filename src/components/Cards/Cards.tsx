@@ -2,6 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-undef */
 import React, { useState } from 'react';
+import { useErrorHandler } from 'react-error-boundary';
 
 import Card from '../Card';
 import { ImagePopup } from '../popups';
@@ -11,6 +12,7 @@ import { ICard } from '../../interfaces/ICard';
 export default function Cards({ user }: { user: User | null }) {
   // @ts-ignore
   const { data = [], error, isLoading } = useGetCardsQuery();
+  const errorHandler = useErrorHandler();
   const [changeLike] = useChangeLikeMutation();
   const [selectedCard, setSelectedCard] = useState<ICard|null>(null);
   const handleCardClick = (card: ICard) => setSelectedCard(card);
@@ -20,8 +22,8 @@ export default function Cards({ user }: { user: User | null }) {
     try {
       await changeLike({ cardId: card._id, value: card.likes.some((u) => u._id === user?._id) });
       handleCloseAllPopups();
-    } catch (e) {
-      console.log(e);
+    } catch ({ status, data: { reason } }: unknown) {
+      errorHandler(new Error(`${status}: ${reason}`));
     }
   };
 

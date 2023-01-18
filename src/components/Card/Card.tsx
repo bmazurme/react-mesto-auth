@@ -3,6 +3,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from 'react';
+import { useErrorHandler } from 'react-error-boundary';
 
 import { useDeleteCardMutation } from '../../store';
 import { PopupWithConfirm } from '../popups';
@@ -16,6 +17,7 @@ export default function Card(props: ICardProps) {
     onCardClick,
   } = props;
 
+  const errorHandler = useErrorHandler();
   const [deleteCard] = useDeleteCardMutation();
   const [confirmPopup, setConfirmPopup] = useState<boolean>(false);
   const isOwn = card?.owner?._id === user?._id;
@@ -27,8 +29,8 @@ export default function Card(props: ICardProps) {
     try {
       await deleteCard(card);
       handleCloseAllPopups();
-    } catch (e) {
-      console.log(e);
+    } catch ({ status, data: { reason } }: unknown) {
+      errorHandler(new Error(`${status}: ${reason}`));
     }
   };
 
@@ -43,8 +45,8 @@ export default function Card(props: ICardProps) {
       <img
         className="card__image"
         alt={card.name}
-        onClick={() => onCardClick(card)}
         src={card.link}
+        onClick={() => onCardClick(card)}
       />
       <div className="card__group">
         <h2 className="card__name">{card.name}</h2>

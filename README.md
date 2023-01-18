@@ -1,13 +1,10 @@
 # Project: Mesto
 ### Tech Stack
 ![TypeScript](https://img.shields.io/badge/-TypeScript-black?style=flat-square&logo=typescript)
-![JavaScript](https://img.shields.io/badge/-JavaScript-black?style=flat-square&logo=javascript)
 ![React](https://img.shields.io/badge/-React-black?style=flat-square&logo=react)
 ![Redux](https://img.shields.io/badge/-Redux-black?style=flat-square&logo=redux)
 ![HTML5](https://img.shields.io/badge/-HTML5-black?style=flat-square&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/-CSS3-black?style=flat-square&logo=css3)
-![NPM](https://img.shields.io/badge/-NPM-black?style=flat-square&logo=npm)
-![Git](https://img.shields.io/badge/-Git-black?style=flat-square&logo=git)
 ![Eslint](https://img.shields.io/badge/-Eslint-black?style=flat-square&logo=eslint)
 ![Stylelint](https://img.shields.io/badge/-Stylelint-black?style=flat-square&logo=stylelint)
 ![BEM](https://img.shields.io/badge/-BEM-black?style=flat-square&logo=bem)
@@ -20,6 +17,7 @@
 * JS CRA Version 0.2.0
 * TS CRA Version 1.1.1
 * TS Webpack Version 2.1.1
+* TS RTK Webpack Version 3.1.1
 
 Implemented features:
 - [X] User registration
@@ -31,8 +29,16 @@ Implemented features:
 - [X] Display the number of likes of the card
 - [X] Like and dislike
 - [X] Form Validation
-- [ ] RTK Query
+- [X] RTK Query
+- [X] Axios
+- [X] react-hook-form
+- [X] Express
 - [ ] Docker
+- [ ] React error boundaries
+- [ ] Tests
+- [ ] Service worker
+- [ ] CI/CD
+
 
 ##### Created by Yandex.Practicum
 
@@ -49,7 +55,51 @@ Clone the repository on your computer:
 
 Install dependencies: `npm install`
 
+Run dev mode: `npm run dev`
+
+Build project: `npm run build`
+
+Clear project: `npm run clear`
+
+Run eslint: `npm run eslint`
+
 Launch: `npm start`
+
+## Docker
+
+`docker-compose build`
+
+`docker-compose up`
+
+`docker-compose stop`
+
+`docker system prune -a`
+
+`docker-compose build`
+
+`docker compose push`
+
+```
+# on an M1 mac…
+
+# --platform linux/amd64
+```
+
+Identify what is running in port 5432: `sudo lsof -i :5432`
+
+Kill all the processes that are running under this port: `sudo kill -9 <pid>`
+
+Run the command again to verify no process is running now: `sudo lsof -i :5432`
+
+### SSL
+
+`sudo apt update`
+
+`sudo apt install -y certbot python3-certbot-nginx`
+
+`sudo certbot --nginx`
+
+`sudo systemctl reload nginx`
 
 **Figma**
 * [Link to Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)

@@ -3,6 +3,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { useErrorHandler } from 'react-error-boundary';
 
 import { IAddPlaceProps } from '../../interfaces/interfaces';
 import { Button, Input } from '../form-components';
@@ -42,8 +43,7 @@ export default function AddPlacePopup(props: IAddPlaceProps) {
     isLoading,
     onAddPlace,
   } = props;
-  const isValid = true;
-  const name = 'edit';
+  const errorHandler = useErrorHandler();
   const buttonText = isLoading ? 'Загрузка...' : 'Сохранить';
 
   const { control, handleSubmit } = useForm<FormPayload>({
@@ -60,13 +60,13 @@ export default function AddPlacePopup(props: IAddPlaceProps) {
   const onSubmit = handleSubmit(async (data) => {
     try {
       await onAddPlace(data);
-    } catch ({ status, data: { reason } }) {
-      // errorHandler(new Error(`${status}: ${reason}`));
+    } catch ({ status, data: { reason } }: unknown) {
+      errorHandler(new Error(`${status}: ${reason}`));
     }
   });
 
   return (
-    <div onClick={handleCloseClick} className={`popup popup_type_${name} ${isOpen && 'popup_active'}`}>
+    <div onClick={handleCloseClick} className={`popup popup_type_edit ${isOpen && 'popup_active'}`}>
       <div className="popup__container">
         <button
           aria-label="Close"
@@ -75,7 +75,7 @@ export default function AddPlacePopup(props: IAddPlaceProps) {
           onClick={onClose}
         />
 
-        <form className={`form form_type_${name}`} onSubmit={onSubmit}>
+        <form className="form form_type_edit" onSubmit={onSubmit}>
           <h2 className="form__title">Новое место</h2>
           {inputs.map((input) => (
             <Controller
@@ -96,7 +96,7 @@ export default function AddPlacePopup(props: IAddPlaceProps) {
               )}
             />
           ))}
-          <Button className={`button button_submit ${!isValid ? 'button_submit_inactive' : ''}`} variant="filled">
+          <Button className="button button_submit" variant="filled">
             <span>{buttonText}</span>
           </Button>
         </form>

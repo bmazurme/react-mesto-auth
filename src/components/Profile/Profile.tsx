@@ -2,10 +2,12 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from 'react';
+import { useErrorHandler } from 'react-error-boundary';
 import { EditProfilePopup, EditAvatarPopup, AddPlacePopup } from '../popups';
 import { useUpdateUserMutation, useUpdateUserAvatarMutation, useAddCardMutation } from '../../store';
 
 export default function Main({ info }:{ info: User | null }) {
+  const errorHandler = useErrorHandler();
   const [updateUser] = useUpdateUserMutation();
   const [updateUserAvatar] = useUpdateUserAvatarMutation();
   const [addCard] = useAddCardMutation();
@@ -26,8 +28,8 @@ export default function Main({ info }:{ info: User | null }) {
     try {
       await updateUser(data);
       handleCloseAllPopups();
-    } catch (e) {
-      console.log(e);
+    } catch ({ status, data: { reason } }: unknown) {
+      errorHandler(new Error(`${status}: ${reason}`));
     }
   };
 
@@ -35,8 +37,8 @@ export default function Main({ info }:{ info: User | null }) {
     try {
       await updateUserAvatar(data);
       handleCloseAllPopups();
-    } catch (e) {
-      console.log(e);
+    } catch ({ status, data: { reason } }: unknown) {
+      errorHandler(new Error(`${status}: ${reason}`));
     }
   };
 
@@ -44,8 +46,8 @@ export default function Main({ info }:{ info: User | null }) {
     try {
       await addCard(data);
       handleCloseAllPopups();
-    } catch (e) {
-      console.log(e);
+    } catch ({ status, data: { reason } }: unknown) {
+      errorHandler(new Error(`${status}: ${reason}`));
     }
   };
 

@@ -3,6 +3,8 @@
 /* eslint-disable no-unused-expressions */
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
+import { useErrorHandler } from 'react-error-boundary';
+
 import { Button, Input } from '../form-components';
 
 type FormPayload = {
@@ -43,8 +45,7 @@ export default function EditProfilePopup(props: any) {
     onUpdateUser,
   } = props;
 
-  const isValid = true;
-  const name = 'edit';
+  const errorHandler = useErrorHandler();
   const buttonText = isLoading ? 'Загрузка...' : 'Сохранить';
   const { control, handleSubmit } = useForm<FormPayload>({
     defaultValues: info ?? {
@@ -61,12 +62,12 @@ export default function EditProfilePopup(props: any) {
     try {
       await onUpdateUser(data);
     } catch ({ status, data: { reason } }) {
-      // errorHandler(new Error(`${status}: ${reason}`));
+      errorHandler(new Error(`${status}: ${reason}`));
     }
   });
 
   return (
-    <div onClick={handleCloseClick} className={`popup popup_type_${name} ${isOpen && 'popup_active'}`}>
+    <div onClick={handleCloseClick} className={`popup popup_type_edit ${isOpen && 'popup_active'}`}>
       <div className="popup__container">
         <button
           aria-label="Close"
@@ -75,7 +76,7 @@ export default function EditProfilePopup(props: any) {
           onClick={onClose}
         />
 
-        <form className={`form form_type_${name}`} onSubmit={onSubmit}>
+        <form className="form form_type_edit" onSubmit={onSubmit}>
           <h2 className="form__title">Редактировать профиль</h2>
           {inputs.map((input) => (
             <Controller
@@ -96,7 +97,7 @@ export default function EditProfilePopup(props: any) {
               )}
             />
           ))}
-          <Button className={`button button_submit ${!isValid ? 'button_submit_inactive' : ''}`} variant="filled">
+          <Button className="button button_submit" variant="filled">
             <span>{buttonText}</span>
           </Button>
         </form>
