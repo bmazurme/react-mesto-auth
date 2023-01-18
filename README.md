@@ -19,13 +19,13 @@
 * TS Webpack Version 2.1.1
 * TS RTK Webpack Version 3.1.1
 
-##### Created by Yandex.Practicum
-
 ## Demo
 [GitHub Pages](https://bmazurme.github.io/react-mesto-auth)
 [Netlify](https://whimsical-sprite-5d5e95.netlify.app/)
 
 ![Alt-text](https://github.com/bmazurme/mesto-react/blob/main/src/images/mesto.png "demo")
+
+##### Created by Yandex.Practicum
 
 ### Installation
 Clone the repository on your computer:
