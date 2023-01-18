@@ -1,61 +1,96 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
-import PopupWithForm from './PopupWithForm';
-import TextField from '../TextField/TextField';
-import { useFormWithValidation } from '../../utils/Validator';
+import { Controller, useForm } from 'react-hook-form';
 
-import { IValid, IEditAvatarProps } from '../../interfaces/interfaces';
+import { IEditAvatarProps } from '../../interfaces/interfaces';
+import { Button, Input } from '../form-components';
+
+type FormPayload = {
+  avatar: string;
+};
+
+const inputs = [
+  {
+    name: 'avatar',
+    label: 'Avatar',
+    pattern: {
+      value: /^/,
+      message: 'Name is invalid',
+    },
+    required: true,
+    autoComplete: 'current-avatar',
+  },
+];
 
 function EditAvatarPopup(props: IEditAvatarProps) {
   const {
+    info,
+    isLoading,
     isOpen,
     onClose,
-    isLoading,
-    onUpdateAvatar,
+    onUpdateUser,
   } = props;
+  const isValid = true;
+  const name = 'edit';
+  const buttonText = isLoading ? 'Загрузка...' : 'Сохранить';
 
-  const {
-    values,
-    errors,
-    isValid,
-    handleChange,
-  } = useFormWithValidation() as IValid;
+  const { control, handleSubmit } = useForm<FormPayload>({
+    defaultValues: info ?? {
+      avatar: '',
+    },
+  });
 
-  const handleSubmit = (evt: SubmitEvent) => {
-    evt.preventDefault();
-    onUpdateAvatar(values);
+  const handleCloseClick = (evt: any) => {
+    evt.currentTarget === evt.target && onClose();
   };
 
-  React.useEffect(() => {
-    values.avatar = '';
-  }, [isOpen]);
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      await onUpdateUser(data);
+    } catch ({ status, data: { reason } }) {
+      // errorHandler(new Error(`${status}: ${reason}`));
+    }
+  });
 
   return (
-    <PopupWithForm
-      title="Обновить аватар"
-      name="avatar"
-      buttonText={isLoading ? 'Загрузка...' : 'Сохранить'}
-      isOpen={isOpen}
-      isValid={isValid}
-      onClose={onClose}
-      onSubmit={handleSubmit}
-    >
-      <TextField
-        placeholder="Название"
-        label="avatar"
-        value={values.avatar || ''}
-        name="avatar"
-        id="avatar-input"
-        autoComplete="off"
-        className=""
-        onChange={handleChange}
-        type="text"
-        minLength={2}
-        maxLength={300}
-        errors={errors}
-        required
-        pattern={''}
-      />
-    </PopupWithForm>
+    <div onClick={handleCloseClick} className={`popup popup_type_${name} ${isOpen && 'popup_active'}`}>
+      <div className="popup__container">
+        <button
+          aria-label="Close"
+          className="popup__close"
+          type="button"
+          onClick={onClose}
+        />
+
+        <form className={`form form_type_${name}`} onSubmit={onSubmit}>
+          <h2 className="form__title">Обновить аватар</h2>
+          {inputs.map((input) => (
+            <Controller
+              key={input.name}
+              name={input.name as keyof FormPayload}
+              rules={{
+                pattern: input.pattern,
+                required: input.required,
+              }}
+              control={control}
+              render={({ field, fieldState }) => (
+                <Input
+                  {...field}
+                  {...input}
+                  className="text-field__input"
+                  errorText={fieldState.error?.message}
+                />
+              )}
+            />
+          ))}
+          <Button className={`button button_submit ${!isValid ? 'button_submit_inactive' : ''}`} variant="filled">
+            <span>{buttonText}</span>
+          </Button>
+        </form>
+      </div>
+    </div>
   );
 }
 

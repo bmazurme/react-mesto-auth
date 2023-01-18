@@ -5,7 +5,7 @@ export interface IMainProps {
   isLoggedIn: boolean,
   onEditAvatar: any,
   onEditProfile: any,
-  onAddPlace: (data: any) => void,
+  onAddPlace: (data: Record<string, string>) => void,
   onCardClick: (card: ICard) => void,
   handleCardLike: (card: ICard) => void,
   handleCardDelete: (card: ICard) => void,

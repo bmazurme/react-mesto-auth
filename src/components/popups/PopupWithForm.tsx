@@ -1,8 +1,11 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 
 import { IPopupWithFormProps } from '../../interfaces/interfaces';
 
-function PopupWithForm(props: IPopupWithFormProps) {
+export default function PopupWithForm(props: IPopupWithFormProps) {
   const {
     name,
     isOpen,
@@ -50,5 +53,3 @@ function PopupWithForm(props: IPopupWithFormProps) {
     </div>
   );
 }
-
-export default PopupWithForm;

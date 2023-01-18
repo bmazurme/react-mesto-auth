@@ -1,5 +1,5 @@
 export interface IProps {
   isOpen: boolean,
   onClose: () => void,
-  isLoading: boolean,
+  isLoading?: boolean,
 }

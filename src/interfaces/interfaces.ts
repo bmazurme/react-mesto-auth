@@ -1,17 +1,12 @@
 export { ICard } from './ICard';
 export { ILike } from './ILike';
 export { IOptions } from './IOptions';
-export { IUser } from './IUser';
-export { IValid } from './IValid';
 export { ICardProps } from './IProps/ICardProps';
-export { IHeaderProps } from './IProps/IHeaderProps';
 export { IMainProps } from './IProps/IMainProps';
 export { INavBarProps } from './IProps/INavBarProps';
 export { INavItemProps } from './IProps/INavItemProps';
-export { IProtectedRouteProps } from './IProps/IProtectedRouteProps';
 export { ISignInProps } from './IProps/ISignInProps';
 export { ISignUpProps } from './IProps/ISignUpProps';
-export { ITextFieldProps } from './IProps/ITextFieldProps';
 export { IAddPlaceProps } from './IProps/IAddPlaceProps';
 export { IEditAvatarProps } from './IProps/IEditAvatarProps';
 export { IEditProfileProps } from './IProps/IEditProfileProps';

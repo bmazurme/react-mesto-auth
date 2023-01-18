@@ -1,8 +1,10 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 
 import { IInfoTooltipProps } from '../../interfaces/interfaces';
 
-function InfoTooltip(props: IInfoTooltipProps) {
+export default function InfoTooltip(props: IInfoTooltipProps) {
   const {
     text,
     isOpen,
@@ -23,10 +25,7 @@ function InfoTooltip(props: IInfoTooltipProps) {
           onClick={onClose}
         />
         <div className="tooltip">
-          <div
-            className={`tooltip__image ${isSuccess ? 'tooltip__image_success' : ''}`}
-          >
-          </div>
+          <div className={`tooltip__image ${isSuccess ? 'tooltip__image_success' : ''}`} />
           <p className="tooltip__text">
             {text}
           </p>
@@ -35,5 +34,3 @@ function InfoTooltip(props: IInfoTooltipProps) {
     </div>
   );
 }
-
-export default InfoTooltip;

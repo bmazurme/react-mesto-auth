@@ -4,6 +4,6 @@ import { IProps } from './IProps';
 export interface IPopupWithConfirmProps extends IProps{
   title: string,
   buttonText: string,
-  card: ICard|null,
-  onSubmit: (data: any) => void,
+  card: ICard | null,
+  onSubmit: any,
 }

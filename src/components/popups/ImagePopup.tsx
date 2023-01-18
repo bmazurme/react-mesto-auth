@@ -1,8 +1,11 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable no-unused-expressions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 
 import { IImageProps } from '../../interfaces/interfaces';
 
-function ImagePopup(props: IImageProps) {
+export default function ImagePopup(props: IImageProps) {
   const { card, onClose } = props;
 
   const handleCloseClick = (e: any) => {
@@ -19,20 +22,13 @@ function ImagePopup(props: IImageProps) {
           aria-label="Close"
           className="popup__close"
           type="button"
-          onClick={onClose} />
+          onClick={onClose}
+        />
         <div className="slide">
-          <img
-            src={card ? card.link : ''}
-            alt={card ? card.name : ''}
-            className="slide__image"
-          />
-          <p className="slide__name">
-            {card ? card.name : ''}
-          </p>
+          <img src={card?.link ?? ''} alt={card?.name ?? ''} className="slide__image" />
+          <p className="slide__name">{card?.name ?? ''}</p>
         </div>
       </div>
     </div>
   );
 }
-
-export default ImagePopup;

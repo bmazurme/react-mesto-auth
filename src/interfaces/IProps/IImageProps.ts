@@ -1,4 +1,4 @@
-import { ICard } from "interfaces/ICard";
+import { ICard } from '../ICard';
 
 export interface IImageProps {
   onClose: () => void,

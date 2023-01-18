@@ -1,11 +1,11 @@
+/* eslint-disable no-undef */
 import { ILike } from './ILike';
-import { IUser } from './IUser';
 
 export interface ICard {
-  _id: number,
+  _id: string,
   name: string,
   link: string,
   likes: Array<ILike>,
-  owner: IUser,
+  owner: User | null,
   createdAt: Date
 }

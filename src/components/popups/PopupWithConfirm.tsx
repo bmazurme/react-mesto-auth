@@ -1,9 +1,10 @@
+/* eslint-disable react/jsx-boolean-value */
 import React from 'react';
 import PopupWithForm from './PopupWithForm';
 
 import { IPopupWithConfirmProps } from '../../interfaces/interfaces';
 
-function PopupWithConfirm(props: IPopupWithConfirmProps) {
+export default function PopupWithConfirm(props: IPopupWithConfirmProps) {
   const {
     card,
     title,
@@ -32,5 +33,3 @@ function PopupWithConfirm(props: IPopupWithConfirmProps) {
     />
   );
 }
-
-export default PopupWithConfirm;

@@ -1,31 +1,41 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { selectData } from '../user/userSlice';
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable react/button-has-type */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import React, { useState } from 'react';
 
-import { IUser, ICardProps } from '../../interfaces/interfaces';
+import { useDeleteCardMutation } from '../../store';
+import { PopupWithConfirm } from '../popups';
+import { ICardProps } from '../../interfaces/interfaces';
 
-function Card(props: ICardProps) {
+export default function Card(props: ICardProps) {
   const {
+    user,
     card,
-    onCardDelete,
     onCardLike,
     onCardClick,
   } = props;
-  const { user } = useSelector(selectData);
-  const { _id } = user as IUser;
-  const isOwn = card.owner._id === _id;
-  const isLiked = card.likes.some((like) => like._id === _id);
-  const cardDeleteButtonClassName = (
-    `card__remove ${isOwn ? 'card__remove_visible' : ''}`
-  );
-  const cardLikeButtonClassName = (
-    `card__like ${isLiked ? 'card__like_checked' : ''}`
-  );
+
+  const [deleteCard] = useDeleteCardMutation();
+  const [confirmPopup, setConfirmPopup] = useState<boolean>(false);
+  const isOwn = card?.owner?._id === user?._id;
+  const isLiked = card.likes.some((like) => like?._id === user?._id);
+  const cardDeleteButtonClassName = (`card__remove${isOwn ? ' card__remove_visible' : ''}`);
+  const cardLikeButtonClassName = (`card__like${isLiked ? ' card__like_checked' : ''}`);
+  const handleCloseAllPopups = () => setConfirmPopup(false);
+  const handleCardDelete = async () => {
+    try {
+      await deleteCard(card);
+      handleCloseAllPopups();
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <div className="card">
       <button
-        onClick={() => onCardDelete(card)}
+        onClick={() => setConfirmPopup(true)}
         aria-label="Remove"
         className={cardDeleteButtonClassName}
         type="button"
@@ -45,13 +55,19 @@ function Card(props: ICardProps) {
             className={cardLikeButtonClassName}
             name="button-like"
           />
-          <p className="card__counter">
-            {card.likes.length}
-          </p>
+          <p className="card__counter">{card.likes.length}</p>
         </div>
       </div>
+      {confirmPopup ? (
+        <PopupWithConfirm
+          onSubmit={handleCardDelete}
+          isOpen={confirmPopup}
+          onClose={handleCloseAllPopups}
+          title="Вы уверены?"
+          buttonText="Удалить"
+          card={null}
+        />
+      ) : null}
     </div>
   );
 }
-
-export default Card;
