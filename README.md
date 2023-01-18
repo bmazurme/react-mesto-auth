@@ -19,27 +19,6 @@
 * TS Webpack Version 2.1.1
 * TS RTK Webpack Version 3.1.1
 
-Implemented features:
-- [X] User registration
-- [X] User authorization
-- [X] Adding user information
-- [X] Edit user profile
-- [X] Uploading initial cards to servers
-- [X] Delete card
-- [X] Display the number of likes of the card
-- [X] Like and dislike
-- [X] Form Validation
-- [X] RTK Query
-- [X] Axios
-- [X] react-hook-form
-- [X] Express
-- [ ] Docker
-- [ ] React error boundaries
-- [ ] Tests
-- [ ] Service worker
-- [ ] CI/CD
-
-
 ##### Created by Yandex.Practicum
 
 ## Demo
@@ -64,6 +43,26 @@ Clear project: `npm run clear`
 Run eslint: `npm run eslint`
 
 Launch: `npm start`
+
+Implemented features:
+- [X] User registration
+- [X] User authorization
+- [X] Adding user information
+- [X] Edit user profile
+- [X] Uploading initial cards to servers
+- [X] Delete card
+- [X] Display the number of likes of the card
+- [X] Like and dislike
+- [X] Form Validation
+- [X] RTK Query
+- [X] Axios
+- [X] react-hook-form
+- [X] Express
+- [ ] Docker
+- [ ] React error boundaries
+- [ ] Tests
+- [ ] Service worker
+- [ ] CI/CD
 
 ## Docker
 
