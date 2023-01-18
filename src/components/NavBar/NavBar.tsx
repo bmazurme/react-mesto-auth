@@ -35,7 +35,7 @@ export default function NavBar(props: INavBarProps) {
       <ul onClick={handlerClick} className={`navbar${isOpen ? ' navbar_opened' : ''}`}>
         {location.pathname === Urls.SIGNIN ? <NavItem to={Urls.SIGNUP} value="Регистрация" active="active" /> : null}
         {location.pathname === Urls.SIGNUP ? <NavItem to={Urls.SIGNIN} value="Войти" active="active" /> : null}
-        {user?.email ? <NavItem to={Urls.BASE} value={email} active="active" /> : null}
+        {user?.email ? <NavItem to="/" value={email} active="active" /> : null}
         {user?.email ? <NavItem to={Urls.SIGNIN} value="Выйти" onClick={onSignOut} active="" /> : null}
       </ul>
       <button onClick={handlerClick} className={`navbar__btn${isOpen ? ' navbar__btn_opened' : ''}`} />
