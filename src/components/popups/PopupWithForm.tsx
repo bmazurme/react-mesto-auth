@@ -14,7 +14,7 @@ export default function PopupWithForm(props: IPopupWithFormProps) {
   } = props;
 
   const handleCloseClick = (evt: React.MouseEvent<HTMLElement>) => {
-    evt.currentTarget === evt.target && onClose();
+    evt.currentTarget === evt.target && onClose()
   };
 
   return (

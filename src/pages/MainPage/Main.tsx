@@ -6,7 +6,7 @@ import { useGetUserMeQuery } from '../../store';
 
 export default function Main() {
   // @ts-ignore
-  const { data, error, isLoading } = useGetUserMeQuery();
+  const { data } = useGetUserMeQuery();
 
   return (
     <>

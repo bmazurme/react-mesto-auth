@@ -12,7 +12,6 @@ import { Button, Input } from '../../components/form-components';
 import FormFooter from '../../components/FormFooter';
 import { InfoTooltip } from '../../components/popups';
 
-
 import { Urls } from '../../utils/constants';
 
 type FormPayload = {
