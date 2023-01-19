@@ -20,8 +20,8 @@
 * TS RTK Webpack Version 3.1.1
 
 ## Demo
-[GitHub Pages](https://bmazurme.github.io/react-mesto-auth)
-[Netlify](https://whimsical-sprite-5d5e95.netlify.app/)
+[![GitHubPages](https://img.shields.io/badge/-GitHubPages-black?style=flat-square&logo=github)](https://bmazurme.github.io/react-mesto-auth)
+[![Netlify](https://img.shields.io/badge/-Netlify-black?style=flat-square&logo=netlify)](https://whimsical-sprite-5d5e95.netlify.app/)
 
 ![Alt-text](https://github.com/bmazurme/mesto-react/blob/main/src/images/mesto.png "demo")
 
