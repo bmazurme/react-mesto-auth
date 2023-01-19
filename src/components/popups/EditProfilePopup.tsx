@@ -1,11 +1,9 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable no-unused-expressions */
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useErrorHandler } from 'react-error-boundary';
 
 import { Button, Input } from '../form-components';
+import { IEditProfileProps } from '../../interfaces/interfaces';
 
 type FormPayload = {
   name: string;
@@ -36,7 +34,7 @@ const inputs = [
   },
 ];
 
-export default function EditProfilePopup(props: any) {
+export default function EditProfilePopup(props: IEditProfileProps) {
   const {
     info,
     isLoading,
@@ -54,11 +52,11 @@ export default function EditProfilePopup(props: any) {
     },
   });
 
-  const handleCloseClick = (evt: any) => {
+  const handleCloseClick = (evt: React.MouseEvent<HTMLElement>) => {
     evt.currentTarget === evt.target && onClose();
   };
 
-  const onSubmit = handleSubmit(async (data) => {
+  const onSubmit = handleSubmit(async (data: Record<string, string>) => {
     try {
       await onUpdateUser(data);
     } catch ({ status, data: { reason } }) {

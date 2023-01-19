@@ -1,8 +1,6 @@
-/* eslint-disable no-undef */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from 'react';
 import { useErrorHandler } from 'react-error-boundary';
+
 import { EditProfilePopup, EditAvatarPopup, AddPlacePopup } from '../popups';
 import { useUpdateUserMutation, useUpdateUserAvatarMutation, useAddCardMutation } from '../../store';
 

@@ -1,7 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { INavItemProps } from 'interfaces/interfaces';
+export interface INavItemProps {
+  to: string,
+  className?: string,
+  onClick?: () => void,
+  active: string,
+  value: string,
+}
 
 export default function NavItem(props: INavItemProps) {
   const {

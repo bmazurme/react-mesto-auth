@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { Regexp } from './constants';
 
 test('email is corrected', () => {

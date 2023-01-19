@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import authApi from '..';
 import { setCredentials } from '../../../slices';
 
@@ -29,7 +28,6 @@ const authApiEndpoints = authApi
       getUser: builder.mutation<User | null, void>({
         query: () => {
           const token = localStorage.getItem('jwt');
-          console.log(token);
           return {
             url: '/users/me',
             method: 'GET',

@@ -53,15 +53,16 @@ Implemented features:
 - [X] Delete card
 - [X] Display the number of likes of the card
 - [X] Like and dislike
-- [X] Form Validation
-- [X] RTK Query
+- [X] Form Validation, react-hook-form
+- [X] Redux, RTK Query
 - [X] Axios
-- [X] react-hook-form
+- [X] React error boundaries
+- [X] TS, Webpack
 - [X] Express
 - [ ] Docker
-- [ ] React error boundaries
 - [ ] Tests
 - [ ] Service worker
+- [ ] API
 - [ ] CI/CD
 
 ## Docker

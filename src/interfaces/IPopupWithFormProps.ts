@@ -4,7 +4,6 @@ export interface IPopupWithFormProps {
   onClose: () => void,
   onSubmit: any,
   title: string,
-  children: any,
   buttonText: string,
   isValid: boolean,
 }

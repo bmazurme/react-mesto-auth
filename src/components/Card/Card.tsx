@@ -1,13 +1,15 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable react/button-has-type */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from 'react';
 import { useErrorHandler } from 'react-error-boundary';
 
 import { useDeleteCardMutation } from '../../store';
 import { PopupWithConfirm } from '../popups';
-import { ICardProps } from '../../interfaces/interfaces';
+
+export interface ICardProps {
+  user: User | null;
+  card: Card,
+  onCardLike: (card: Card) => void,
+  onCardClick: (card: Card) => void,
+}
 
 export default function Card(props: ICardProps) {
   const {
@@ -21,7 +23,7 @@ export default function Card(props: ICardProps) {
   const [deleteCard] = useDeleteCardMutation();
   const [confirmPopup, setConfirmPopup] = useState<boolean>(false);
   const isOwn = card?.owner?._id === user?._id;
-  const isLiked = card.likes.some((like) => like?._id === user?._id);
+  const isLiked = card.likes.some((like: Like) => like?._id === user?._id);
   const cardDeleteButtonClassName = (`card__remove${isOwn ? ' card__remove_visible' : ''}`);
   const cardLikeButtonClassName = (`card__like${isLiked ? ' card__like_checked' : ''}`);
   const handleCloseAllPopups = () => setConfirmPopup(false);

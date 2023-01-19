@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-expressions */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useErrorHandler } from 'react-error-boundary';
@@ -25,7 +22,7 @@ const inputs = [
   },
 ];
 
-function EditAvatarPopup(props: IEditAvatarProps) {
+export default function EditAvatarPopup(props: IEditAvatarProps) {
   const {
     info,
     isLoading,
@@ -36,14 +33,13 @@ function EditAvatarPopup(props: IEditAvatarProps) {
 
   const errorHandler = useErrorHandler();
   const buttonText = isLoading ? 'Загрузка...' : 'Сохранить';
-
   const { control, handleSubmit } = useForm<FormPayload>({
     defaultValues: info ?? {
       avatar: '',
     },
   });
 
-  const handleCloseClick = (evt: any) => {
+  const handleCloseClick = (evt: React.MouseEvent<HTMLElement>) => {
     evt.currentTarget === evt.target && onClose();
   };
 
@@ -94,5 +90,3 @@ function EditAvatarPopup(props: IEditAvatarProps) {
     </div>
   );
 }
-
-export default EditAvatarPopup;

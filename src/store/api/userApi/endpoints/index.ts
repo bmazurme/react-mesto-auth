@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-disable import/prefer-default-export */
 import usersApi from '..';
 
 const headers = {
@@ -21,7 +19,7 @@ const usersApiEndpoints = usersApi
         providesTags: ['Users'],
       }),
       updateUser: builder.mutation({
-        query: (user) => ({
+        query: (user: Record<string, string>) => ({
           url: '/users/me',
           method: 'PATCH',
           headers,

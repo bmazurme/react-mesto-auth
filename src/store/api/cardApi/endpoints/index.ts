@@ -1,6 +1,3 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-undef */
-/* eslint-disable import/prefer-default-export */
 import usersApi from '..';
 
 const headers = {

@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-expressions */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 
 import { IPopupWithFormProps } from '../../interfaces/interfaces';
@@ -13,11 +10,10 @@ export default function PopupWithForm(props: IPopupWithFormProps) {
     onSubmit,
     title,
     buttonText,
-    children,
     isValid,
   } = props;
 
-  const handleCloseClick = (evt: any) => {
+  const handleCloseClick = (evt: React.MouseEvent<HTMLElement>) => {
     evt.currentTarget === evt.target && onClose();
   };
 
@@ -40,7 +36,6 @@ export default function PopupWithForm(props: IPopupWithFormProps) {
           onSubmit={onSubmit}
         >
           <h2 className="form__title">{title}</h2>
-          {children}
           <button
             aria-label="Save"
             className={`button button_submit ${!isValid ? 'button_submit_inactive' : ''}`}

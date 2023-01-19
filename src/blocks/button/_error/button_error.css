@@ -1,0 +1,22 @@
+.button_error {
+  margin: 20px 0;
+  width: 150px;
+  height: 40px;
+  background-color: black;
+  border: 1px solid #000;
+  color: white;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.button_error:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 320px) and (max-width: 539px) {
+  .button_error {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

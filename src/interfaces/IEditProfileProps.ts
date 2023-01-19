@@ -1,6 +1,6 @@
-/* eslint-disable no-undef */
 import { IProps } from './IProps';
 
 export interface IEditProfileProps extends IProps {
-  onUpdateUser: (info: User | null) => void,
+  info: User | null,
+  onUpdateUser: (info: Record<string, string>) => void,
 }

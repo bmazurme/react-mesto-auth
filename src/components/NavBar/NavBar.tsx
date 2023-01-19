@@ -1,7 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable react/button-has-type */
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
@@ -10,9 +6,9 @@ import useUser from '../../hook/useUser';
 import NavItem from '../NavItem';
 import { Urls } from '../../utils/constants';
 import { setCredentials } from '../../store';
-import { INavBarProps } from '../../interfaces/interfaces';
 
-export default function NavBar(props: INavBarProps) {
+export default function NavBar(props
+: { isOpen: boolean, handlerClick: () => void }) {
   const location = useLocation();
   const [email, setEmail] = useState('');
   const user = useUser();

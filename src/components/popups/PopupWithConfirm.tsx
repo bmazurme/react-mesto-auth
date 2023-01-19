@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-boolean-value */
 import React from 'react';
 import PopupWithForm from './PopupWithForm';
 
@@ -29,7 +28,6 @@ export default function PopupWithConfirm(props: IPopupWithConfirmProps) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-      children={undefined}
     />
   );
 }

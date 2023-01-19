@@ -13,3 +13,17 @@ type User = {
   email: string;
   password: string;
 };
+
+type Like = {
+  _id: string,
+  user: User | null,
+}
+
+ type Card = {
+  _id: string,
+  name: string,
+  link: string,
+  likes: Array<Like>,
+  owner: User | null,
+  createdAt: Date
+}

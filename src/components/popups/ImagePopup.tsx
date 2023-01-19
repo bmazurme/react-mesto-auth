@@ -1,14 +1,10 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 
-import { IImageProps } from '../../interfaces/interfaces';
-
-export default function ImagePopup(props: IImageProps) {
+export default function ImagePopup(props
+: { onClose: () => void, card: Card | null }) {
   const { card, onClose } = props;
 
-  const handleCloseClick = (e: any) => {
+  const handleCloseClick = (e: React.MouseEvent<HTMLElement>) => {
     e.currentTarget === e.target && onClose();
   };
 

@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-expressions */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useErrorHandler } from 'react-error-boundary';
@@ -43,9 +40,9 @@ export default function AddPlacePopup(props: IAddPlaceProps) {
     isLoading,
     onAddPlace,
   } = props;
+
   const errorHandler = useErrorHandler();
   const buttonText = isLoading ? 'Загрузка...' : 'Сохранить';
-
   const { control, handleSubmit } = useForm<FormPayload>({
     defaultValues: {
       name: '',
@@ -53,7 +50,7 @@ export default function AddPlacePopup(props: IAddPlaceProps) {
     },
   });
 
-  const handleCloseClick = (evt: any) => {
+  const handleCloseClick = (evt: React.MouseEvent<HTMLElement>) => {
     evt.currentTarget === evt.target && onClose();
   };
 

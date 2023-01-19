@@ -1,13 +1,18 @@
 /* eslint-disable no-undef */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 import { useErrorHandler } from 'react-error-boundary';
 import { Controller, useForm } from 'react-hook-form';
-import FormFooter from '../../components/FormFooter';
-import { Button, Input } from '../../components/form-components';
-import { useSignUpMutation } from '../../store';
+
 import useUser from '../../hook/useUser';
+import { useSignUpMutation } from '../../store';
+
+import { Button, Input } from '../../components/form-components';
+import FormFooter from '../../components/FormFooter';
+import { InfoTooltip } from '../../components/popups';
+
+
 import { Urls } from '../../utils/constants';
 
 type FormPayload = {
@@ -44,6 +49,8 @@ export default function SignUp() {
   const navigate = useNavigate();
   const [signUp] = useSignUpMutation();
   const errorHandler = useErrorHandler();
+  const [isInfoToolTipPopupOpen, setIsInfoToolTipPopupOpen] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
     if (userData) {
@@ -58,10 +65,15 @@ export default function SignUp() {
     },
   });
 
+  const handleCloseAllPopups = () => setIsInfoToolTipPopupOpen(false);
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await signUp(data as Omit<User, 'id' | 'display_name'>);
-      navigate('/');
+      const result: unknown = await signUp(data as Omit<User, 'id' | 'display_name'>);
+      setIsSuccess((result as Record<string, Record<string, string>>).error.code !== 'ERR_BAD_REQUEST');
+      setIsInfoToolTipPopupOpen(true);
+      setTimeout(() => {
+        navigate('/');
+      }, 3000);
     } catch ({ status, data: { reason } }) {
       errorHandler(new Error(`${status}: ${reason}`));
     }
@@ -95,6 +107,16 @@ export default function SignUp() {
         </Button>
         <FormFooter url={Urls.SIGNIN} label="Войти" />
       </form>
+      {isInfoToolTipPopupOpen ? (
+        <InfoTooltip
+          isOpen={isInfoToolTipPopupOpen}
+          onClose={handleCloseAllPopups}
+          isSuccess={isSuccess}
+          text={
+            isSuccess ? 'Вы успешно зарегистрировались!' : 'Что-то пошло не так! Попробуйте ещё раз.'
+          }
+        />
+      ) : null}
     </div>
   );
 }

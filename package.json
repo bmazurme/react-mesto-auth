@@ -43,7 +43,7 @@
     "@typescript-eslint/parser": "5.32.0",
     "connect-livereload": "0.6.1",
     "css-loader": "6.7.1",
-    "eslint": "8.21.0",
+    "eslint": "8.32.0",
     "eslint-config-airbnb": "19.0.4",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-jsx-a11y": "6.6.1",

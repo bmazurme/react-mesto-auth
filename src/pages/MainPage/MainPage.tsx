@@ -2,7 +2,6 @@ import React from 'react';
 
 import Component from '../../components/Component';
 import Main from './Main';
-
 import withUser from '../../hoc/withUser';
 
 function MainPage() {

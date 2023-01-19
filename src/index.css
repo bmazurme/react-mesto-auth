@@ -65,6 +65,7 @@
 @import "./blocks/button/_submit/button_submit.css";
 @import "./blocks/button/_submit/_inactive/button_submit_inactive.css";
 @import "./blocks/button/_identity/button_identity.css";
+@import "./blocks/button/_error/button_error.css";
 
 /* slide */
 @import "./blocks/slide/slide.css";
@@ -88,3 +89,12 @@
 @import "./blocks/tooltip/__image/_success/tooltip__image_success.css";
 @import "./blocks/tooltip/__text/tooltip__text.css";
 @import "./blocks/main/main.css";
+
+/* error-boundary */
+@import "./blocks/error-boundary/error-boundary.css";
+@import "./blocks/error-boundary/__block/error-boundary__block.css";
+@import "./blocks/error-boundary/__message/error-boundary__message.css";
+@import "./blocks/error-boundary/__title/error-boundary__title.css";
+
+/* link */
+@import "./blocks/link/_home/link_home.css";
