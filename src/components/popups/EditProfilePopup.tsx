@@ -1,83 +1,105 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { useFormWithValidation } from '../../utils/Validator';
-import { selectData } from '../user/userSlice';
-import PopupWithForm from './PopupWithForm';
-import TextField from '../TextField/TextField';
+import { useForm, Controller } from 'react-hook-form';
+import { useErrorHandler } from 'react-error-boundary';
 
-import { IValid, IEditProfileProps } from '../../interfaces/interfaces';
+import { Button, Input } from '../form-components';
+import { IEditProfileProps } from '../../interfaces/interfaces';
 
-function EditProfilePopup(props: IEditProfileProps) {
-  const { user } = useSelector(selectData);
+type FormPayload = {
+  name: string;
+  about: string;
+};
 
+const inputs = [
+  {
+    name: 'name',
+    label: 'Name',
+    pattern: {
+      value: /^/,
+      message: 'Name is invalid',
+    },
+    required: true,
+    autoComplete: 'current-name',
+  },
+  {
+    name: 'about',
+    label: 'About',
+    pattern: {
+      value: /^[a-zA-Z0-9_-]{3,15}$/,
+      message: 'About is invalid',
+    },
+    required: true,
+    type: 'about',
+    autoComplete: 'current-about',
+  },
+];
+
+export default function EditProfilePopup(props: IEditProfileProps) {
   const {
+    info,
     isLoading,
     isOpen,
     onClose,
     onUpdateUser,
   } = props;
 
-  const {
-    values,
-    errors,
-    isValid,
-    handleChange,
-  } = useFormWithValidation() as IValid;
+  const errorHandler = useErrorHandler();
+  const buttonText = isLoading ? 'Загрузка...' : 'Сохранить';
+  const { control, handleSubmit } = useForm<FormPayload>({
+    defaultValues: info ?? {
+      name: '',
+      about: '',
+    },
+  });
 
-  const handleSubmit = (evt: SubmitEvent) => {
-    evt.preventDefault();
-    onUpdateUser(values);
+  const handleCloseClick = (evt: React.MouseEvent<HTMLElement>) => {
+    evt.currentTarget === evt.target && onClose();
   };
 
-  React.useEffect(() => {
-    values.name = user.name;
-    values.about = user.about;
-  }, [isOpen, user]);
+  const onSubmit = handleSubmit(async (data: Record<string, string>) => {
+    try {
+      await onUpdateUser(data);
+    } catch ({ status, data: { reason } }) {
+      errorHandler(new Error(`${status}: ${reason}`));
+    }
+  });
 
   return (
-    <PopupWithForm
-      title="Редактировать профиль"
-      name="edit"
-      buttonText={isLoading ? 'Загрузка...' : 'Сохранить'}
-      isOpen={isOpen}
-      isValid={isValid}
-      onClose={onClose}
-      onSubmit={handleSubmit}
-    >
-      <TextField
-        placeholder="Имя"
-        label="name"
-        value={values.name || ''}
-        name="name"
-        id="name-input"
-        autoComplete="off"
-        className=""
-        onChange={handleChange}
-        type="text"
-        minLength={2}
-        maxLength={40}
-        errors={errors}
-        required
-        pattern={''}
-      />
-      <TextField
-        placeholder="Профессия"
-        label="about"
-        value={values.about || ''}
-        name="about"
-        id="about-input"
-        autoComplete="off"
-        className=""
-        onChange={handleChange}
-        type="text"
-        minLength={2}
-        maxLength={200}
-        errors={errors}
-        required
-        pattern={''}
-      />
-    </PopupWithForm>
+    <div onClick={handleCloseClick} className={`popup popup_type_edit ${isOpen && 'popup_active'}`}>
+      <div className="popup__container">
+        <button
+          aria-label="Close"
+          className="popup__close"
+          type="button"
+          onClick={onClose}
+        />
+
+        <form className="form form_type_edit" onSubmit={onSubmit}>
+          <h2 className="form__title">Редактировать профиль</h2>
+          {inputs.map((input) => (
+            <Controller
+              key={input.name}
+              name={input.name as keyof FormPayload}
+              rules={{
+                pattern: input.pattern,
+                required: input.required,
+              }}
+              control={control}
+              render={({ field, fieldState }) => (
+                <Input
+                  {...field}
+                  {...input}
+                  className="text-field__input"
+                  errorText={fieldState.error?.message}
+                />
+              )}
+            />
+          ))}
+          <Button className="button button_submit" variant="filled">
+            <span>{buttonText}</span>
+          </Button>
+        </form>
+      </div>
+    </div>
   );
 }
-
-export default EditProfilePopup;

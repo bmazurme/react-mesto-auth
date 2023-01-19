@@ -1,29 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import NavBar from '../NavBar/NavBar';
 
-import { IHeaderProps } from 'interfaces/interfaces';
+import Logo from '../Logo';
+import NavBar from '../NavBar';
 
-import logo from '../../images/logo.svg';
-
-function Header(props: IHeaderProps) {
+export default function Header() {
   const [isOpen, setIsOpen] = React.useState<boolean>(false);
-  const handlerClick = () => {
-    setIsOpen(!isOpen);
-  };
+  const handlerClick = () => setIsOpen(!isOpen);
+  const hedClass = (op: boolean) => `header${op ? ' header_opened' : ''}`;
+
   return (
-    <header className={`header ${isOpen ? 'header_opened' : ''}`} >
-      <Link className="logo" to="/">
-        <img className="logo" src={logo} alt="Logo Mesto"></img>
-      </Link>
-      <NavBar
-        /* eslint-disable react/jsx-props-no-spreading */
-        {...props}
-        handlerClick={handlerClick}
-        isOpen={isOpen}
-      />
+    <header className={hedClass(isOpen)}>
+      <Logo />
+      <NavBar handlerClick={handlerClick} isOpen={isOpen} />
     </header>
   );
 }
-
-export default Header;

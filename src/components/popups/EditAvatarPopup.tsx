@@ -1,62 +1,92 @@
 import React from 'react';
-import PopupWithForm from './PopupWithForm';
-import TextField from '../TextField/TextField';
-import { useFormWithValidation } from '../../utils/Validator';
+import { Controller, useForm } from 'react-hook-form';
+import { useErrorHandler } from 'react-error-boundary';
 
-import { IValid, IEditAvatarProps } from '../../interfaces/interfaces';
+import { IEditAvatarProps } from '../../interfaces/interfaces';
+import { Button, Input } from '../form-components';
 
-function EditAvatarPopup(props: IEditAvatarProps) {
+type FormPayload = {
+  avatar: string;
+};
+
+const inputs = [
+  {
+    name: 'avatar',
+    label: 'Avatar',
+    pattern: {
+      value: /^/,
+      message: 'Name is invalid',
+    },
+    required: true,
+    autoComplete: 'current-avatar',
+  },
+];
+
+export default function EditAvatarPopup(props: IEditAvatarProps) {
   const {
+    info,
+    isLoading,
     isOpen,
     onClose,
-    isLoading,
-    onUpdateAvatar,
+    onUpdateUser,
   } = props;
 
-  const {
-    values,
-    errors,
-    isValid,
-    handleChange,
-  } = useFormWithValidation() as IValid;
+  const errorHandler = useErrorHandler();
+  const buttonText = isLoading ? 'Загрузка...' : 'Сохранить';
+  const { control, handleSubmit } = useForm<FormPayload>({
+    defaultValues: info ?? {
+      avatar: '',
+    },
+  });
 
-  const handleSubmit = (evt: SubmitEvent) => {
-    evt.preventDefault();
-    onUpdateAvatar(values);
+  const handleCloseClick = (evt: React.MouseEvent<HTMLElement>) => {
+    evt.currentTarget === evt.target && onClose();
   };
 
-  React.useEffect(() => {
-    values.avatar = '';
-  }, [isOpen]);
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      await onUpdateUser(data);
+    } catch ({ status, data: { reason } }) {
+      errorHandler(new Error(`${status}: ${reason}`));
+    }
+  });
 
   return (
-    <PopupWithForm
-      title="Обновить аватар"
-      name="avatar"
-      buttonText={isLoading ? 'Загрузка...' : 'Сохранить'}
-      isOpen={isOpen}
-      isValid={isValid}
-      onClose={onClose}
-      onSubmit={handleSubmit}
-    >
-      <TextField
-        placeholder="Название"
-        label="avatar"
-        value={values.avatar || ''}
-        name="avatar"
-        id="avatar-input"
-        autoComplete="off"
-        className=""
-        onChange={handleChange}
-        type="text"
-        minLength={2}
-        maxLength={300}
-        errors={errors}
-        required
-        pattern={''}
-      />
-    </PopupWithForm>
+    <div onClick={handleCloseClick} className={`popup popup_type_edit ${isOpen && 'popup_active'}`}>
+      <div className="popup__container">
+        <button
+          aria-label="Close"
+          className="popup__close"
+          type="button"
+          onClick={onClose}
+        />
+
+        <form className="form form_type_edit" onSubmit={onSubmit}>
+          <h2 className="form__title">Обновить аватар</h2>
+          {inputs.map((input) => (
+            <Controller
+              key={input.name}
+              name={input.name as keyof FormPayload}
+              rules={{
+                pattern: input.pattern,
+                required: input.required,
+              }}
+              control={control}
+              render={({ field, fieldState }) => (
+                <Input
+                  {...field}
+                  {...input}
+                  className="text-field__input"
+                  errorText={fieldState.error?.message}
+                />
+              )}
+            />
+          ))}
+          <Button className="button button_submit" variant="filled">
+            <span>{buttonText}</span>
+          </Button>
+        </form>
+      </div>
+    </div>
   );
 }
-
-export default EditAvatarPopup;

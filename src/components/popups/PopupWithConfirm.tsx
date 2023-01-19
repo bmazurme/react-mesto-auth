@@ -3,7 +3,7 @@ import PopupWithForm from './PopupWithForm';
 
 import { IPopupWithConfirmProps } from '../../interfaces/interfaces';
 
-function PopupWithConfirm(props: IPopupWithConfirmProps) {
+export default function PopupWithConfirm(props: IPopupWithConfirmProps) {
   const {
     card,
     title,
@@ -28,9 +28,6 @@ function PopupWithConfirm(props: IPopupWithConfirmProps) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-      children={undefined}
     />
   );
 }
-
-export default PopupWithConfirm;

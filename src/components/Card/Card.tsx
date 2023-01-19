@@ -1,31 +1,45 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { selectData } from '../user/userSlice';
+import React, { useState } from 'react';
+import { useErrorHandler } from 'react-error-boundary';
 
-import { IUser, ICardProps } from '../../interfaces/interfaces';
+import { useDeleteCardMutation } from '../../store';
+import { PopupWithConfirm } from '../popups';
 
-function Card(props: ICardProps) {
+export interface ICardProps {
+  user: User | null;
+  card: Card,
+  onCardLike: (card: Card) => void,
+  onCardClick: (card: Card) => void,
+}
+
+export default function Card(props: ICardProps) {
   const {
+    user,
     card,
-    onCardDelete,
     onCardLike,
     onCardClick,
   } = props;
-  const { user } = useSelector(selectData);
-  const { _id } = user as IUser;
-  const isOwn = card.owner._id === _id;
-  const isLiked = card.likes.some((like) => like._id === _id);
-  const cardDeleteButtonClassName = (
-    `card__remove ${isOwn ? 'card__remove_visible' : ''}`
-  );
-  const cardLikeButtonClassName = (
-    `card__like ${isLiked ? 'card__like_checked' : ''}`
-  );
+
+  const errorHandler = useErrorHandler();
+  const [deleteCard] = useDeleteCardMutation();
+  const [confirmPopup, setConfirmPopup] = useState<boolean>(false);
+  const isOwn = card?.owner?._id === user?._id;
+  const isLiked = card.likes.some((like: Like) => like?._id === user?._id);
+  const cardDeleteButtonClassName = (`card__remove${isOwn ? ' card__remove_visible' : ''}`);
+  const cardLikeButtonClassName = (`card__like${isLiked ? ' card__like_checked' : ''}`);
+  const handleCloseAllPopups = () => setConfirmPopup(false);
+  const handleCardDelete = async () => {
+    try {
+      await deleteCard(card);
+      handleCloseAllPopups();
+    } catch ({ status, data: { reason } }: unknown) {
+      errorHandler(new Error(`${status}: ${reason}`));
+    }
+  };
 
   return (
     <div className="card">
       <button
-        onClick={() => onCardDelete(card)}
+        onClick={() => setConfirmPopup(true)}
         aria-label="Remove"
         className={cardDeleteButtonClassName}
         type="button"
@@ -33,8 +47,8 @@ function Card(props: ICardProps) {
       <img
         className="card__image"
         alt={card.name}
-        onClick={() => onCardClick(card)}
         src={card.link}
+        onClick={() => onCardClick(card)}
       />
       <div className="card__group">
         <h2 className="card__name">{card.name}</h2>
@@ -45,13 +59,19 @@ function Card(props: ICardProps) {
             className={cardLikeButtonClassName}
             name="button-like"
           />
-          <p className="card__counter">
-            {card.likes.length}
-          </p>
+          <p className="card__counter">{card.likes.length}</p>
         </div>
       </div>
+      {confirmPopup ? (
+        <PopupWithConfirm
+          onSubmit={handleCardDelete}
+          isOpen={confirmPopup}
+          onClose={handleCloseAllPopups}
+          title="Вы уверены?"
+          buttonText="Удалить"
+          card={null}
+        />
+      ) : null}
     </div>
   );
 }
-
-export default Card;

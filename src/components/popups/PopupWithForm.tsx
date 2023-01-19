@@ -2,7 +2,7 @@ import React from 'react';
 
 import { IPopupWithFormProps } from '../../interfaces/interfaces';
 
-function PopupWithForm(props: IPopupWithFormProps) {
+export default function PopupWithForm(props: IPopupWithFormProps) {
   const {
     name,
     isOpen,
@@ -10,11 +10,10 @@ function PopupWithForm(props: IPopupWithFormProps) {
     onSubmit,
     title,
     buttonText,
-    children,
     isValid,
   } = props;
 
-  const handleCloseClick = (evt: any) => {
+  const handleCloseClick = (evt: React.MouseEvent<HTMLElement>) => {
     evt.currentTarget === evt.target && onClose();
   };
 
@@ -37,7 +36,6 @@ function PopupWithForm(props: IPopupWithFormProps) {
           onSubmit={onSubmit}
         >
           <h2 className="form__title">{title}</h2>
-          {children}
           <button
             aria-label="Save"
             className={`button button_submit ${!isValid ? 'button_submit_inactive' : ''}`}
@@ -50,5 +48,3 @@ function PopupWithForm(props: IPopupWithFormProps) {
     </div>
   );
 }
-
-export default PopupWithForm;

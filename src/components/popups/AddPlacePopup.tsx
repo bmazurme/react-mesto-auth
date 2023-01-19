@@ -1,11 +1,39 @@
 import React from 'react';
-import PopupWithForm from './PopupWithForm';
-import TextField from '../TextField/TextField';
-import { useFormWithValidation } from '../../utils/Validator';
+import { Controller, useForm } from 'react-hook-form';
+import { useErrorHandler } from 'react-error-boundary';
 
-import { IValid, IAddPlaceProps } from '../../interfaces/interfaces';
+import { IAddPlaceProps } from '../../interfaces/interfaces';
+import { Button, Input } from '../form-components';
 
-function AddPlacePopup(props: IAddPlaceProps) {
+type FormPayload = {
+  name: string;
+  link: string;
+};
+
+const inputs = [
+  {
+    name: 'name',
+    label: 'Name',
+    pattern: {
+      value: /^/,
+      message: 'Name is invalid',
+    },
+    required: true,
+    autoComplete: 'current-name',
+  },
+  {
+    name: 'link',
+    label: 'Link',
+    pattern: {
+      value: /^/,
+      message: 'Link is invalid',
+    },
+    required: true,
+    autoComplete: 'current-link',
+  },
+];
+
+export default function AddPlacePopup(props: IAddPlaceProps) {
   const {
     isOpen,
     onClose,
@@ -13,67 +41,63 @@ function AddPlacePopup(props: IAddPlaceProps) {
     onAddPlace,
   } = props;
 
-  const {
-    values,
-    errors,
-    isValid,
-    handleChange,
-  } = useFormWithValidation() as IValid;
+  const errorHandler = useErrorHandler();
+  const buttonText = isLoading ? 'Загрузка...' : 'Сохранить';
+  const { control, handleSubmit } = useForm<FormPayload>({
+    defaultValues: {
+      name: '',
+      link: '',
+    },
+  });
 
-  const handleSubmit = (evt: SubmitEvent) => {
-    evt.preventDefault();
-    onAddPlace(values);
+  const handleCloseClick = (evt: React.MouseEvent<HTMLElement>) => {
+    evt.currentTarget === evt.target && onClose();
   };
 
-  React.useEffect(() => {
-    values.name = '';
-    values.link = '';
-  }, [isOpen]);
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      await onAddPlace(data);
+    } catch ({ status, data: { reason } }: unknown) {
+      errorHandler(new Error(`${status}: ${reason}`));
+    }
+  });
 
   return (
-    <PopupWithForm
-      title="Новое место"
-      name="place"
-      isValid={isValid}
-      buttonText={isLoading ? 'Загрузка...' : 'Создать'}
-      isOpen={isOpen}
-      onClose={onClose}
-      onSubmit={handleSubmit}
-    >
-      <TextField
-        placeholder="Название"
-        label="name"
-        value={values.name || ''}
-        name="name"
-        id="name-input"
-        autoComplete="off"
-        className=""
-        onChange={handleChange}
-        type="text"
-        minLength={2}
-        maxLength={30}
-        errors={errors}
-        required
-        pattern={''}
-      />
-      <TextField
-        placeholder="Ссылка на картинку"
-        label="link"
-        onChange={handleChange}
-        value={values.link || ''}
-        name="link"
-        id="link-input"
-        autoComplete="off"
-        className=""
-        type="text"
-        errors={errors}
-        required
-        pattern={''}
-        minLength={0}
-        maxLength={200}
-      />
-    </PopupWithForm>
+    <div onClick={handleCloseClick} className={`popup popup_type_edit ${isOpen && 'popup_active'}`}>
+      <div className="popup__container">
+        <button
+          aria-label="Close"
+          className="popup__close"
+          type="button"
+          onClick={onClose}
+        />
+
+        <form className="form form_type_edit" onSubmit={onSubmit}>
+          <h2 className="form__title">Новое место</h2>
+          {inputs.map((input) => (
+            <Controller
+              key={input.name}
+              name={input.name as keyof FormPayload}
+              rules={{
+                pattern: input.pattern,
+                required: input.required,
+              }}
+              control={control}
+              render={({ field, fieldState }) => (
+                <Input
+                  {...field}
+                  {...input}
+                  className="text-field__input"
+                  errorText={fieldState.error?.message}
+                />
+              )}
+            />
+          ))}
+          <Button className="button button_submit" variant="filled">
+            <span>{buttonText}</span>
+          </Button>
+        </form>
+      </div>
+    </div>
   );
 }
-
-export default AddPlacePopup;

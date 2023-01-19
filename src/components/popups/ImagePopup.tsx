@@ -1,11 +1,10 @@
 import React from 'react';
 
-import { IImageProps } from '../../interfaces/interfaces';
-
-function ImagePopup(props: IImageProps) {
+export default function ImagePopup(props
+: { onClose: () => void, card: Card | null }) {
   const { card, onClose } = props;
 
-  const handleCloseClick = (e: any) => {
+  const handleCloseClick = (e: React.MouseEvent<HTMLElement>) => {
     e.currentTarget === e.target && onClose();
   };
 
@@ -19,20 +18,13 @@ function ImagePopup(props: IImageProps) {
           aria-label="Close"
           className="popup__close"
           type="button"
-          onClick={onClose} />
+          onClick={onClose}
+        />
         <div className="slide">
-          <img
-            src={card ? card.link : ''}
-            alt={card ? card.name : ''}
-            className="slide__image"
-          />
-          <p className="slide__name">
-            {card ? card.name : ''}
-          </p>
+          <img src={card?.link ?? ''} alt={card?.name ?? ''} className="slide__image" />
+          <p className="slide__name">{card?.name ?? ''}</p>
         </div>
       </div>
     </div>
   );
 }
-
-export default ImagePopup;
