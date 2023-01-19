@@ -49,11 +49,13 @@ export default function Card(props: ICardProps) {
         alt={card.name}
         src={card.link}
         onClick={() => onCardClick(card)}
+        aria-hidden="true"
       />
       <div className="card__group">
         <h2 className="card__name">{card.name}</h2>
         <div className="card__column">
           <button
+            type="button"
             onClick={() => onCardLike(card)}
             aria-label="Like"
             className={cardLikeButtonClassName}

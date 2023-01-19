@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useErrorHandler } from 'react-error-boundary';
@@ -52,9 +53,7 @@ export default function EditProfilePopup(props: IEditProfileProps) {
     },
   });
 
-  const handleCloseClick = (evt: React.MouseEvent<HTMLElement>) => {
-    evt.currentTarget === evt.target && onClose();
-  };
+  const handleCloseClick = (e: React.MouseEvent<HTMLElement>) => e.currentTarget === e.target && onClose();
 
   const onSubmit = handleSubmit(async (data: Record<string, string>) => {
     try {
@@ -65,7 +64,11 @@ export default function EditProfilePopup(props: IEditProfileProps) {
   });
 
   return (
-    <div onClick={handleCloseClick} className={`popup popup_type_edit ${isOpen && 'popup_active'}`}>
+    <div
+      onClick={handleCloseClick}
+      className={`popup popup_type_edit ${isOpen && 'popup_active'}`}
+      aria-hidden="true"
+    >
       <div className="popup__container">
         <button
           aria-label="Close"

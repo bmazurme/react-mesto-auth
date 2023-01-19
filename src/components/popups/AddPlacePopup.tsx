@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useErrorHandler } from 'react-error-boundary';
@@ -50,9 +51,7 @@ export default function AddPlacePopup(props: IAddPlaceProps) {
     },
   });
 
-  const handleCloseClick = (evt: React.MouseEvent<HTMLElement>) => {
-    evt.currentTarget === evt.target && onClose();
-  };
+  const handleCloseClick = (evt: React.MouseEvent<HTMLElement>) => evt.currentTarget === evt.target && onClose();
 
   const onSubmit = handleSubmit(async (data) => {
     try {
@@ -63,7 +62,11 @@ export default function AddPlacePopup(props: IAddPlaceProps) {
   });
 
   return (
-    <div onClick={handleCloseClick} className={`popup popup_type_edit ${isOpen && 'popup_active'}`}>
+    <div
+      onClick={handleCloseClick}
+      className={`popup popup_type_edit ${isOpen && 'popup_active'}`}
+      aria-hidden="true"
+    >
       <div className="popup__container">
         <button
           aria-label="Close"

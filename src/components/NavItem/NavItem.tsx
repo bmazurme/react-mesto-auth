@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export interface INavItemProps {
   to: string,
-  className?: string,
+  className?: string;
   onClick?: () => void,
   active: string,
   value: string,
@@ -13,6 +13,7 @@ export default function NavItem(props: INavItemProps) {
   const {
     to,
     onClick,
+    className,
     active,
     value,
   } = props;
@@ -20,7 +21,7 @@ export default function NavItem(props: INavItemProps) {
 
   return (
     <li className="navbar__item">
-      <Link to={to} onClick={onClick} className={navClass(active)}>
+      <Link to={to} onClick={onClick} className={`${className} ${navClass(active)}`}>
         {value}
       </Link>
     </li>

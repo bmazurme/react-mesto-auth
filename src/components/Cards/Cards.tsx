@@ -7,7 +7,7 @@ import { useGetCardsQuery, useChangeLikeMutation } from '../../store';
 
 export default function Cards({ user }: { user: User | null }) {
   // @ts-ignore
-  const { data = [], error, isLoading } = useGetCardsQuery();
+  const { data = [] } = useGetCardsQuery();
   const errorHandler = useErrorHandler();
   const [changeLike] = useChangeLikeMutation();
   const [selectedCard, setSelectedCard] = useState<Card|null>(null);

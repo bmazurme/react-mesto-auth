@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React from 'react';
 
 import { IInfoTooltipProps } from '../../interfaces/interfaces';
@@ -10,12 +11,14 @@ export default function InfoTooltip(props: IInfoTooltipProps) {
     isSuccess,
   } = props;
 
-  const handleCloseClick = (e: React.MouseEvent<HTMLElement>) => {
-    e.currentTarget === e.target && onClose();
-  };
+  const handleCloseClick = (e: React.MouseEvent<HTMLElement>) => e.currentTarget === e.target && onClose();
 
   return (
-    <div onClick={handleCloseClick} className={`popup popup_tooltip ${isOpen ? 'popup_active' : ''}`}>
+    <div
+      onClick={handleCloseClick}
+      className={`popup popup_tooltip ${isOpen ? 'popup_active' : ''}`}
+      aria-hidden="true"
+    >
       <div className="popup__container">
         <button
           aria-label="Close"

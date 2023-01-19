@@ -55,6 +55,7 @@ export default function Main({ info }:{ info: User | null }) {
         className="profile__image"
         style={{ backgroundImage: `url(${info?.avatar})` }}
         onClick={handleOpenEditAvatarPopup}
+        aria-hidden="true"
       />
       <div className="profile__info">
         <h1 className="profile__name">{info?.name}</h1>

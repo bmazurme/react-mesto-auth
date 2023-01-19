@@ -1,5 +1,5 @@
+/* eslint-disable max-len */
 import React from 'react';
-import PopupWithForm from './PopupWithForm';
 
 import { IPopupWithConfirmProps } from '../../interfaces/interfaces';
 
@@ -8,26 +8,46 @@ export default function PopupWithConfirm(props: IPopupWithConfirmProps) {
     card,
     title,
     buttonText,
-    isLoading,
     onSubmit,
     isOpen,
     onClose,
   } = props;
 
-  const handleSubmit = (evt: Event) => {
-    evt.preventDefault();
+  const handleCloseClick = (evt: React.MouseEvent<HTMLElement>) => evt.currentTarget === evt.target && onClose();
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     onSubmit(card);
   };
 
   return (
-    <PopupWithForm
-      name="confirm"
-      isValid={true}
-      title={title}
-      buttonText={isLoading ? 'Удаление...' : buttonText}
-      isOpen={isOpen}
-      onClose={onClose}
-      onSubmit={handleSubmit}
-    />
+    <div
+      onClick={handleCloseClick}
+      className={`popup popup_type_confirm ${isOpen && 'popup_active'}`}
+      aria-hidden="true"
+    >
+      <div className="popup__container">
+        <button
+          aria-label="Close"
+          className="popup__close"
+          type="button"
+          onClick={onClose}
+        />
+        <form
+          className="form form_type_confirm"
+          name="confirm-form"
+          noValidate
+          onSubmit={handleSubmit}
+        >
+          <h2 className="form__title">{title}</h2>
+          <button
+            aria-label="Save"
+            className="button button_submit}"
+            type="submit"
+          >
+            {buttonText}
+          </button>
+        </form>
+      </div>
+    </div>
   );
 }

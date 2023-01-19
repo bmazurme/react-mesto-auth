@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
@@ -28,13 +29,13 @@ export default function NavBar(props
 
   return (
     <>
-      <ul onClick={handlerClick} className={`navbar${isOpen ? ' navbar_opened' : ''}`}>
+      <ul onClick={handlerClick} className={`navbar${isOpen ? ' navbar_opened' : ''}`} aria-hidden="true">
         {location.pathname === Urls.SIGNIN ? <NavItem to={Urls.SIGNUP} value="Регистрация" active="active" /> : null}
         {location.pathname === Urls.SIGNUP ? <NavItem to={Urls.SIGNIN} value="Войти" active="active" /> : null}
         {user?.email ? <NavItem to="/" value={email} active="active" /> : null}
         {user?.email ? <NavItem to={Urls.SIGNIN} value="Выйти" onClick={onSignOut} active="" /> : null}
       </ul>
-      <button onClick={handlerClick} className={`navbar__btn${isOpen ? ' navbar__btn_opened' : ''}`} />
+      <button type="button" onClick={handlerClick} className={`navbar__btn${isOpen ? ' navbar__btn_opened' : ''}`} />
     </>
   );
 }

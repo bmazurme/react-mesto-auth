@@ -39,7 +39,7 @@ export default function ErrorBoundaryWrapper({
   children,
 }: ErrorBoundaryWrapperProps) {
   return (
-    <ErrorBoundary onReset={() => {}} FallbackComponent={ErrorFallback}>
+    <ErrorBoundary onReset={() => console.log('reset')} FallbackComponent={ErrorFallback}>
       {children}
     </ErrorBoundary>
   );
