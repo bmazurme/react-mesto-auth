@@ -15,8 +15,8 @@ const inputs = [
     name: 'avatar',
     label: 'Avatar',
     pattern: {
-      value: /^/,
-      message: 'Name is invalid',
+      value: /(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\\/]))?/,
+      message: 'Url is invalid',
     },
     required: true,
     autoComplete: 'current-avatar',
@@ -79,6 +79,7 @@ export default function EditAvatarPopup(props: IEditAvatarProps) {
                 <Input
                   {...field}
                   {...input}
+                  black
                   className="text-field__input"
                   errorText={fieldState.error?.message}
                 />

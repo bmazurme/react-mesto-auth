@@ -91,6 +91,7 @@ export default function AddPlacePopup(props: IAddPlaceProps) {
                   {...field}
                   {...input}
                   className="text-field__input"
+                  black
                   errorText={fieldState.error?.message}
                 />
               )}

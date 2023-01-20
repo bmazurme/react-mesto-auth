@@ -16,7 +16,7 @@ const inputs = [
     name: 'name',
     label: 'Name',
     pattern: {
-      value: /^/,
+      value: /^[a-zA-Z0-9_-]{3,15}$/,
       message: 'Name is invalid',
     },
     required: true,
@@ -92,6 +92,7 @@ export default function EditProfilePopup(props: IEditProfileProps) {
                 <Input
                   {...field}
                   {...input}
+                  black
                   className="text-field__input"
                   errorText={fieldState.error?.message}
                 />

@@ -54,6 +54,8 @@
 /* text-field */
 @import "./blocks/text-field/text-field.css";
 @import "./blocks/text-field/__label/text-field__label.css";
+@import "./blocks/text-field/__label/_black/text-field__label_black.css";
+@import "./blocks/text-field/__label/_error/text-field__label_error.css";
 @import "./blocks/text-field/_identity/text-field_identity.css";
 @import "./blocks/text-field/__input/text-field__input.css";
 @import "./blocks/text-field/__input/_identity/text-field_identity.css";
