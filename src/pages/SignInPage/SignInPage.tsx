@@ -1,10 +1,10 @@
 import React from 'react';
 import SignIn from './SignIn';
-import Component from '../../components/Component';
+import Content from '../../components/Content';
 import withUser from '../../hoc/withUser';
 
 function SignInPage() {
-  return (<Component children={<SignIn />} />);
+  return (<Content children={<SignIn />} />);
 }
 
 export default withUser(SignInPage, false);

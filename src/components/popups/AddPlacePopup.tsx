@@ -56,7 +56,7 @@ export default function AddPlacePopup(props: IAddPlaceProps) {
   const onSubmit = handleSubmit(async (data) => {
     try {
       await onAddPlace(data);
-    } catch ({ status, data: { reason } }: unknown) {
+    } catch ({ status, data: { reason } }) {
       errorHandler(new Error(`${status}: ${reason}`));
     }
   });

@@ -6,9 +6,9 @@ import { useUpdateUserMutation, useUpdateUserAvatarMutation, useAddCardMutation 
 
 export default function Main({ info }:{ info: User | null }) {
   const errorHandler = useErrorHandler();
-  const [updateUser] = useUpdateUserMutation();
-  const [updateUserAvatar] = useUpdateUserAvatarMutation();
-  const [addCard] = useAddCardMutation();
+  const [updateUser, { isLoading: isLoadingUser }] = useUpdateUserMutation();
+  const [updateUserAvatar, { isLoading: isLoadingAvatar }] = useUpdateUserAvatarMutation();
+  const [addCard, { isLoading: isLoadingCard }] = useAddCardMutation();
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
@@ -22,11 +22,12 @@ export default function Main({ info }:{ info: User | null }) {
     setAddPlacePopupOpen(false);
   };
 
+  console.log(isLoadingAvatar);
   const handleUpdateUserSubmit = async (data: Record<string, string>) => {
     try {
       await updateUser(data);
       handleCloseAllPopups();
-    } catch ({ status, data: { reason } }: unknown) {
+    } catch ({ status, data: { reason } }) {
       errorHandler(new Error(`${status}: ${reason}`));
     }
   };
@@ -35,7 +36,7 @@ export default function Main({ info }:{ info: User | null }) {
     try {
       await updateUserAvatar(data);
       handleCloseAllPopups();
-    } catch ({ status, data: { reason } }: unknown) {
+    } catch ({ status, data: { reason } }) {
       errorHandler(new Error(`${status}: ${reason}`));
     }
   };
@@ -44,7 +45,7 @@ export default function Main({ info }:{ info: User | null }) {
     try {
       await addCard(data);
       handleCloseAllPopups();
-    } catch ({ status, data: { reason } }: unknown) {
+    } catch ({ status, data: { reason } }) {
       errorHandler(new Error(`${status}: ${reason}`));
     }
   };
@@ -77,6 +78,7 @@ export default function Main({ info }:{ info: User | null }) {
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           info={info}
+          isLoading={isLoadingAvatar}
           onClose={handleCloseAllPopups}
           onUpdateUser={handleUpdateAvatarSubmit}
         />
@@ -86,6 +88,7 @@ export default function Main({ info }:{ info: User | null }) {
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           info={info}
+          isLoading={isLoadingUser}
           onClose={handleCloseAllPopups}
           onUpdateUser={handleUpdateUserSubmit}
         />
@@ -94,6 +97,7 @@ export default function Main({ info }:{ info: User | null }) {
       {isAddPlacePopupOpen ? (
         <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
+          isLoading={isLoadingCard}
           onClose={handleCloseAllPopups}
           onAddPlace={handleAddPlaceSubmit}
         />

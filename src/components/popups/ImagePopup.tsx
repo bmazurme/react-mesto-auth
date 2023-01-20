@@ -1,10 +1,8 @@
 /* eslint-disable max-len */
 import React from 'react';
 
-export default function ImagePopup(props
+export default function ImagePopup({ card, onClose }
 : { onClose: () => void, card: Card | null }) {
-  const { card, onClose } = props;
-
   const handleCloseClick = (e: React.MouseEvent<HTMLElement>) => e.currentTarget === e.target && onClose();
 
   return (

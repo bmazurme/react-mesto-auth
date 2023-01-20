@@ -98,3 +98,6 @@
 
 /* link */
 @import "./blocks/link/_home/link_home.css";
+
+/* preloader */
+@import "./blocks/preloader/preloader.css";

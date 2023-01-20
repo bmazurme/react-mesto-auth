@@ -4,7 +4,7 @@ import type { PropsWithChildren } from 'react';
 import Header from '../Header';
 import Footer from '../Footer';
 
-export default function Component({ children }: PropsWithChildren) {
+export default function Content({ children }: PropsWithChildren) {
   return (
     <main className="main">
       <Header />

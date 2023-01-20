@@ -20,7 +20,7 @@ export default function Card(props: ICardProps) {
   } = props;
 
   const errorHandler = useErrorHandler();
-  const [deleteCard] = useDeleteCardMutation();
+  const [deleteCard, { isLoading: isLoadingCard }] = useDeleteCardMutation();
   const [confirmPopup, setConfirmPopup] = useState<boolean>(false);
   const isOwn = card?.owner?._id === user?._id;
   const isLiked = card.likes.some((like: Like) => like?._id === user?._id);
@@ -31,7 +31,7 @@ export default function Card(props: ICardProps) {
     try {
       await deleteCard(card);
       handleCloseAllPopups();
-    } catch ({ status, data: { reason } }: unknown) {
+    } catch ({ status, data: { reason } }) {
       errorHandler(new Error(`${status}: ${reason}`));
     }
   };
@@ -68,9 +68,10 @@ export default function Card(props: ICardProps) {
         <PopupWithConfirm
           onSubmit={handleCardDelete}
           isOpen={confirmPopup}
+          isLoading={isLoadingCard}
           onClose={handleCloseAllPopups}
           title="Вы уверены?"
-          buttonText="Удалить"
+          buttonText={isLoadingCard ? 'Удаляется...' : 'Удалить'}
           card={null}
         />
       ) : null}

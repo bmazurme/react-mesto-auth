@@ -1,10 +1,10 @@
 import React from 'react';
 import SignUp from './SignUp';
-import Component from '../../components/Component';
+import Content from '../../components/Content';
 import withUser from '../../hoc/withUser';
 
 function SignUpPage() {
-  return (<Component children={(<SignUp />)} />);
+  return (<Content children={(<SignUp />)} />);
 }
 
 export default withUser(SignUpPage, false);

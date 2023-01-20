@@ -28,9 +28,7 @@ export default function InfoTooltip(props: IInfoTooltipProps) {
         />
         <div className="tooltip">
           <div className={`tooltip__image ${isSuccess ? 'tooltip__image_success' : ''}`} />
-          <p className="tooltip__text">
-            {text}
-          </p>
+          <p className="tooltip__text">{text}</p>
         </div>
       </div>
     </div>

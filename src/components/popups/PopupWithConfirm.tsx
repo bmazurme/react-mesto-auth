@@ -39,11 +39,7 @@ export default function PopupWithConfirm(props: IPopupWithConfirmProps) {
           onSubmit={handleSubmit}
         >
           <h2 className="form__title">{title}</h2>
-          <button
-            aria-label="Save"
-            className="button button_submit}"
-            type="submit"
-          >
+          <button aria-label="Save" className="button button_submit" type="submit">
             {buttonText}
           </button>
         </form>
