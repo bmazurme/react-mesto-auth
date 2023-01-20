@@ -1,7 +1,8 @@
 export const Urls = {
-  BASE: '/*',
+  BASE: '/',
   SIGNIN: '/signin',
   SIGNUP: '/signup',
+  404: '*',
 };
 
 export const Regexp = {

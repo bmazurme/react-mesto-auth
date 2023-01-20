@@ -103,3 +103,9 @@
 
 /* preloader */
 @import "./blocks/preloader/preloader.css";
+
+/* 404 */
+@import "./blocks/p404/p404.css";
+@import "./blocks/p404/__title.css/p404__title.css";
+@import "./blocks/p404/__description/p404__description.css";
+@import "./blocks/p404/__link/p404__link.css";
