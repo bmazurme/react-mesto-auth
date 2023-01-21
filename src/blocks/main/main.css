@@ -1,3 +1,16 @@
 .main {
   margin: 0 auto;
+  max-width: 880px;
+}
+
+@media screen and (max-width: 899px) {
+  .main {
+
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .main {
+
+  }
 }

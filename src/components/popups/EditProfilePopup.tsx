@@ -4,7 +4,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { useErrorHandler } from 'react-error-boundary';
 
 import { Button, Input } from '../form-components';
-import { IEditProfileProps } from '../../interfaces/interfaces';
+import { IEditProfileProps } from '../../interfaces';
 
 type FormPayload = {
   name: string;
@@ -14,7 +14,7 @@ type FormPayload = {
 const inputs = [
   {
     name: 'name',
-    label: 'Name',
+    label: 'Имя',
     pattern: {
       value: /^[a-zA-Z0-9_-]{3,15}$/,
       message: 'Name is invalid',
@@ -54,7 +54,6 @@ export default function EditProfilePopup(props: IEditProfileProps) {
   });
 
   const handleCloseClick = (e: React.MouseEvent<HTMLElement>) => e.currentTarget === e.target && onClose();
-
   const onSubmit = handleSubmit(async (data: Record<string, string>) => {
     try {
       await onUpdateUser(data);

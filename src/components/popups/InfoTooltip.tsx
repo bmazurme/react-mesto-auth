@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import React from 'react';
 
-import { IInfoTooltipProps } from '../../interfaces/interfaces';
+import { IInfoTooltipProps } from '../../interfaces';
 
 export default function InfoTooltip(props: IInfoTooltipProps) {
   const {

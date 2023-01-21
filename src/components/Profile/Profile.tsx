@@ -22,7 +22,6 @@ export default function Main({ info }:{ info: User | null }) {
     setAddPlacePopupOpen(false);
   };
 
-  console.log(isLoadingAvatar);
   const handleUpdateUserSubmit = async (data: Record<string, string>) => {
     try {
       await updateUser(data);

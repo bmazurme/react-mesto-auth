@@ -18,5 +18,6 @@
     content: "Sorry, but we do not support your screen... =(";
     background-color: hotpink;
     color: mediumspringgreen;
+    z-index: 1000;
   }
 }

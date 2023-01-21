@@ -3,7 +3,7 @@ import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useErrorHandler } from 'react-error-boundary';
 
-import { IAddPlaceProps } from '../../interfaces/interfaces';
+import { IAddPlaceProps } from '../../interfaces';
 import { Button, Input } from '../form-components';
 
 type FormPayload = {
@@ -14,9 +14,9 @@ type FormPayload = {
 const inputs = [
   {
     name: 'name',
-    label: 'Name',
+    label: 'Название',
     pattern: {
-      value: /^/,
+      value: /^[a-zA-Z0-9_-]{3,15}$/,
       message: 'Name is invalid',
     },
     required: true,
@@ -24,10 +24,10 @@ const inputs = [
   },
   {
     name: 'link',
-    label: 'Link',
+    label: 'Url картинки',
     pattern: {
-      value: /^/,
-      message: 'Link is invalid',
+      value: /(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\\/]))?/,
+      message: 'Url is invalid',
     },
     required: true,
     autoComplete: 'current-link',
@@ -52,7 +52,6 @@ export default function AddPlacePopup(props: IAddPlaceProps) {
   });
 
   const handleCloseClick = (evt: React.MouseEvent<HTMLElement>) => evt.currentTarget === evt.target && onClose();
-
   const onSubmit = handleSubmit(async (data) => {
     try {
       await onAddPlace(data);
@@ -74,7 +73,6 @@ export default function AddPlacePopup(props: IAddPlaceProps) {
           type="button"
           onClick={onClose}
         />
-
         <form className="form form_type_edit" onSubmit={onSubmit}>
           <h2 className="form__title">Новое место</h2>
           {inputs.map((input) => (

@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import React from 'react';
 
-import { IPopupWithConfirmProps } from '../../interfaces/interfaces';
+import { IPopupWithConfirmProps } from '../../interfaces';
 
 export default function PopupWithConfirm(props: IPopupWithConfirmProps) {
   const {

@@ -3,17 +3,15 @@ import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useErrorHandler } from 'react-error-boundary';
 
-import { IEditAvatarProps } from '../../interfaces/interfaces';
+import { IEditProfileProps } from '../../interfaces';
 import { Button, Input } from '../form-components';
 
-type FormPayload = {
-  avatar: string;
-};
+type FormPayload = { avatar: string; };
 
 const inputs = [
   {
     name: 'avatar',
-    label: 'Avatar',
+    label: 'Url картинки',
     pattern: {
       value: /(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\\/]))?/,
       message: 'Url is invalid',
@@ -23,7 +21,7 @@ const inputs = [
   },
 ];
 
-export default function EditAvatarPopup(props: IEditAvatarProps) {
+export default function EditAvatarPopup(props: IEditProfileProps) {
   const {
     info,
     isLoading,
@@ -41,7 +39,6 @@ export default function EditAvatarPopup(props: IEditAvatarProps) {
   });
 
   const handleCloseClick = (evt: React.MouseEvent<HTMLElement>) => evt.currentTarget === evt.target && onClose();
-
   const onSubmit = handleSubmit(async (data) => {
     try {
       await onUpdateUser(data);
