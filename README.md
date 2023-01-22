@@ -21,7 +21,7 @@
 
 ## Demo
 [![Netlify Status](https://api.netlify.com/api/v1/badges/cba6d7c5-ac20-450a-bbc1-da1e599e0123/deploy-status)](https://app.netlify.com/sites/whimsical-sprite-5d5e95/deploys)
-[![Netlify](https://img.shields.io/badge/-Netlify-black?style=flat-square&logo=netlify)](https://whimsical-sprite-5d5e95.netlify.
+[![Netlify](https://img.shields.io/badge/-Netlify-black?style=flat-square&logo=netlify)](https://whimsical-sprite-5d5e95.netlify.app/)
 
 ![Alt-text](https://github.com/bmazurme/mesto-react/blob/main/src/images/mesto.png "demo")
 
