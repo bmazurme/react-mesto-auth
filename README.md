@@ -58,7 +58,7 @@ Implemented features:
 - [X] React error boundaries
 - [X] TS, Webpack
 - [X] Express
-- [ ] Docker
+- [X] Docker
 - [ ] Tests
 - [ ] Service worker
 - [ ] API

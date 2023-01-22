@@ -20,16 +20,16 @@ import limiter from './utils/limiter';
 
 dotEnvConfig();
 
-const helmetConfig = {
-  useDefaults: true,
-  directives: {
-    defaultSrc: ["'self'", 'https://auth.nomoreparties.co/'],
-    scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", 'https://auth.nomoreparties.co/'],
-    connectSrc: ["'self'", 'https://auth.nomoreparties.co/'],
-    styleSrc: ["'self'", "'unsafe-inline'"],
-    imgSrc: ["'self'"],
-  },
-};
+// const helmetConfig = {
+//   useDefaults: true,
+//   directives: {
+//     defaultSrc: ["'self'", 'https://auth.nomoreparties.co/'],
+//     scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", 'https://auth.nomoreparties.co/'],
+//     connectSrc: ["'self'", 'https://auth.nomoreparties.co/'],
+//     styleSrc: ["'self'", "'unsafe-inline'"],
+//     imgSrc: ["'self'"],
+//   },
+// };
 
 const port = process.env.PORT ?? 3000;
 
@@ -46,7 +46,7 @@ app.use(limiter);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(helmet.hidePoweredBy());
-  app.use(helmet.contentSecurityPolicy(helmetConfig));
+  // app.use(helmet.contentSecurityPolicy(helmetConfig));
 }
 
 if (process.env.NODE_ENV === 'development') {

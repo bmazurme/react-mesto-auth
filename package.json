@@ -41,7 +41,6 @@
     "@types/webpack-node-externals": "2.5.3",
     "@typescript-eslint/eslint-plugin": "5.32.0",
     "@typescript-eslint/parser": "5.32.0",
-    "connect-livereload": "0.6.1",
     "css-loader": "6.7.1",
     "eslint": "8.32.0",
     "eslint-config-airbnb": "19.0.4",
@@ -62,9 +61,10 @@
     "terser-webpack-plugin": "5.3.6",
     "ts-loader": "9.3.1",
     "typescript": "4.7.4",
-    "webpack": "5.74.0",
+    "webpack": "5.75.0",
     "webpack-cli": "4.10.0",
     "webpack-dev-server": "4.9.3",
+    "webpack-merge": "5.8.0",
     "webpack-node-externals": "3.0.0",
     "webpack-open-browser": "2.0.2"
   },
@@ -78,6 +78,7 @@
     "bcryptjs": "2.4.3",
     "body-parser": "1.20.1",
     "classnames": "2.3.2",
+    "connect-livereload": "0.6.1",
     "cors": "2.8.5",
     "dotenv": "16.0.3",
     "express": "4.18.1",
@@ -102,7 +103,6 @@
     "reselect": "4.1.7",
     "styled-components": "5.3.6",
     "validator": "13.7.0",
-    "webpack-merge": "5.8.0",
     "winston": "3.8.2"
   },
   "engines": {
