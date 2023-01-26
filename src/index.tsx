@@ -9,12 +9,15 @@ import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
 import MainPage from './pages/MainPage';
 import NotFoundPage from './pages/404';
+
 import ErrorBoundaryWrapper from './components/ErrorBoundaryWrapper';
 
 import { Urls } from './utils/constants';
+
 import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>
