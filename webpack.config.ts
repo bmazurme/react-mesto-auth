@@ -113,7 +113,7 @@ const sw = merge<Configuration>(common, {
   devtool: 'inline-source-map',
   entry: ['./src/service-worker/service-worker.js'],
   output: {
-    filename: 'service-worker/service-worker.js',
+    filename: 'service-worker.js',
     path: path.join(__dirname, 'dist'),
   },
   optimization: {

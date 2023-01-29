@@ -65,7 +65,7 @@ app.use('/static', express.static(path.resolve(process.cwd(), 'static')));
 app.use(express.static(path.resolve(__dirname), { extensions: ['css', 'js'] }));
 
 app.get('/service-worker.js', (_req, res) => {
-  res.sendFile(path.resolve(__dirname, '..', 'dist', 'service-worker', 'service-worker.js'));
+  res.sendFile(path.resolve(__dirname, '..', 'dist', 'service-worker.js'));
 });
 
 app.get('*', (_req, res) => {
