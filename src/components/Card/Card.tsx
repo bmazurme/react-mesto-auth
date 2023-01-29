@@ -50,6 +50,7 @@ export default function Card(props: ICardProps) {
         src={card.link}
         onClick={() => onCardClick(card)}
         aria-hidden="true"
+        loading="lazy"
       />
       <div className="card__group">
         <h2 className="card__name">{card.name}</h2>
