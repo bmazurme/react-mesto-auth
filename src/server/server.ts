@@ -64,6 +64,10 @@ if (process.env.NODE_ENV === 'development') {
 app.use('/static', express.static(path.resolve(process.cwd(), 'static')));
 app.use(express.static(path.resolve(__dirname), { extensions: ['css', 'js'] }));
 
+app.get('/service-worker.js', (_req, res) => {
+  res.sendFile(path.resolve(__dirname, '..', 'dist', 'service-worker', 'service-worker.js'));
+});
+
 app.get('*', (_req, res) => {
   res.status(200).sendFile(path.resolve(__dirname, 'index.html'));
 });

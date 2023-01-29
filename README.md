@@ -60,8 +60,8 @@ Implemented features:
 - [X] TS, Webpack
 - [X] Express
 - [X] Docker
+- [X] Service worker
 - [ ] Tests
-- [ ] Service worker
 - [ ] API
 - [ ] CI/CD
 
