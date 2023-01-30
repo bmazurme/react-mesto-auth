@@ -18,6 +18,7 @@
 * TS CRA Version 1.1.1
 * TS Webpack Version 2.1.1
 * TS RTK Webpack Version 3.1.1
+* TS RTK Webpack SW Version 3.2.1
 
 ## Demo
 [![Netlify Status](https://api.netlify.com/api/v1/badges/cba6d7c5-ac20-450a-bbc1-da1e599e0123/deploy-status)](https://app.netlify.com/sites/whimsical-sprite-5d5e95/deploys)
@@ -45,24 +46,23 @@ Run eslint: `npm run eslint`
 Launch: `npm start`
 
 Implemented features:
-- [X] User registration
-- [X] User authorization
-- [X] Adding user information
+- [X] User registration, authorization
+- [X] Add user information
 - [X] Edit user profile
-- [X] Uploading initial cards to servers
-- [X] Delete card
+- [X] Add, delete card, like and dislike
+- [X] Popup, modal
 - [X] Display the number of likes of the card
-- [X] Like and dislike
 - [X] Form Validation, react-hook-form
 - [X] Redux, RTK Query
 - [X] Axios
 - [X] React error boundaries
-- [X] TS, Webpack
+- [X] TypeScript, Webpack
 - [X] Express
 - [X] Docker
 - [X] Service worker
 - [ ] Tests
 - [ ] API
+- [ ] Oauth
 - [ ] CI/CD
 
 ## Docker
