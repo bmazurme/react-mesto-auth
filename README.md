@@ -52,7 +52,7 @@ Implemented features:
 - [X] Add, delete card, like and dislike
 - [X] Popup, modal
 - [X] Display the number of likes of the card
-- [X] Form Validation, react-hook-form
+- [X] Form validation, react-hook-form
 - [X] Redux, RTK Query
 - [X] Axios
 - [X] React error boundaries
