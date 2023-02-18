@@ -75,8 +75,6 @@ Implemented features:
 
 `docker system prune -a`
 
-`docker-compose build`
-
 `docker compose push`
 
 ```
