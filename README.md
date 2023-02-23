@@ -65,7 +65,7 @@ Implemented features:
 - [ ] Oauth
 - [ ] CI/CD
 
-## Docker
+### Docker
 
 `docker-compose build`
 
@@ -75,12 +75,18 @@ Implemented features:
 
 `docker system prune -a`
 
-`docker compose push`
+`docker push cr.yandex/${REGISTRY_ID}/mesto:latest`
 
-```
-# on an M1 mac…
+`docker pull cr.yandex/${REGISTRY_ID}/mesto:latest`
 
-# --platform linux/amd64
+`docker run cr.yandex/${REGISTRY_ID}/mesto:latest`
+
+`docker run -d -p 80:3000  cr.yandex/${REGISTRY_ID}/mesto:latest`
+
+[https://cloud.yandex.ru/docs/container-registry/tutorials/run-docker-on-vm#before-begin](https://cloud.yandex.ru/docs/container-registry/tutorials/run-docker-on-vm#before-begin)
+
+`docker exec -it container_ID_or_name /bin/bash`
+
 ```
 
 ### SSL

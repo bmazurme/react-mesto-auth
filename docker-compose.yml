@@ -2,7 +2,7 @@ version: "3"
 
 services:
   my-app:
-    image: mesto:latest
+    image: cr.yandex/${REGISTRY_ID}/mesto:latest
     platform: linux/amd64
     build:
       context: .
