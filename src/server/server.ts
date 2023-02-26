@@ -27,7 +27,7 @@ const helmetConfig = {
     scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", 'https://auth.nomoreparties.co/', 'https://mesto.ntlstl.dev/', 'https://ya-praktikum.tech/api/v2/', 'https://localhost:3002/', 'https://mesto.nomoreparties.co/v1/'],
     connectSrc: ["'self'", 'https://auth.nomoreparties.co/', 'https://mesto.ntlstl.dev/', 'https://ya-praktikum.tech/api/v2/', 'https://localhost:3002/', 'https://mesto.nomoreparties.co/v1/'],
     styleSrc: ["'self'", "'unsafe-inline'", 'https://mesto.ntlstl.dev/', 'https://ya-praktikum.tech/api/v2/', 'https://localhost:3002/', 'https://mesto.nomoreparties.co/v1/'],
-    imgSrc: ["'self'", 'https://mesto.ntlstl.dev/', 'https://ya-praktikum.tech/api/v2/', 'https://localhost:3002/', 'https://mesto.nomoreparties.co/v1/'],
+    imgSrc: ["'self'", '*'],
   },
 };
 
@@ -43,10 +43,10 @@ app.use(requestLogger);
 
 app.use(limiter);
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(helmet.hidePoweredBy());
-  app.use(helmet.contentSecurityPolicy(helmetConfig));
-}
+// if (process.env.NODE_ENV === 'production') {
+app.use(helmet.hidePoweredBy());
+app.use(helmet.contentSecurityPolicy(helmetConfig));
+// }
 
 if (process.env.NODE_ENV === 'development') {
   const liveReloadServer = livereload.createServer();
