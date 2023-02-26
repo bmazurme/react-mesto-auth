@@ -1,11 +1,11 @@
 /* eslint-disable no-restricted-globals */
 const addResourcesToCache = async (resources) => {
-  const cache = await caches.open('v2');
+  const cache = await caches.open('v3');
   await cache.addAll(resources);
 };
 
 const putInCache = async (request, response) => {
-  const cache = await caches.open('v2');
+  const cache = await caches.open('v3');
   if ((request.url.indexOf('https') === 0) && request.method === 'GET') {
     await cache.put(request, response);
   }
