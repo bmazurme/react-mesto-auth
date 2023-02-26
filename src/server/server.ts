@@ -20,22 +20,21 @@ import limiter from './utils/limiter';
 
 dotEnvConfig();
 
-// const helmetConfig = {
-//   useDefaults: true,
-//   directives: {
-//     defaultSrc: ["'self'", 'https://auth.nomoreparties.co/'],
-//     scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", 'https://auth.nomoreparties.co/'],
-//     connectSrc: ["'self'", 'https://auth.nomoreparties.co/'],
-//     styleSrc: ["'self'", "'unsafe-inline'"],
-//     imgSrc: ["'self'"],
-//   },
-// };
+const helmetConfig = {
+  useDefaults: true,
+  directives: {
+    defaultSrc: ["'self'", 'https://auth.nomoreparties.co/', 'https://mesto.ntlstl.dev/', 'https://ya-praktikum.tech/api/v2/', 'https://localhost:3001/'],
+    scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", 'https://auth.nomoreparties.co/', 'https://mesto.ntlstl.dev/', 'https://ya-praktikum.tech/api/v2/', 'https://localhost:3001/'],
+    connectSrc: ["'self'", 'https://auth.nomoreparties.co/', 'https://mesto.ntlstl.dev/', 'https://ya-praktikum.tech/api/v2/', 'https://localhost:3001/'],
+    styleSrc: ["'self'", "'unsafe-inline'", 'https://mesto.ntlstl.dev/', 'https://ya-praktikum.tech/api/v2/', 'https://localhost:3001/'],
+    imgSrc: ["'self'", 'https://mesto.ntlstl.dev/', 'https://ya-praktikum.tech/api/v2/', 'https://localhost:3001/'],
+  },
+};
 
 const port = process.env.PORT ?? 3000;
 
 const app = express();
 
-app.use(cors());
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -46,7 +45,7 @@ app.use(limiter);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(helmet.hidePoweredBy());
-  // app.use(helmet.contentSecurityPolicy(helmetConfig));
+  app.use(helmet.contentSecurityPolicy(helmetConfig));
 }
 
 if (process.env.NODE_ENV === 'development') {
