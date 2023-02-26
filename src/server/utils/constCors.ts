@@ -9,6 +9,7 @@ const WHITE_LIST = [
   'https://auth.nomoreparties.co',
   'https://mesto.ntlstl.dev',
   'https://ya-praktikum.tech/api/v2',
+  'https://mesto.nomoreparties.co/v1',
 ];
 
 const METHODS = [
