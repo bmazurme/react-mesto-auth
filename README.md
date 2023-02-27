@@ -47,8 +47,7 @@ Launch: `npm start`
 
 Implemented features:
 - [X] User registration, authorization
-- [X] Add user information
-- [X] Edit user profile
+- [X] Add, edit user information
 - [X] Add, delete card, like and dislike
 - [X] Popup, modal
 - [X] Display the number of likes of the card
@@ -60,10 +59,11 @@ Implemented features:
 - [X] Express
 - [X] Docker
 - [X] Service worker
+- [X] CI/CD GitHub Actions
+- [ ] Dark&light theme
 - [ ] Tests
 - [ ] API
 - [ ] Oauth
-- [ ] CI/CD
 
 ### Docker
 
@@ -81,11 +81,31 @@ Implemented features:
 
 `docker run cr.yandex/${REGISTRY_ID}/mesto:latest`
 
-`docker run -d -p 80:3000  cr.yandex/${REGISTRY_ID}/mesto:latest`
+`docker run -d -p 80:3000 cr.yandex/${REGISTRY_ID}/mesto:latest`
 
 [https://cloud.yandex.ru/docs/container-registry/tutorials/run-docker-on-vm#before-begin](https://cloud.yandex.ru/docs/container-registry/tutorials/run-docker-on-vm#before-begin)
 
 `docker exec -it container_ID_or_name /bin/bash`
+
+### NGINX
+
+`sudo apt update`
+
+`sudo apt install -y nginx`
+
+`sudo ufw allow 'Nginx Full'`
+
+`sudo ufw allow OpenSSH`
+
+`sudo ufw enable`
+
+`sudo systemctl enable --now nginx`
+
+`sudo nano /etc/nginx/sites-available/default`
+
+`sudo nginx -t`
+
+`sudo systemctl reload nginx`
 
 ### SSL
 
