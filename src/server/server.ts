@@ -25,7 +25,7 @@ const helmetConfig = {
   directives: {
     defaultSrc: ["'self'", 'https://auth.nomoreparties.co/', 'https://mesto.ntlstl.dev/', 'https://ya-praktikum.tech/api/v2/', 'https://localhost:3002/', 'https://mesto.nomoreparties.co/v1/'],
     scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", '*'],
-    connectSrc: ["'self'", 'https://auth.nomoreparties.co/', 'https://mesto.ntlstl.dev/', 'https://ya-praktikum.tech/api/v2/', 'https://localhost:3002/', 'https://mesto.nomoreparties.co/v1/'],
+    connectSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", '*'],
     styleSrc: ["'self'", "'unsafe-inline'", 'https://mesto.ntlstl.dev/', 'https://ya-praktikum.tech/api/v2/', 'https://localhost:3002/', 'https://mesto.nomoreparties.co/v1/'],
     imgSrc: ['*'],
   },
