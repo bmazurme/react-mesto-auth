@@ -15,7 +15,7 @@ RUN npm install
 FROM base AS prod-deps
 COPY --from=dev-deps /usr/src/app/.npm-cache/ /usr/src/app/.npm-cache/
 COPY package*.json ./
-RUN npm install --production --prefer-offline
+RUN npm set-script prepare '' &&  npm install --production --prefer-offline
 RUN rm -rf /usr/src/app/.npm-caches
 
 FROM base AS builder
