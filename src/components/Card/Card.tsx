@@ -13,10 +13,7 @@ export interface ICardProps {
 
 export default function Card(props: ICardProps) {
   const {
-    user,
-    card,
-    onCardLike,
-    onCardClick,
+    user, card, onCardLike, onCardClick,
   } = props;
 
   const errorHandler = useErrorHandler();

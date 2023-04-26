@@ -5,7 +5,7 @@ import { createReduxHistoryContext } from 'redux-first-history';
 import { createBrowserHistory, createMemoryHistory } from 'history';
 
 import { authApi, usersApi, cardsApi } from './api';
-import userReducer from './slices/userSlice';
+import userReducer from './slices/user-slice';
 import { isServer } from '../utils';
 
 export * from './api/authApi/endpoints';

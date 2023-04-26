@@ -1,9 +1,9 @@
-import AddPlacePopup from './AddPlacePopup';
-import EditAvatarPopup from './EditAvatarPopup';
-import EditProfilePopup from './EditProfilePopup';
-import InfoTooltip from './InfoTooltip';
-import ImagePopup from './ImagePopup';
-import PopupWithConfirm from './PopupWithConfirm';
+import AddPlacePopup from './add-place-popup';
+import EditAvatarPopup from './edit-avatar-popup';
+import EditProfilePopup from './edit-profile-popup';
+import InfoTooltip from './info-tooltip';
+import ImagePopup from './image-popup';
+import PopupWithConfirm from './popup-with-confirm';
 
 export {
   AddPlacePopup,

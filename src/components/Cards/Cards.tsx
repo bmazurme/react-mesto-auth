@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useErrorHandler } from 'react-error-boundary';
 
-import Card from '../Card';
+import Card from '../card';
 import { ImagePopup } from '../popups';
 
 import { useChangeLikeMutation } from '../../store';

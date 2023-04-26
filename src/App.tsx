@@ -1,16 +1,16 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import SignInPage from './pages/SignInPage';
-import SignUpPage from './pages/SignUpPage';
-import MainPage from './pages/MainPage';
+import SignInPage from './pages/signIn-page';
+import SignUpPage from './pages/signup-page';
+import MainPage from './pages/main-page';
 import NotFoundPage from './pages/404';
 
-import ErrorBoundaryWrapper from './components/ErrorBoundaryWrapper';
+import ErrorBoundaryWrapper from './components/error-boundary-wrapper';
 
 import { Urls } from './utils/constants';
 
-import ThemeContext from './context/ThemeContext';
+import ThemeContext from './context/theme-context';
 
 export default function App() {
   const [style, setStyle] = useState('light');

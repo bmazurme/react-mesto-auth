@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import Logo from '../Logo';
-import NavBar from '../NavBar';
+import Logo from '../logo';
+import NavBar from '../nav-bar';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState<boolean>(false);

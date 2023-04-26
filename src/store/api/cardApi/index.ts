@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import { getBaseQuery } from '../../baseQuery';
+import { getBaseQuery } from '../../base-query';
 
 const baseQuery = getBaseQuery('https://mesto.nomoreparties.co/v1/cohort36');
 
