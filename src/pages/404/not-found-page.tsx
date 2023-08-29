@@ -1,10 +1,11 @@
 import React from 'react';
-import NotFound from './not-found';
+
+import NotFoundLayout from '../../layouts/not-found-layout';
 import Content from '../../components/content';
 import withUser from '../../hocs/with-user';
 
 function NotFoundPage() {
-  return (<Content children={(<NotFound />)} />);
+  return (<Content children={(<NotFoundLayout />)} />);
 }
 
 export default withUser(NotFoundPage, false);
