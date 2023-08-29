@@ -1,7 +1,7 @@
 import React from 'react';
 import { useErrorHandler } from 'react-error-boundary';
 
-import Main from './main';
+import MainLayout from '../../layouts/main-layout';
 import Content from '../../components/content';
 import Preloader from '../../components/preloader';
 
@@ -25,7 +25,7 @@ function MainPage() {
 
   return (
     <Content>
-      {isLoadingCards || isLoadingUser ? <Preloader /> : <Main cards={cards} user={user} />}
+      {isLoadingCards || isLoadingUser ? <Preloader /> : <MainLayout cards={cards} user={user} />}
     </Content>
   );
 }
