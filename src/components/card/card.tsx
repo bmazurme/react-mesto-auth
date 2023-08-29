@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { useErrorHandler } from 'react-error-boundary';
 
+import Popup from '../modal';
+import WithConfirm from '../with-confirm';
+
 import { useDeleteCardMutation } from '../../store';
-import { PopupWithConfirm } from '../popups';
+
+import style from './card.module.css';
 
 export interface ICardProps {
   user: User | null;
@@ -21,8 +25,10 @@ export default function Card(props: ICardProps) {
   const [confirmPopup, setConfirmPopup] = useState<boolean>(false);
   const isOwn = card?.owner?._id === user?._id;
   const isLiked = card.likes.some((like: Like) => like?._id === user?._id);
-  const cardDeleteButtonClassName = (`card__remove${isOwn ? ' card__remove_visible' : ''}`);
-  const cardLikeButtonClassName = (`card__like${isLiked ? ' card__like_checked' : ''}`);
+
+  const cardDeleteButtonClassName = (`${style.remove}${isOwn ? ` ${style.remove_visible}` : ''}`);
+  const cardLikeButtonClassName = (`${style.like}${isLiked ? ` ${style.like_checked}` : ''}`);
+
   const handleCloseAllPopups = () => setConfirmPopup(false);
   const handleCardDelete = async () => {
     try {
@@ -34,7 +40,7 @@ export default function Card(props: ICardProps) {
   };
 
   return (
-    <div className="card">
+    <div className={style.card}>
       <button
         onClick={() => setConfirmPopup(true)}
         aria-label="Remove"
@@ -42,16 +48,16 @@ export default function Card(props: ICardProps) {
         type="button"
       />
       <img
-        className="card__image"
+        className={style.image}
         alt={card.name}
         src={card.link}
         onClick={() => onCardClick(card)}
         aria-hidden="true"
         loading="lazy"
       />
-      <div className="card__group">
-        <h2 className="card__name">{card.name}</h2>
-        <div className="card__column">
+      <div className={style.group}>
+        <h2 className={style.name}>{card.name}</h2>
+        <div className={style.column}>
           <button
             type="button"
             onClick={() => onCardLike(card)}
@@ -59,20 +65,22 @@ export default function Card(props: ICardProps) {
             className={cardLikeButtonClassName}
             name="button-like"
           />
-          <p className="card__counter">{card.likes.length}</p>
+          <p className={style.counter}>{card.likes.length}</p>
         </div>
       </div>
-      {confirmPopup ? (
-        <PopupWithConfirm
-          onSubmit={handleCardDelete}
-          isOpen={confirmPopup}
-          isLoading={isLoadingCard}
+      {confirmPopup &&
+        <Popup
           onClose={handleCloseAllPopups}
-          title="Вы уверены?"
-          buttonText={isLoadingCard ? 'Удаляется...' : 'Удалить'}
-          card={null}
+          children={
+            <WithConfirm
+              card={card}
+              isLoading={isLoadingCard}
+              title="Вы уверены?"
+              buttonText={isLoadingCard ? 'Удаляется...' : 'Удалить'}
+              onSubmit={handleCardDelete}
+            />}
         />
-      ) : null}
+      }
     </div>
   );
 }
