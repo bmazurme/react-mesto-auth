@@ -1,6 +1,6 @@
 .form_identity {
-  z-index: 2;
-  background-color: black;
+  z-index: 1000;
+  background-color: var(--background-color);
   border: 0;
   padding: 34px;
   width: 358px;
