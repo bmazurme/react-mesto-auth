@@ -19,3 +19,28 @@ export const isServer = !(
     && window.document
     && window.document.createElement
 );
+
+const MODAL_CONFIG = {
+  INITIAL: {
+    opacity: 0,
+    scale: 0.75,
+  },
+  ANIMATE: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      ease: 'easeOut',
+      duration: 0.35,
+    },
+  },
+  EXIT: {
+    opacity: 0,
+    scale: 0.75,
+    transition: {
+      ease: 'easeIn',
+      duration: 0.35,
+    },
+  },
+};
+
+export { MODAL_CONFIG };
