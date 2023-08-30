@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { useErrorHandler } from 'react-error-boundary';
 
 import Card from '../card';
-import { ImagePopup } from '../popups';
+import Popup from '../modal';
+import Slide from '../slide';
 
 import { useChangeLikeMutation } from '../../store';
+
+import style from './cards.module.css';
 
 export default function Cards({ user, cards }
   : { user: User | null, cards: Card[] }) {
@@ -27,7 +30,7 @@ export default function Cards({ user, cards }
   };
 
   return (
-    <section className="cards">
+    <section className={style.cards}>
       {cards.map((card: Card) => (
         <Card
           key={card._id}
@@ -37,7 +40,8 @@ export default function Cards({ user, cards }
           onCardLike={handleCardLike}
         />
       ))}
-      { selectedCard ? (<ImagePopup card={selectedCard} onClose={handleCloseAllPopups} />) : null}
+      {selectedCard
+        && (<Popup children={<Slide card={selectedCard} />} onClose={handleCloseAllPopups} />)}
     </section>
   );
 }
