@@ -1,0 +1,10 @@
+.container {
+  width: auto;
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: var(--header-bg-color);
+  border-radius: 40px;
+  justify-content: center;
+}
