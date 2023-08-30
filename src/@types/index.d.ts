@@ -1,3 +1,5 @@
+declare module '*.css';
+
 type Action<T> = {
   type: string;
   payload: T;
