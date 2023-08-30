@@ -1,6 +1,6 @@
 import React from 'react';
 
-import NavItem from '../nav-item';
+import NavItem from '../nav-bar/components/nav-item';
 
 export default function SignIn({ help, url, label }: Record<string, string>) {
   return (
