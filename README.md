@@ -67,7 +67,8 @@ Implemented features:
 - [X] Docker
 - [X] Service worker
 - [X] CI/CD GitHub Actions
-- [ ] Dark&light theme
+- [X] Dark&light theme
+- [ ] RU/EN lang
 - [ ] Tests
 - [ ] API
 - [ ] Oauth
