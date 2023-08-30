@@ -1,0 +1,178 @@
+.profile {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  margin: 40px auto 0;
+}
+
+.image {
+  height: 120px;
+  width: 120px;
+  display: flex;
+  align-self: center;
+  border-radius: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.image:hover::before {
+  content: "";
+  cursor: pointer;
+  height: 120px;
+  width: 120px;
+  background-color: rgb(0 0 0 / 80%);
+  background-image: url("../../images/Vector.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 26px;
+  position: absolute;
+  border-radius: 50%;
+}
+
+.info {
+  align-self: center;
+  color: var(--color);
+  width: auto;
+  margin: 0 auto 0 30px;
+  display: grid;
+  gap: 0;
+  grid-template-columns: minmax(auto, 1fr) minmax(24px, auto);
+  grid-template-rows: 48px 22px;
+  grid-template-areas:
+    "name button"
+    "profession gap";
+}
+
+.button {
+  border-radius: 2px;
+  background-color: var(--background-color);
+  background-repeat: no-repeat;
+  background-position: center;
+  color: var(--color);
+}
+
+.edit {
+  composes: button;
+  grid-area: button;
+  border: 1px solid var(--color);
+  margin-top: 5px;
+  margin-left: 15px;
+  padding: 4px;
+  background-color: var(--background-color);
+  height: 24px;
+  width: 24px;
+}
+
+.edit:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.add {
+  composes: button;
+  width: 150px;
+  height: 50px;
+  border: var(--color) solid 2px;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  margin: 0;
+  padding: 0;
+}
+
+.add:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.common {
+  margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  color: var(--color);
+  width: 100%;
+}
+
+.name {
+  composes: common;
+  grid-area: name;
+  padding: 0;
+  max-width: 326px;
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 48px;
+}
+
+.profession {
+  composes: common;
+  grid-area: profession;
+  padding: 0;
+  max-width: 326px;
+  font-size: 18px;
+  line-height: 22px;
+  min-height: 22px;
+}
+
+@media screen and (min-width: 320px) and (max-width: 899px) {
+  .profession {
+    min-height: 16px;
+    font-size: 14px;
+    line-height: 16px;
+    margin-top: 0;
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 899px) {
+  .name {
+    text-align: center;
+    font-size: 27px;
+    line-height: 32px;
+  }
+}
+
+
+@media screen and (min-width: 320px) and (max-width: 899px) {
+  .add {
+    width: 282px;
+    height: 50px;
+    margin-top: 36px;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 899px) {
+  .edit {
+    margin: 0;
+    height: 20px;
+    width: 20px;
+    padding: 2px;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 899px) {
+  .info {
+    grid-template-columns: 24px auto 24px;
+    grid-template-rows: 33px 16px;
+    grid-template-areas:
+      "space name button"
+      "space profession gap";
+      gap: 6px;
+    margin-top: 26px;
+    margin-left: auto;
+    max-width: 238px;
+    /* min-width: 234px; */
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 899px) {
+  .profile {
+    flex-direction: column;
+    margin-top: 42px;
+  }
+}

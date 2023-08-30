@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import { useErrorHandler } from 'react-error-boundary';
+import { PlusIcon, PencilIcon } from '@heroicons/react/24/outline';
 
-import { EditProfilePopup, EditAvatarPopup, AddPlacePopup } from '../popups';
+import Popup from '../modal';
+import EditProfile from '../edit-profile';
+import EditAvatar from '../edit-avatar';
+import AddPlace from '../add-place';
 import { useUpdateUserMutation, useUpdateUserAvatarMutation, useAddCardMutation } from '../../store';
 
-export default function Main({ info }:{ info: User | null }) {
+import style from './profile.module.css';
+
+export default function Main({ info }: { info: User | null }) {
   const errorHandler = useErrorHandler();
   const [updateUser, { isLoading: isLoadingUser }] = useUpdateUserMutation();
   const [updateUserAvatar, { isLoading: isLoadingAvatar }] = useUpdateUserAvatarMutation();
@@ -50,58 +56,66 @@ export default function Main({ info }:{ info: User | null }) {
   };
 
   return (
-    <section className="profile">
+    <section className={style.profile}>
       <div
-        className="profile__image"
+        className={style.image}
         style={{ backgroundImage: `url(${info?.avatar})` }}
         onClick={handleOpenEditAvatarPopup}
         aria-hidden="true"
       />
-      <div className="profile__info">
-        <h1 className="profile__name">{info?.name}</h1>
-        <p className="profile__profession">{info?.about}</p>
+      <div className={style.info}>
+        <h1 className={style.name}>{info?.name}</h1>
+        <p className={style.profession}>{info?.about}</p>
         <button
           aria-label="Edit"
           type="button"
-          className="profile__edit"
+          className={style.edit}
           onClick={handleOpenEditProfilePopup}
-        />
+        >
+          <PencilIcon className="h-2 w-2" />
+        </button>
       </div>
       <button
         aria-label="Add"
-        className="profile__add"
+        className={style.add}
         type="button"
         onClick={handleOpenAddPlacePopup}
-      />
-      {isEditAvatarPopupOpen ? (
-        <EditAvatarPopup
-          isOpen={isEditAvatarPopupOpen}
-          info={info}
-          isLoading={isLoadingAvatar}
+      >
+        <PlusIcon className="h-6 w-6" />
+      </button>
+      {isEditAvatarPopupOpen
+        && (
+        <Popup
           onClose={handleCloseAllPopups}
-          onUpdateUser={handleUpdateAvatarSubmit}
+          children={(
+            <EditAvatar
+              isLoading={isLoadingAvatar}
+              info={info}
+              onUpdateUser={handleUpdateAvatarSubmit}
+            />
+          )}
         />
-      )
-        : null}
-      {isEditProfilePopupOpen ? (
-        <EditProfilePopup
-          isOpen={isEditProfilePopupOpen}
-          info={info}
-          isLoading={isLoadingUser}
+        )}
+      {isEditProfilePopupOpen
+        && (
+        <Popup
           onClose={handleCloseAllPopups}
-          onUpdateUser={handleUpdateUserSubmit}
+          children={(
+            <EditProfile
+              isLoading={isLoadingUser}
+              info={info}
+              onUpdateUser={handleUpdateUserSubmit}
+            />
+          )}
         />
-      )
-        : null}
-      {isAddPlacePopupOpen ? (
-        <AddPlacePopup
-          isOpen={isAddPlacePopupOpen}
-          isLoading={isLoadingCard}
+        )}
+      {isAddPlacePopupOpen
+        && (
+        <Popup
           onClose={handleCloseAllPopups}
-          onAddPlace={handleAddPlaceSubmit}
+          children={<AddPlace isLoading={isLoadingCard} onAddPlace={handleAddPlaceSubmit} />}
         />
-      )
-        : null}
+        )}
     </section>
   );
 }
