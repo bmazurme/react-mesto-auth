@@ -2,7 +2,6 @@
   font-size: 12px;
   line-height: 15px;
   font-weight: 400;
-  color: #fff;
-  -webkit-text-fill-color: #fff;
-  /* border-bottom: 1px solid #fff; */
+  color: var(--color);
+  -webkit-text-fill-color: var(--color);
 }
