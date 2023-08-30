@@ -1,0 +1,29 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import classNames from 'classnames';
+
+export interface INavItemProps {
+  to: string,
+  className?: string;
+  onClick?: () => void,
+  active: string,
+  value: string,
+}
+
+import style from './navbar-item.module.css';
+
+export default function NavItem({
+  to, onClick, className, active, value,
+}: INavItemProps) {
+  return (
+    <li className={style.item}>
+      <Link
+        to={to}
+        onClick={onClick}
+        className={classNames(className, style.link, { [style.link_active]: active })}
+      >
+        {value}
+      </Link>
+    </li>
+  );
+}
