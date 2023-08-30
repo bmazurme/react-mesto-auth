@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import SignInPage from './pages/signIn-page';
@@ -11,15 +11,10 @@ import ErrorBoundaryWrapper from './components/error-boundary-wrapper';
 import { Urls } from './utils/constants';
 
 import ThemeContext from './context/theme-context';
+import useDarkTheme from './hooks/use-dark-theme';
 
 export default function App() {
-  const [style, setStyle] = useState('light');
-  const providerValue = useMemo(() => ({ style, setStyle }), [style, setStyle]);
-
-  useEffect(() => {
-    const currentTheme = localStorage.getItem('ms-theme');
-    document.documentElement.setAttribute('ms-theme', (currentTheme === 'dark') ? 'dark' : 'light');
-  }, [style]);
+  const { providerValue } = useDarkTheme();
 
   return (
     <ThemeContext.Provider value={providerValue}>
