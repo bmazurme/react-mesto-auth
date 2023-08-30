@@ -8,17 +8,19 @@ import Button from '../form-components/button';
 import Header from '../header';
 import Footer from '../footer';
 
+import style from './error-boundary.module.css';
+
 type ErrorBoundaryWrapperProps = PropsWithChildren<unknown>;
 
 function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
   return (
     <>
       <Header />
-      <div className="error-boundary">
-        <div className="error-boundary__title">
-          <h2 className="error-boundary__title">APP-ERROR</h2>
-          <p className="error-boundary__message">{error.message}</p>
-          <div className="error-boundary__block">
+      <div className={style.boundary}>
+        <div className={style.title}>
+          <h2 className={style.title}>APP-ERROR</h2>
+          <p className={style.message}>{error.message}</p>
+          <div className={style.block}>
             Try to
             <Button className="button button_error" onClick={resetErrorBoundary} variant="outline">
               Reload app
