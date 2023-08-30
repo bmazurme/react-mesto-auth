@@ -8,9 +8,9 @@ import { authApi, usersApi, cardsApi } from './api';
 import userReducer from './slices/user-slice';
 import { isServer } from '../utils';
 
-export * from './api/authApi/endpoints';
-export * from './api/userApi/endpoints';
-export * from './api/cardApi/endpoints';
+export * from './api/auth-api/endpoints';
+export * from './api/user-api/endpoints';
+export * from './api/card-api/endpoints';
 export * from './slices';
 
 // global redeclared types
