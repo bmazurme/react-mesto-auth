@@ -2,12 +2,12 @@
   max-width: 358px;
   width: 100%;
   height: 50px;
-  background: #fff;
+  background-color: var(--background-color-in);
   margin: 190px 0 0;
   font-size: 18px;
   line-height: 22px;
-  border: 1px solid #fff;
-  color: #000;
+  border: 1px solid var(--background-color-in);
+  color: var(--color-in);
 }
 
 .button_identity:hover {
