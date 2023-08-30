@@ -1,7 +1,7 @@
-export { default as authApi } from './authApi';
-export { default as usersApi } from './userApi';
-export { default as cardsApi } from './cardApi';
+export { default as authApi } from './auth-api';
+export { default as usersApi } from './user-api';
+export { default as cardsApi } from './card-api';
 
-export * from './authApi/endpoints';
-export * from './userApi/endpoints';
-export * from './cardApi/endpoints';
+export * from './auth-api/endpoints';
+export * from './user-api/endpoints';
+export * from './card-api/endpoints';
