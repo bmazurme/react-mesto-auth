@@ -9,8 +9,8 @@ import bodyParser from 'body-parser';
 import { config as dotEnvConfig } from 'dotenv';
 import cors from 'cors';
 
-import { requestLogger, errorLogger } from './middlewares/logger';
-import errorHandler from './middlewares/error-handler';
+import { requestLogger, errorLogger } from './middlewares/logger-middleware';
+import errorHandlerMiddleware from './middlewares/error-handler-middleware';
 
 import corsOptions from './utils/cors-options';
 
@@ -76,7 +76,7 @@ app.use('*', () => {
 });
 
 app.use(errorLogger);
-app.use(errorHandler);
+app.use(errorHandlerMiddleware);
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
