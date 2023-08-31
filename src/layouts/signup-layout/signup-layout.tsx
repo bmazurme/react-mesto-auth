@@ -8,8 +8,9 @@ import { Controller, useForm } from 'react-hook-form';
 import useUser from '../../hooks/use-user';
 import { useSignUpMutation } from '../../store';
 
-import { Button, Input } from '../../components/form-components';
+import { Button, InputField } from '../../components/form-components';
 import FormFooter from '../../components/form-footer';
+import Modal from '../../components/modal';
 import InfoTooltip from '../../components/info-tooltip';
 
 import { Urls } from '../../utils/constants';
@@ -94,30 +95,26 @@ export default function SignupLayout() {
             }}
             control={control}
             render={({ field, fieldState }) => (
-              <Input
+              <InputField
                 {...field}
                 {...input}
-                className="text-field__input text-field__input_identity"
+                className={style['text-field__input_identity']}
                 errorText={fieldState.error?.message}
               />
             )}
           />
         ))}
-        <Button className="button button_identity button_submit" variant="filled">
+        <Button className={style.identity} variant="filled">
           <span>Зарегистрироваться</span>
         </Button>
         <FormFooter url={Urls.SIGNIN} label="Войти" />
       </form>
-      {isInfoToolTipPopupOpen ? (
-        <InfoTooltip
-          isOpen={isInfoToolTipPopupOpen}
+      {isInfoToolTipPopupOpen && (
+        <Modal
           onClose={handleCloseAllPopups}
-          isSuccess={isSuccess}
-          text={
-            isSuccess ? 'Вы успешно зарегистрировались!' : 'Что-то пошло не так! Попробуйте ещё раз.'
-          }
+          children={<InfoTooltip isSuccess={isSuccess} text={isSuccess ? 'Вы успешно зарегистрировались!' : 'Что-то пошло не так! Попробуйте ещё раз.'} />}
         />
-      ) : null}
+      )}
     </div>
   );
 }
