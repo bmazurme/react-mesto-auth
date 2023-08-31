@@ -9,15 +9,14 @@ import Button from './components/button';
 import NavItem from './components/nav-item';
 
 import useUser from '../../hooks/use-user';
-
-import { Urls } from '../../utils/constants';
 import { setCredentials } from '../../store';
 import ThemeContext from '../../context/theme-context';
 
+import { Urls } from '../../utils/constants';
+
 import style from './navbar.module.css';
 
-export default function NavBar(props
-: { isOpen: boolean, handlerClick: () => void }) {
+export default function NavBar(props: { isOpen: boolean, handlerClick: () => void }) {
   const { isDark, setIsDark } = useContext(ThemeContext);
   const location = useLocation();
   const [email, setEmail] = useState('');

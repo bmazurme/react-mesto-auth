@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
+import style from './navbar-item.module.css';
+
 export interface INavItemProps {
   to: string,
   className?: string;
@@ -9,8 +11,6 @@ export interface INavItemProps {
   active: string,
   value: string,
 }
-
-import style from './navbar-item.module.css';
 
 export default function NavItem({
   to, onClick, className, active, value,
