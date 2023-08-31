@@ -1,16 +1,17 @@
-import usersApi from '..';
+import cardsApi from '..';
+import { AUTHORIZATION } from '../../../../utils/constants';
 
 const headers = {
-  Authorization: 'fcfa5c3a-c07d-49f3-a47d-0099ff285712',
+  Authorization: AUTHORIZATION,
 };
 
-const usersApiEndpoints = usersApi
+const cardsApiEndpoints = cardsApi
   .enhanceEndpoints({
     addTagTypes: ['Cards'],
   })
   .injectEndpoints({
     endpoints: (builder) => ({
-      getCards: builder.query({
+      getCards: builder.query<Card[], void>({
         query: () => ({
           url: '/cards',
           method: 'GET',
@@ -60,4 +61,5 @@ export const {
   useDeleteCardMutation,
   useChangeLikeMutation,
   useAddCardMutation,
-} = usersApiEndpoints;
+} = cardsApiEndpoints;
+export { cardsApiEndpoints };
