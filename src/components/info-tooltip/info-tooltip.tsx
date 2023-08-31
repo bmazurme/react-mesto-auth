@@ -1,32 +1,13 @@
-import React, { MouseEvent } from 'react';
+import React from 'react';
+import classNames from 'classnames';
 
-import { IInfoTooltipProps } from '../../interfaces';
+import style from './tooltip.module.css';
 
-export default function InfoTooltip(props: IInfoTooltipProps) {
-  const {
-    text, isOpen, onClose, isSuccess,
-  } = props;
-
-  const handleClose = (e: MouseEvent<HTMLElement>) => e.currentTarget === e.target && onClose();
-
+export default function InfoTooltip({ text, isSuccess }: { text: string; isSuccess: boolean; }) {
   return (
-    <div
-      onClick={handleClose}
-      className={`popup popup_tooltip ${isOpen ? 'popup_active' : ''}`}
-      aria-hidden="true"
-    >
-      <div className="popup__container">
-        <button
-          aria-label="Close"
-          className="popup__close"
-          type="button"
-          onClick={onClose}
-        />
-        <div className="tooltip">
-          <div className={`tooltip__image ${isSuccess ? 'tooltip__image_success' : ''}`} />
-          <p className="tooltip__text">{text}</p>
-        </div>
-      </div>
+    <div className={style.tooltip}>
+      <div className={classNames(style.image, { [style.success]: isSuccess })} />
+      <p className={style.text}>{text}</p>
     </div>
   );
 }
