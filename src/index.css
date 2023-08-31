@@ -1,51 +1,11 @@
 @import "./vendor/normalize.css";
 @import "./vendor/fonts.css";
 @import "./styles/root/root.css";
-@import "./blocks/page/page.css";
-
-/* popup */
-@import "./blocks/popup/popup.css";
-@import "./blocks/popup/_image/popup_image.css";
-@import "./blocks/popup/_active/popup_active.css";
-@import "./blocks/popup/__container/popup__container.css";
-@import "./blocks/popup/__container/_image/popup__container_image.css";
-@import "./blocks/popup/__close/popup__close.css";
+@import "./styles/page/page.css";
 
 /* form */
-@import "./blocks/form/form.css";
-@import "./blocks/form/__title/form__title.css";
-@import "./blocks/form/__delete/form__delete.css";
-@import "./blocks/form/_identity/form_identity.css";
-@import "./blocks/form/__help/form__help.css";
-@import "./blocks/form/__link/form__link.css";
-
-/* text-field */
-@import "./blocks/text-field/text-field.css";
-@import "./blocks/text-field/__label/text-field__label.css";
-@import "./blocks/text-field/__label/_black/text-field__label_black.css";
-@import "./blocks/text-field/__label/_error/text-field__label_error.css";
-@import "./blocks/text-field/_identity/text-field_identity.css";
-@import "./blocks/text-field/__input/text-field__input.css";
-@import "./blocks/text-field/__input/_identity/text-field_identity.css";
-@import "./blocks/text-field/__input-error/text-field__input-error.css";
-@import "./blocks/text-field/__input-error/_help/text-field__input-error_help.css";
-
-/* button */
-@import "./blocks/button/button.css";
-@import "./blocks/button/_submit/button_submit.css";
-@import "./blocks/button/_submit/_inactive/button_submit_inactive.css";
-@import "./blocks/button/_identity/button_identity.css";
-@import "./blocks/button/_error/button_error.css";
-
-/* tooltip */
-@import "./blocks/tooltip/tooltip.css";
-@import "./blocks/tooltip/__image/tooltip__image.css";
-@import "./blocks/tooltip/__image/_success/tooltip__image_success.css";
-@import "./blocks/tooltip/__text/tooltip__text.css";
-@import "./blocks/main/main.css";
-
-/* link */
-@import "./blocks/link/_home/link_home.css";
+@import "./styles/form/form.css";
+@import "./styles/form/_identity/form_identity.css";
 
 /* preloader */
 @import "./styles/preloader/preloader.css";
