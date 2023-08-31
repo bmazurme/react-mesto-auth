@@ -1,5 +1,9 @@
 import React from 'react';
+import classNames from 'classnames';
+
 import type { ComponentPropsWithoutRef, ElementType, PropsWithChildren } from 'react';
+
+import style from './button.module.css';
 
 type ButtonProps<T extends ElementType> = PropsWithChildren<{
   as?: T;
@@ -12,21 +16,15 @@ export default function Button<T extends ElementType = 'button'>({
   as, className, disabled, variant, ...props
 }: ButtonProps<T>) {
   const Component = as ?? 'button';
-  const rules = [className];
-
-  if (disabled) {
-    rules.push('button_disabled');
-  }
-
-  if (variant === 'filled') {
-    rules.push('button_filled');
-  }
-
-  const currentClass = rules.join(' ');
 
   return (
     <Component
-      className={currentClass}
+      className={classNames(
+        style.button,
+        className,
+        { [style.disabled]: disabled },
+        { [style.filled]: variant },
+      )}
       disabled={disabled}
       {...props}
     />
