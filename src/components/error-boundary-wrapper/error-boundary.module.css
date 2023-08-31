@@ -36,6 +36,29 @@
   align-items: center;
 }
 
+.link {
+  color: #000;
+  text-align: center;
+  margin: 20px auto;
+  padding: 0;
+}
+
+.button {
+  margin: 20px 0;
+  width: 150px;
+  height: 40px;
+  background-color: black;
+  border: 1px solid #000;
+  color: white;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 319px) {
   .title {
     margin-top: 14px;
@@ -53,6 +76,11 @@
     margin-bottom: 20px;
     align-items: center;
     text-align: center;
+  }
+
+  .button {
+    font-size: 14px;
+    line-height: 17px;
   }
 }
 

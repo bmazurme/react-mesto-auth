@@ -3,6 +3,7 @@ import React from 'react';
 import type { PropsWithChildren } from 'react';
 import { ErrorBoundary, type FallbackProps } from 'react-error-boundary';
 import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 
 import Button from '../form-components/button';
 import Header from '../header';
@@ -22,11 +23,17 @@ function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
           <p className={style.message}>{error.message}</p>
           <div className={style.block}>
             Try to
-            <Button className="button button_error" onClick={resetErrorBoundary} variant="outline">
+            <Button className={style.button} onClick={resetErrorBoundary} variant="outline">
               Reload app
             </Button>
             or
-            <Button className="link link_home" onClick={resetErrorBoundary} variant="outline" as={Link} to="/">
+            <Button
+              className={classNames('link', style.link)}
+              onClick={resetErrorBoundary}
+              variant="outline"
+              as={Link}
+              to="/"
+            >
               Go to homepage
             </Button>
           </div>
