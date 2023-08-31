@@ -10,10 +10,8 @@ import { useGetCardsQuery, useGetUserMeQuery } from '../../store';
 
 function MainPage() {
   const handleError = useErrorHandler();
-  // @ts-ignore
-  const { data: cards = [], error: cardsError, isLoading: isLoadingCards } = useGetCardsQuery();
-  // @ts-ignore
-  const { data: user, error: userError, isLoading: isLoadingUser } = useGetUserMeQuery();
+  const { error: cardsError, isLoading: isLoadingCards } = useGetCardsQuery();
+  const { error: userError, isLoading: isLoadingUser } = useGetUserMeQuery();
 
   if (cardsError) {
     handleError(cardsError);
@@ -25,7 +23,7 @@ function MainPage() {
 
   return (
     <Content>
-      {isLoadingCards || isLoadingUser ? <Preloader /> : <MainLayout cards={cards} user={user} />}
+      {isLoadingCards || isLoadingUser ? <Preloader /> : <MainLayout />}
     </Content>
   );
 }
