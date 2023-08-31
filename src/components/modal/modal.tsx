@@ -40,7 +40,7 @@ export default function Popup({ children, onClose }
         >
           <button
             aria-label="Close"
-            className="popup__close"
+            className={style.close}
             type="button"
             onClick={onClose}
           />
