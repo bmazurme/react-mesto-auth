@@ -6,7 +6,7 @@ import { useErrorHandler } from 'react-error-boundary';
 
 import { useSignInMutation } from '../../store';
 import FormFooter from '../../components/form-footer';
-import { Button, Input } from '../../components/form-components';
+import { Button, InputField } from '../../components/form-components';
 import { Urls } from '../../utils/constants';
 import useUser from '../../hooks/use-user';
 
@@ -83,16 +83,16 @@ export default function SigninLayout() {
             }}
             control={control}
             render={({ field, fieldState }) => (
-              <Input
+              <InputField
                 {...field}
                 {...input}
-                className="text-field__input text-field__input_identity"
+                className={style['text-field__input_identity']}
                 errorText={fieldState.error?.message}
               />
             )}
           />
         ))}
-        <Button className="button button_identity button_submit" variant="filled">
+        <Button className={style.identity} variant="filled">
           <span>Войти</span>
         </Button>
         <FormFooter url={Urls.SIGNUP} label="Зарегистрироваться" />
