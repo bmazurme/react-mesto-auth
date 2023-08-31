@@ -3,6 +3,9 @@
 ![TypeScript](https://img.shields.io/badge/-TypeScript-black?style=flat-square&logo=typescript)
 ![React](https://img.shields.io/badge/-React-black?style=flat-square&logo=react)
 ![Redux](https://img.shields.io/badge/-Redux-black?style=flat-square&logo=redux)
+![Express](https://img.shields.io/badge/-Express-black?style=flat-square&logo=express)
+![Mongoose](https://img.shields.io/badge/-Mongoose-black?style=flat-square&logo=mongoose)
+![MongoDB](https://img.shields.io/badge/-MongoDB-black?style=flat-square&logo=mongodb)
 ![HTML5](https://img.shields.io/badge/-HTML5-black?style=flat-square&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/-CSS3-black?style=flat-square&logo=css3)
 ![Eslint](https://img.shields.io/badge/-Eslint-black?style=flat-square&logo=eslint)
@@ -12,6 +15,10 @@
 ![Jest](https://img.shields.io/badge/-Jest-black?style=flat-square&logo=jest)
 ![Netlify](https://img.shields.io/badge/-Netlify-black?style=flat-square&logo=netlify)
 
+* framer-motion
+* uuidv4
+* classnames
+
 ### About
 * Photo posting service.
 * JS CRA Version 0.2.0
@@ -19,6 +26,7 @@
 * TS Webpack Version 2.1.1
 * TS RTK Webpack Version 3.1.1
 * TS RTK Webpack SW Version 3.2.1
+* Dark&light theme
 
 ## Demo
 [![Netlify Status](https://api.netlify.com/api/v1/badges/cba6d7c5-ac20-450a-bbc1-da1e599e0123/deploy-status)](https://app.netlify.com/sites/whimsical-sprite-5d5e95/deploys)
@@ -63,67 +71,73 @@ Implemented features:
 - [X] Axios
 - [X] React error boundaries
 - [X] TypeScript, Webpack
-- [X] Express
+- [X] Express static
 - [X] Docker
 - [X] Service worker
 - [X] CI/CD GitHub Actions
 - [X] Dark&light theme
 - [ ] RU/EN lang
-- [ ] Tests
-- [ ] API
-- [ ] Oauth
+- [ ] Tests, jest, cypress
+- [ ] API, express
+- [ ] Oauth, yandex
 
 ### Docker
 
-`docker-compose build`
+```bash
+$ docker-compose build
 
-`docker-compose up`
+$ docker-compose up
 
-`docker-compose stop`
+$ docker-compose stop
 
-`docker system prune -a`
+$ docker system prune -a
 
-`docker push cr.yandex/${REGISTRY_ID}/mesto:latest`
+$ docker push cr.yandex/${REGISTRY_ID}/mesto:latest
 
-`docker pull cr.yandex/${REGISTRY_ID}/mesto:latest`
+$ docker pull cr.yandex/${REGISTRY_ID}/mesto:latest
 
-`docker run cr.yandex/${REGISTRY_ID}/mesto:latest`
+$ docker run cr.yandex/${REGISTRY_ID}/mesto:latest
 
-`docker run -d -p 80:3000 cr.yandex/${REGISTRY_ID}/mesto:latest`
+$ docker run -d -p 80:3000 cr.yandex/${REGISTRY_ID}/mesto:latest
 
-[https://cloud.yandex.ru/docs/container-registry/tutorials/run-docker-on-vm#before-begin](https://cloud.yandex.ru/docs/container-registry/tutorials/run-docker-on-vm#before-begin)
+# [https://cloud.yandex.ru/docs/container-registry/tutorials/run-docker-on-vm#before-begin](https://cloud.yandex.ru/docs/container-registry/tutorials/run-docker-on-vm#before-begin)
+$ docker exec -it container_ID_or_name /bin/bash
 
-`docker exec -it container_ID_or_name /bin/bash`
+```
 
 ### NGINX
 
-`sudo apt update`
+```bash
+$ sudo apt update
 
-`sudo apt install -y nginx`
+$ sudo apt install -y nginx
 
-`sudo ufw allow 'Nginx Full'`
+$ sudo ufw allow 'Nginx Full'
 
-`sudo ufw allow OpenSSH`
+$ sudo ufw allow OpenSSH
 
-`sudo ufw enable`
+$ sudo ufw enable
 
-`sudo systemctl enable --now nginx`
+$ sudo systemctl enable --now nginx
 
-`sudo nano /etc/nginx/sites-available/default`
+$ sudo nano /etc/nginx/sites-available/default
 
-`sudo nginx -t`
+$ sudo nginx -t
 
-`sudo systemctl reload nginx`
+$ sudo systemctl reload nginx
+```
 
 ### SSL
 
-`sudo apt update`
+```bash
+$ sudo apt update
 
-`sudo apt install -y certbot python3-certbot-nginx`
+$ sudo apt install -y certbot python3-certbot-nginx
 
-`sudo certbot --nginx`
+$ sudo certbot --nginx
 
-`sudo systemctl reload nginx`
+$ sudo systemctl reload nginx
+```
 
 ### Figma
 * [Link to Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
