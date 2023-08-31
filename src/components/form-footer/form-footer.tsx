@@ -2,13 +2,15 @@ import React from 'react';
 
 import NavItem from '../nav-bar/components/nav-item';
 
+import style from './form-footer.module.css';
+
 export default function SignIn({ help, url, label }: Record<string, string>) {
   return (
-    <div className="form__help">
+    <div className={style.style}>
       {help}
       <NavItem
         to={url}
-        className="form__link"
+        className={style.link}
         active="true"
         value={label}
       />
