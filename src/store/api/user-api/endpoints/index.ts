@@ -1,7 +1,8 @@
 import usersApi from '..';
+import { AUTHORIZATION } from '../../../../utils/constants';
 
 const headers = {
-  Authorization: 'fcfa5c3a-c07d-49f3-a47d-0099ff285712',
+  Authorization: AUTHORIZATION,
 };
 
 const usersApiEndpoints = usersApi
@@ -10,7 +11,7 @@ const usersApiEndpoints = usersApi
   })
   .injectEndpoints({
     endpoints: (builder) => ({
-      getUserMe: builder.query({
+      getUserMe: builder.query<User, void>({
         query: () => ({
           url: '/users/me',
           method: 'GET',
@@ -52,3 +53,4 @@ export const {
   useUpdateUserAvatarMutation,
   useGetUsersInfoQuery,
 } = usersApiEndpoints;
+export { usersApiEndpoints };

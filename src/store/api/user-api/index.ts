@@ -2,7 +2,9 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { getBaseQuery } from '../../base-query';
 
-const baseQuery = getBaseQuery('https://mesto.nomoreparties.co/v1/cohort36');
+import { BASE_API_URL } from '../../../utils/constants';
+
+const baseQuery = getBaseQuery(BASE_API_URL);
 
 const usersApi = createApi({
   reducerPath: 'usersApi',
