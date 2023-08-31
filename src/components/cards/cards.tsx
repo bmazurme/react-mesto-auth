@@ -2,16 +2,18 @@ import React, { useState } from 'react';
 import { useErrorHandler } from 'react-error-boundary';
 
 import Card from '../card';
-import Popup from '../modal';
+import Modal from '../modal';
 import Slide from '../slide';
 
-import { useChangeLikeMutation } from '../../store';
+import { useAppSelector } from '../../hooks';
+import { cardsSelector, usersSelector, useChangeLikeMutation } from '../../store';
 
 import style from './cards.module.css';
 
-export default function Cards({ user, cards }
-  : { user: User | null, cards: Card[] }) {
+export default function Cards() {
+  const user = useAppSelector(usersSelector);
   const errorHandler = useErrorHandler();
+  const cards = useAppSelector(cardsSelector);
   const [changeLike] = useChangeLikeMutation();
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
   const handleCardClick = (card: Card) => setSelectedCard(card);
@@ -41,7 +43,7 @@ export default function Cards({ user, cards }
         />
       ))}
       {selectedCard
-        && (<Popup children={<Slide card={selectedCard} />} onClose={handleCloseAllPopups} />)}
+        && (<Modal children={<Slide card={selectedCard} />} onClose={handleCloseAllPopups} />)}
     </section>
   );
 }
