@@ -11,13 +11,13 @@ const usersApiEndpoints = usersApi
   })
   .injectEndpoints({
     endpoints: (builder) => ({
-      getUserMe: builder.query<User, void>({
+      getUserMe: builder.mutation<User, void>({
         query: () => ({
           url: '/users/me',
           method: 'GET',
           headers,
         }),
-        providesTags: ['Users'],
+        invalidatesTags: ['Users'],
       }),
       updateUser: builder.mutation({
         query: (user: Record<string, string>) => ({
@@ -37,20 +37,12 @@ const usersApiEndpoints = usersApi
         }),
         invalidatesTags: ['Users'],
       }),
-      getUsersInfo: builder.query({
-        query: (id) => ({
-          url: `/user/${id}`,
-          method: 'GET',
-        }),
-        providesTags: ['Users'],
-      }),
     }),
   });
 
 export const {
-  useGetUserMeQuery,
+  useGetUserMeMutation,
   useUpdateUserMutation,
   useUpdateUserAvatarMutation,
-  useGetUsersInfoQuery,
 } = usersApiEndpoints;
 export { usersApiEndpoints };
