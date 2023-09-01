@@ -1,8 +1,9 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import SignInPage from './pages/signIn-page';
+import SignInPage from './pages/sign-in-page';
 import SignUpPage from './pages/signup-page';
+import OauthPage from './pages/oauth-page';
 import MainPage from './pages/main-page';
 import NotFoundPage from './pages/404';
 
@@ -23,6 +24,7 @@ export default function App() {
           <Route path={Urls.BASE} element={(<MainPage />)} />
           <Route path={Urls.SIGNIN} element={(<SignInPage />)} />
           <Route path={Urls.SIGNUP} element={(<SignUpPage />)} />
+          <Route path={Urls.OAUTH.INDEX} element={(<OauthPage />)} />
           <Route path={Urls[404]} element={(<NotFoundPage />)} />
         </Routes>
       </ErrorBoundaryWrapper>
