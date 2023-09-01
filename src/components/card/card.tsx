@@ -1,23 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 
+import Modal from '../modal';
+import Slide from '../slide';
 import LikeButton from './components/like-button';
 import RemoveButton from './components/remove-button';
 
+import useUsers from '../../hooks/use-users';
+import useUser from '../../hooks/use-user';
+
 import style from './card.module.css';
 
-interface ICardProps {
-  user: User | null;
-  card: Card;
-  onCardLike: (card: Card) => void;
-  onCardClick: (card: Card) => void;
-}
+export default function Card({ card }: { card: Card; }) {
+  const user = useUsers();
+  const authorized = useUser();
+  const [selectedCard, setSelectedCard] = useState<Card | null>(null);
+  const handleCloseAllPopups = () => setSelectedCard(null);
+  const onCardClick = (c: Card) => setSelectedCard(c);
 
-export default function Card({
-  user, card, onCardLike, onCardClick,
-}: ICardProps) {
   return (
     <div className={style.card}>
-      <RemoveButton card={card} user={user} />
+      {authorized && user && <RemoveButton card={card} user={user} />}
       <img
         className={style.image}
         alt={card.name}
@@ -29,10 +31,12 @@ export default function Card({
       <div className={style.group}>
         <h2 className={style.name}>{card.name}</h2>
         <div className={style.column}>
-          <LikeButton card={card} user={user} onCardLike={onCardLike} />
+          <LikeButton card={card} user={user} authorized={authorized} />
           <p className={style.counter}>{card.likes.length}</p>
         </div>
       </div>
+      {selectedCard
+        && (<Modal children={<Slide card={selectedCard} />} onClose={handleCloseAllPopups} />)}
     </div>
   );
 }
