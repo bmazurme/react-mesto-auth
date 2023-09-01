@@ -20,7 +20,7 @@ export default function NavItem({
       <Link
         to={to}
         onClick={onClick}
-        className={classNames(className, style.link, { [style.link_active]: active })}
+        className={classNames(className, style.link, { [style.active]: active })}
       >
         {value}
       </Link>

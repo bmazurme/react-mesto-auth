@@ -25,15 +25,15 @@
   color: #a9a9a9;
 }
 
-.link_active:active {
+.active:active {
   color: var(--menu-color-active);
 }
 
-.link_active:visited {
+.active:visited {
   color: var(--menu-color-active);
 }
 
-.link_active:hover {
+.active:hover {
   color: var(--menu-color-active);
 }
 
