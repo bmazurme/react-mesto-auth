@@ -26,7 +26,7 @@ export default function withUser<P extends Record<string, unknown>>(
     useEffect(() => {
       if (isUninitialized && !userData) {
         getUser().then(() => {
-          if (data && !isError) userData = data;
+          if (data && !isError) userData = data as unknown as User;
         });
       }
     }, [getUser, isError, isLoading, isUninitialized, userData]);
