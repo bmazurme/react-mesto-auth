@@ -4,11 +4,12 @@ import { useForm, Controller } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useErrorHandler } from 'react-error-boundary';
 
-import { useSignInMutation } from '../../store';
 import FormFooter from '../../components/form-footer';
 import { Button, InputField } from '../../components/form-components';
-import { Urls } from '../../utils/constants';
+
+import { useSignInMutation } from '../../store';
 import useUser from '../../hooks/use-user';
+import { Urls } from '../../utils/constants';
 
 import style from './signin-layout.module.css';
 
@@ -71,7 +72,7 @@ export default function SigninLayout() {
 
   return (
     <div className="identity">
-      <h2 className={style.title}>Вход</h2>
+      <h2 className={style.title}>Sign In</h2>
       <form className="form form_identity" onSubmit={onSubmit}>
         {inputs.map((input) => (
           <Controller
@@ -93,9 +94,9 @@ export default function SigninLayout() {
           />
         ))}
         <Button className={style.identity} variant="filled">
-          <span>Войти</span>
+          <span>Sign In</span>
         </Button>
-        <FormFooter url={Urls.SIGNUP} label="Зарегистрироваться" />
+        <FormFooter url={Urls.SIGNUP} label="Sign up" />
       </form>
     </div>
   );
