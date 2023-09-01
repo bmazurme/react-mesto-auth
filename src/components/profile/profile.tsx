@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 
 import { AvatarButton, PlusButton, ProfileButton } from './components';
 
-import { useAppSelector } from '../../hooks';
-import { usersSelector } from '../../store';
+import useUser from '../../hooks/use-users';
 
 import style from './profile.module.css';
 
 export default function Profile() {
-  const user = useAppSelector(usersSelector);
+  const user = useUser();
   const [popup, setPopup] = useState({ profile: false, avatar: false, place: false });
 
   return (
