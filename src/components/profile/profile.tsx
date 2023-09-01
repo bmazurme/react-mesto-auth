@@ -15,7 +15,7 @@ export default function Profile() {
     <section className={style.profile}>
       <AvatarButton info={user} popup={popup} setPopup={setPopup} />
       <div className={style.info}>
-        <h1 className={style.name}>{user?.name}</h1>
+        <h2 className={style.name}>{user?.name}</h2>
         <p className={style.profession}>{user?.about}</p>
         <ProfileButton info={user} popup={popup} setPopup={setPopup} />
       </div>
