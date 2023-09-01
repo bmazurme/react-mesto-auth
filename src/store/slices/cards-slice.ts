@@ -24,7 +24,11 @@ const slice = createSlice({
       )
       .addMatcher(
         cardsApiEndpoints.endpoints.getCards.matchRejected,
-        (state, action) => console.log('rejected', action),
+        (state, action) => {
+          if (action.error.name !== 'ConditionError') {
+            console.log('rejected', action);
+          }
+        },
       );
   },
 });
