@@ -18,3 +18,7 @@
 .checked {
   background-image: url("../../../../images/stroke-checked.svg");
 }
+
+.disabled {
+  opacity: 0.3;
+}
