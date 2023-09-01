@@ -1,5 +1,4 @@
 import authApi from '..';
-import { setCredentials } from '../../../slices';
 
 const authApiEndpoints = authApi
   .enhanceEndpoints({
@@ -25,7 +24,7 @@ const authApiEndpoints = authApi
           },
         }),
       }),
-      getUser: builder.mutation<User | null, void>({
+      getUser: builder.mutation<{ data: User | null }, void>({
         query: () => {
           const token = localStorage.getItem('jwt');
           return {
@@ -34,17 +33,24 @@ const authApiEndpoints = authApi
             headers: {
               Authorization: `Bearer ${token}`,
             },
-            async onSuccess(dispatch, data) {
-              const user = (data as { data: User })?.data;
-              if (user?.email) {
-                dispatch(setCredentials(user as User));
-              }
-            },
           };
         },
         invalidatesTags: ['User'],
       }),
+      signInWitOauthYa: builder.mutation({
+        query: (body) => ({
+          url: '/api/oauth',
+          method: 'POST',
+          body,
+        }),
+      }),
     }),
   });
 
-export const { useSignUpMutation, useSignInMutation, useGetUserMutation } = authApiEndpoints;
+export const {
+  useSignUpMutation,
+  useSignInMutation,
+  useGetUserMutation,
+  useSignInWitOauthYaMutation,
+} = authApiEndpoints;
+export { authApiEndpoints };
