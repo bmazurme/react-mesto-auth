@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { usersApiEndpoints } from '../api/user-api/endpoints';
 import type { RootState } from '..';
@@ -15,7 +15,13 @@ export const initialStateUsers: InfoState = {
 const slice = createSlice({
   name: 'users',
   initialState: initialStateUsers,
-  reducers: {},
+  reducers: {
+    setUsers: (
+      state,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      { payload: data }: PayloadAction<User | null>,
+    ) => ({ ...state, data: null }),
+  },
   extraReducers: (builder) => {
     builder
       .addMatcher(
@@ -25,9 +31,26 @@ const slice = createSlice({
       .addMatcher(
         usersApiEndpoints.endpoints.getUserMe.matchRejected,
         (state, action) => console.log('rejected', action),
+      )
+      .addMatcher(
+        usersApiEndpoints.endpoints.updateUser.matchFulfilled,
+        (state, action) => ({ ...state, data: action.payload }),
+      )
+      .addMatcher(
+        usersApiEndpoints.endpoints.updateUser.matchRejected,
+        (state, action) => console.log('rejected', action),
+      )
+      .addMatcher(
+        usersApiEndpoints.endpoints.updateUserAvatar.matchFulfilled,
+        (state, action) => ({ ...state, data: action.payload }),
+      )
+      .addMatcher(
+        usersApiEndpoints.endpoints.updateUserAvatar.matchRejected,
+        (state, action) => console.log('rejected', action),
       );
   },
 });
 
+export const { setUsers } = slice.actions;
 export default slice.reducer;
 export const usersSelector = (state: RootState) => state.users.data;
