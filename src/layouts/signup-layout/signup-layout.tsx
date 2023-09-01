@@ -105,9 +105,9 @@ export default function SignupLayout() {
           />
         ))}
         <Button className={style.identity} variant="filled">
-          <span>Зарегистрироваться</span>
+          <span>Sign up</span>
         </Button>
-        <FormFooter url={Urls.SIGNIN} label="Войти" />
+        <FormFooter url={Urls.SIGNIN} label="Sign in" />
       </form>
       {isInfoToolTipPopupOpen && (
         <Modal
