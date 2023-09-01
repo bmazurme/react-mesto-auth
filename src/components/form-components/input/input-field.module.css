@@ -2,11 +2,15 @@
   height: 60px;
 }
 
-.text-field_identity {
-  height: 60px;
-  margin: 30px 0 0;
-  background-color: #3498db;
-}
+/* .text-field_identity { */
+
+/*  height: 60px; */
+
+/*  margin: 30px 0 0; */
+
+/*  background-color: #3498db; */
+
+/* } */
 
 .common {
   font-size: 12px;
@@ -14,35 +18,35 @@
   font-weight: 400;
 }
 
-.text-field__label {
+.label {
   composes: common;
   color: var(--color);
   -webkit-text-fill-color: var(--color);
 }
 
-.text-field__label_error {
+.label_error {
   composes: common;
   color: #f00;
   -webkit-text-fill-color: #f00;
 }
 
-.text-field__label_black {
+.black {
   color: #000;
   -webkit-text-fill-color: #000;
 }
 
-.text-field__input-error {
+.error {
   composes: common;
   color: #f00;
   -webkit-text-fill-color: #f00;
   border-bottom: 1px solid #f00;
 }
 
-.text-field__input-error_help {
+.help {
   border: none;
 }
 
-.text-field__input {
+.input {
   outline: none;
   margin: 0;
   border-bottom: 1px solid rgb(0 0 0 / 20%);

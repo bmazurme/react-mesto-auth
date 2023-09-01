@@ -25,9 +25,9 @@ const InputField = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         && <label
           htmlFor={id}
           className={classNames(
-            style['text-field__label'],
-            { [style['text-field__label_error']]: errorText },
-            { [style['text-field__label_black']]: black },
+            style.label,
+            { [style.label_error]: errorText },
+            { [style.black]: black },
           )}
         >
           {label}
@@ -38,17 +38,12 @@ const InputField = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
         type={type}
         value={value}
         placeholder={placeholder}
-        className={classNames(style['text-field__input'], className)}
+        className={classNames(style.input, className)}
       />
       {errorText
-        && <span
-            className={classNames(
-              style['text-field__input-error'],
-              style['text-field__input-error_help'],
-              `${label}-input-error`)}
-            >
-              {errorText}
-            </span>}
+        && <span className={classNames(style.error, style.help, `${label}-input-error`)}>
+             {errorText}
+           </span>}
     </div>);
 });
 
