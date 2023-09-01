@@ -12,12 +12,12 @@ const createCard = async (req: unknown, res: Response, next: NextFunction) => {
     const card = await Card.create({ name, link, userId: (req as & { user: IUser}).user._id });
 
     return res.status(200).send(card);
-  } catch (error: any) {
-    if (error.name === 'ValidationError') {
+  } catch (error: unknown) {
+    if ((error as Error).name === 'ValidationError') {
       return next(new BadRequestError('переданы некорректные данные в метод'));
     }
 
-    return next(error);
+    next(error);
   }
 };
 
@@ -30,7 +30,7 @@ const deleteCard = async (req: unknown, res: Response, next: NextFunction) => {
     }
 
     if (!card.userId.equals((req as Request & { user: IUser}).user._id)) {
-      return next(new ForbiddenError('access denied'));
+      next(new ForbiddenError('access denied'));
     }
 
     await Card.deleteOne({ _id: (req as Request).params.id });
@@ -41,27 +41,57 @@ const deleteCard = async (req: unknown, res: Response, next: NextFunction) => {
   }
 };
 
-const getCards = (req: Request, res: Response, next: NextFunction) => {
+const getCards = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    return res.clearCookie('token', { path: '/' }).send({ message: 'logout' });
+    const cards = await Card.find({});
+
+    return res.status(200).send(cards);
   } catch (err) {
     next(err);
   }
 };
 
-const likeCard = (req: Request, res: Response, next: NextFunction) => {
+const likeCard = async (req: unknown, res: Response, next: NextFunction) => {
   try {
-    return res.clearCookie('token', { path: '/' }).send({ message: 'logout' });
-  } catch (err) {
-    next(err);
+    const card = await Card.findByIdAndUpdate(
+      (req as Request).params.id,
+      { $addToSet: { likes: (req as Request & { user: IUser }).user._id } },
+      { new: true },
+    );
+
+    if (!card) {
+      next(new NotFoundError('карточка не найдена'));
+    }
+
+    return res.status(200).send(card);
+  } catch (error: unknown) {
+    if ((error as Error).name === 'CastError') {
+      next(new BadRequestError('переданы некорректные данные в метод'));
+    }
+
+    next(error);
   }
 };
 
-const dislikeCard = (req: Request, res: Response, next: NextFunction) => {
+const dislikeCard = async (req: unknown, res: Response, next: NextFunction) => {
   try {
-    return res.clearCookie('token', { path: '/' }).send({ message: 'logout' });
-  } catch (err) {
-    next(err);
+    const card = await Card.findByIdAndUpdate(
+      (req as Request).params.id,
+      { $pull: { likes: (req as Request & { user: User }).user._id } },
+      { new: true },
+    );
+
+    if (!card) {
+      next(new NotFoundError('карточка не найдена'));
+    }
+
+    return res.status(200).send(card);
+  } catch (error: unknown) {
+    if ((error as Error).name === 'CastError') {
+      next(new BadRequestError('переданы некорректные данные в метод'));
+    }
+
+    next(error);
   }
 };
 
