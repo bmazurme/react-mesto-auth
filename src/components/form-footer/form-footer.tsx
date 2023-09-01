@@ -4,9 +4,9 @@ import NavItem from '../nav-bar/components/nav-item';
 
 import style from './form-footer.module.css';
 
-export default function SignIn({ help, url, label }: Record<string, string>) {
+export default function FormFooter({ help, url, label }: Record<string, string>) {
   return (
-    <div className={style.style}>
+    <div className={style.help}>
       {help}
       <NavItem
         to={url}
